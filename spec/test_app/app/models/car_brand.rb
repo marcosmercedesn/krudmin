@@ -3,5 +3,11 @@ class CarBrand < ApplicationRecord
 
   has_many :cars
 
-  scope :search_by_term, -> (term) { where("description ILIKE ?", "%#{term}%").limit(10) }
+  scope :search_by_term, -> (term) {
+    if term.present?
+      where(CarBrand.arel_table[:description].matches("%#{term}%"))
+    else
+      where("1=1")
+    end.limit(10)
+  }
 end
