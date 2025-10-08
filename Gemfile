@@ -29,6 +29,8 @@ group :development, :test do
   gem "ffaker"
   gem "hamlit-rails"
   gem "pry-byebug"
+  gem "sqlite3", ">= 2.1"
+  gem "puma"
 end
 
 group :test do
