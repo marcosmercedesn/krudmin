@@ -2,15 +2,15 @@
 
 Krudmin::Config.with do |config|
   # config.current_user_method(&:current_user)
-  config.current_user_method(&:current_krudmin_profile)
+  # config.current_user_method(&:current_krudmin_profile)
   config.edit_profile_path = "/krudmin/users"
   config.logout_path = "/krudmin/user/sign_out"
 
   config.navigation_menu = -> {
     Krudmin::NavigationMenu.configure do |menu, user|
-      menu.node "Users", "user", module_path: :krudmin, icon: :users
       menu.node label: "Cars", resource: "car", module_path: :admin, icon: :car, visible_if: -> { CarPolicy.new(nil, nil).index? }
-      menu.node label: "Car Brands", resource: "car_brand"#, icon: :car
+      menu.node label: "Car Brands", resource: "car_brand", icon: :car
+      # menu.node label: "Users",  resource: "user", module_path: :krudmin, icon: :users
       menu.link label: "Customs",  link: :admin_customs_path, module_path: :admin, icon: :gear
       menu.link label: "Documentation",  link: :docs_path, icon: :copy
     end
