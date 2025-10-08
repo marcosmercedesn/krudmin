@@ -19,7 +19,7 @@ class Car < ApplicationRecord
 
   belongs_to :car_brand, optional: true
 
-  enum transmission: {automatic: 0, manual: 1}
+  enum :transmission, {automatic: 0, manual: 1}
 
   delegate :description, to: :car_brand, prefix: true, allow_nil: true
 
