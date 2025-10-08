@@ -16,3 +16,6 @@ tmp/rspec_guard_result
 .vscode/settings.json
 
 .ruby-gemset
+
+.DS_Store
+*.sqlite3
