@@ -8,11 +8,11 @@ Krudmin::Config.with do |config|
 
   config.navigation_menu = -> {
     Krudmin::NavigationMenu.configure do |menu, user|
-      menu.node "Cars", "car", module_path: :admin, icon: :car, visible_if: -> { CarPolicy.new(nil, nil).index? }
-      menu.node "Car Brands", "car_brand", icon: :car
       menu.node "Users", "user", module_path: :krudmin, icon: :users
-      menu.link "Customs", :admin_customs_path, module_path: :admin, icon: :gear
-      menu.link "Documentation", :docs_path, icon: :copy
+      menu.node label: "Cars", resource: "car", module_path: :admin, icon: :car, visible_if: -> { CarPolicy.new(nil, nil).index? }
+      menu.node label: "Car Brands", resource: "car_brand"#, icon: :car
+      menu.link label: "Customs",  link: :admin_customs_path, module_path: :admin, icon: :gear
+      menu.link label: "Documentation",  link: :docs_path, icon: :copy
     end
   }
 
