@@ -20,12 +20,12 @@ module Krudmin
       new(&block)
     end
 
-    def link(*args)
-      items << Node.new(*args)
+    def link(**args)
+      items << Node.new(**args)
     end
 
-    def node(*args)
-      items << Node.node_for(*args)
+    def node(**args)
+      items << Node.node_for(**args)
     end
 
     def each(&block)

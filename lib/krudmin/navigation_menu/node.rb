@@ -5,7 +5,7 @@ module Krudmin
 
       attr_reader :label, :link, :label_class, :visible_if, :items, :icon, :module_path, :html
 
-      def initialize(label, link, visible_if: -> { true }, items: [], icon: :file, module_path: nil, html: {})
+      def initialize(label:, link:, visible_if: -> { true }, items: [], icon: :file, module_path: nil, html: {})
         @label = label
         @visible_if = visible_if
         @items = items
@@ -35,16 +35,16 @@ module Krudmin
           Rails.application.routes.url_helpers
         end
 
-        def node_for(label, resource, visible_if: -> { true }, icon: :file, module_path: nil, html: {}, manage_if: -> { true }, add_if: -> { true })
-          new(label, "#", visible_if: visible_if, items: links_for(resource, module_path, manage_if: manage_if, add_if: add_if), icon: icon, module_path: module_path, html: html)
+        def node_for(label:, resource:, visible_if: -> { true }, icon: :file, module_path: nil, html: {}, manage_if: -> { true }, add_if: -> { true })
+          new(label: label, link: "#", visible_if: visible_if, items: links_for(resource, module_path, manage_if: manage_if, add_if: add_if), icon: icon, module_path: module_path, html: html)
         end
 
         def links_for(resource, module_path = "", manage_if: -> { true }, add_if: -> { true })
           module_path = "#{module_path}_" if module_path.present?
 
           [
-            new(I18n.t("krudmin.actions.manage"), routes.send("#{module_path}#{resource.pluralize}_path"), icon: :list, visible_if: manage_if),
-            new(I18n.t("krudmin.actions.add_new"), routes.send("new_#{module_path}#{resource}_path"), icon: :plus, visible_if: add_if),
+            new(label: I18n.t("krudmin.actions.manage"), link: routes.send("#{module_path}#{resource.pluralize}_path"), icon: :list, visible_if: manage_if),
+            new(label: I18n.t("krudmin.actions.add_new"), link: routes.send("new_#{module_path}#{resource}_path"), icon: :plus, visible_if: add_if),
           ]
         end
       end
