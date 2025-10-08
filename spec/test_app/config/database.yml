@@ -1,6 +1,6 @@
 development: &default
-  adapter: postgresql
-  database: krudmin_development
+  adapter: sqlite3
+  database: storage/production.sqlite3
   encoding: utf8
   min_messages: warning
   pool: 2
