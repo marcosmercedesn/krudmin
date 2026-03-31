@@ -361,6 +361,43 @@ The `spec/test_app/` directory contains a complete working example:
 - `config/initializers/krudmin.rb` - Full configuration example
 - `config/routes.rb` - Route setup with namespacing and member actions
 
+## Generators
+
+Krudmin provides two Rails generators:
+
+### Install Generator
+
+```bash
+rails generate krudmin:install
+```
+
+Installs into the host project:
+- `config/initializers/krudmin.rb` — Configuration
+- `CLAUDE.md` — AI agent instructions (tailored for host projects)
+- `docs/krudmin/` — Full documentation copied from the gem
+- `app/resource_managers/` — Empty directory
+
+Flags: `--no-docs`, `--no-claude`, `--no-initializer`
+
+Generator source: `lib/generators/krudmin/install/`
+
+### Resource Generator
+
+```bash
+rails generate krudmin:resource Product name:string price:decimal active:boolean
+```
+
+Generates:
+- `app/resource_managers/products_resource_manager.rb`
+- `app/controllers/admin/products_controller.rb`
+
+Options:
+- `--namespace=admin` (default) — Controller namespace
+- `--policy` — Generate a Pundit policy
+- `--remote` — Enable AJAX CRUD
+
+Generator source: `lib/generators/krudmin/resource/`
+
 ## Coding Conventions
 
 - Views use **HAML** (not ERB)

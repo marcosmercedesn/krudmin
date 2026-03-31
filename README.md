@@ -56,7 +56,23 @@ bundle install
 
 ## Quick Start
 
-### 1. Configure Krudmin
+### Option A: Use the Generator
+
+```bash
+rails generate krudmin:install
+```
+
+This creates:
+- `config/initializers/krudmin.rb` — Configuration file
+- `CLAUDE.md` — AI agent instructions for your project
+- `docs/krudmin/` — Full documentation
+- `app/resource_managers/` — Directory for your resource managers
+
+Skip docs or CLAUDE.md with flags: `--no-docs`, `--no-claude`, `--no-initializer`.
+
+### Option B: Manual Setup
+
+#### 1. Configure Krudmin
 
 Create an initializer at `config/initializers/krudmin.rb`:
 
@@ -79,7 +95,15 @@ Krudmin::Config.with do |config|
 end
 ```
 
-### 2. Create a Resource Manager
+#### 2. Create a Resource Manager
+
+Use the generator:
+
+```bash
+rails generate krudmin:resource Product name:string price:decimal description:rich_text active:boolean --remote
+```
+
+Or create manually:
 
 ```ruby
 # app/resource_managers/products_resource_manager.rb
@@ -101,7 +125,7 @@ class ProductsResourceManager < Krudmin::ResourceManagers::Base
 end
 ```
 
-### 3. Create the Controller
+#### 3. Create the Controller
 
 ```ruby
 # app/controllers/admin/products_controller.rb
@@ -111,7 +135,7 @@ end
 
 That's it. The controller inherits all CRUD actions from Krudmin.
 
-### 4. Add Routes
+#### 4. Add Routes
 
 ```ruby
 # config/routes.rb
@@ -125,7 +149,7 @@ namespace :admin do
 end
 ```
 
-### 5. Add Navigation
+#### 5. Add Navigation
 
 In your Krudmin initializer, add a menu entry:
 

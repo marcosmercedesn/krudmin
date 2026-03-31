@@ -1,0 +1,24 @@
+class <%= class_name.pluralize %>ResourceManager < Krudmin::ResourceManagers::Base
+  MODEL_CLASSNAME = "<%= class_name %>"
+
+  LISTABLE_ATTRIBUTES = [<%= listable_attributes.map { |a| ":#{a}" }.join(", ") %>]
+  EDITABLE_ATTRIBUTES = [<%= editable_attributes.map { |a| ":#{a}" }.join(", ") %>]
+  SEARCHABLE_ATTRIBUTES = [<%= searchable_attributes.map { |a| ":#{a}" }.join(", ") %>]
+  LISTABLE_ACTIONS = [:show, :edit, :active, :destroy]
+
+  RESOURCE_INSTANCE_LABEL_ATTRIBUTE = <%= first_string_attribute %>
+
+  RESOURCE_LABEL = "<%= class_name %>"
+  RESOURCES_LABEL = "<%= class_name.pluralize %>"
+
+  ORDER_BY = [created_at: :desc]
+<% if options[:remote] -%>
+
+  REMOTE_CRUD = true
+<% end -%>
+<% if has_attribute_types? %>
+  ATTRIBUTE_TYPES = {
+<%= attribute_types_hash %>
+  }
+<% end -%>
+end

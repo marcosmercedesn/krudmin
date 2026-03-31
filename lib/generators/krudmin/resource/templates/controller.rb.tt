@@ -1,0 +1,2 @@
+class <%= controller_class_prefix %><%= class_name.pluralize %>Controller < Krudmin::ApplicationController
+end
