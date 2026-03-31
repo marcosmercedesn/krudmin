@@ -1,0 +1,3 @@
+<%= turbo_stream.remove "item-model-#{model_id}" %>
+
+<turbo-stream action="toast" type="error" message="<%= destroyed_message %>"></turbo-stream>

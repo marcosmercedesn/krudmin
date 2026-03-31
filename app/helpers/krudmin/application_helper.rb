@@ -10,6 +10,33 @@ module Krudmin
       render partial: "list_item", locals: { item: item }
     end
 
+    def inline_edit_data_for(column_label, item)
+      field = field_for(column_label, item)
+      field_type = field.class.name.demodulize.underscore
+
+      data = {
+        inline_edit: true,
+        attribute: column_label,
+        model_id: item.id,
+        update_url: resource_path(item),
+        model_key: model_class.model_name.param_key,
+        field_type: field_type,
+        field_value: field.data
+      }
+
+      if field_type == "enum_type"
+        data[:field_options] = field.associated_options.map { |label, val| { label: label, value: val } }.to_json
+      elsif field_type == "belongs_to"
+        options = field.associated_options.map { |opt| { label: opt.send(field.collection_label_field), value: opt.id } }
+        data[:field_options] = options.to_json
+      elsif field_type == "boolean"
+        data[:field_options] = [{ label: I18n.t("krudmin.labels.yes"), value: "true" }, { label: I18n.t("krudmin.labels.no"), value: "false" }].to_json
+        data[:field_value] = field.data.to_s
+      end
+
+      data
+    end
+
     private
 
     def evaluate_boolean_string(value)

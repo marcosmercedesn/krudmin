@@ -13,7 +13,7 @@ module Krudmin
       respond_to do |format|
         html_response(format)
 
-        js_response(format)
+        turbo_stream_response(format)
 
         json_response(format)
       end
@@ -23,7 +23,7 @@ module Krudmin
 
     def html_response(format); end
 
-    def js_response(format); end
+    def turbo_stream_response(format); end
 
     def json_response(format); end
   end

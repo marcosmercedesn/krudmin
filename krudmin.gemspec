@@ -28,5 +28,5 @@ Gem::Specification.new do |s|
   s.add_dependency "sassc-rails"
   s.add_dependency "simple_form"
   s.add_dependency "summernote-rails"
-  s.add_dependency "turbolinks"
+  s.add_dependency "turbo-rails", ">= 1.0"
 end

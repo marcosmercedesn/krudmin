@@ -1,0 +1,5 @@
+<%= turbo_stream.update "krudmin-modal-container" do %>
+  <%= render partial: 'modal_form' %>
+<% end %>
+
+<turbo-stream action="modal" target="crudFormModal" event="show"></turbo-stream>

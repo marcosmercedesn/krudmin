@@ -2,7 +2,7 @@
   .col-lg-12.no-padding
     .card
       .card-body
-        = simple_form_for(search_form, as: :q, method: :get, url: resource_root, html: { class: 'turbo-form' }) do |f|
+        = simple_form_for(search_form, as: :q, method: :get, url: resource_root) do |f|
           = f.hidden_field :s
           .row
             - search_form.fields.each_slice(1) do |field_slice|

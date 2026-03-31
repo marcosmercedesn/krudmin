@@ -21,7 +21,6 @@ $.grayLightest = "#f8f9fa";
 ("use strict");
 
 function initKrudminScriptsForControls() {
-  initializeSweetConfirm();
   initializeBelongsToOneHasOneControl();
   initializeDateTimePickers();
   initializeSummerNoteControls();
@@ -51,9 +50,9 @@ function panelNameFor(cardEl) {
   return [cPath, panelName].join("-");
 }
 
-document.addEventListener("turboforms:updated", function(e) {
+document.addEventListener("turbo:before-stream-render", function(e) {
   setTimeout(function() {
-    Turbolinks.dispatch("turbolinks:load");
+    initKrudminScriptsForControls();
   }, 100);
 });
 
@@ -77,7 +76,7 @@ function bindAssociatedButtonEditUrl(control) {
   }
 }
 
-document.addEventListener("turbolinks:load", function(event) {
+document.addEventListener("turbo:load", function(event) {
   $(".belongs-to-control").each(function() {
     bindAssociatedButtonEditUrl(this);
   });

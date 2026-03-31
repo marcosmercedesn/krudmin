@@ -68,6 +68,18 @@ describe Krudmin::ResourceManagers::Base do
     }
   end
 
+  class InlineEditableResourceManager < described_class
+    MODEL_CLASSNAME = 'Krudmin::ItemSpecModel'
+    EDITABLE_ATTRIBUTES = [:description, :priority, :items]
+
+    ATTRIBUTE_TYPES = {
+      priority: {type: Krudmin::Fields::Number, decimals: 3},
+      items: {type: Krudmin::Fields::HasMany},
+    }
+
+    INLINE_EDITABLE_ATTRIBUTES = [:description, :priority, :items]
+  end
+
   class PropertiesResourceManager < described_class
     MODEL_CLASSNAME = 'Krudmin::ItemSpecModel'
     EDITABLE_ATTRIBUTES = [:description, :year]
@@ -189,6 +201,32 @@ describe Krudmin::ResourceManagers::Base do
     it do
       expect(subject.field_for(:year, root: :properties)).to be_a(Krudmin::Fields::Number)
       expect(subject.field_for(:year, root: :properties).options).to eq({:decimals=>3})
+    end
+  end
+
+  describe "inline_editable?" do
+    context "with inline editable attributes configured" do
+      subject { InlineEditableResourceManager.new }
+
+      it "returns true for attributes in the list with allowed types" do
+        expect(subject.inline_editable?(:priority)).to be true
+        expect(subject.inline_editable?(:description)).to be true
+      end
+
+      it "returns false for attributes not in the list" do
+        expect(subject.inline_editable?(:properties)).to be false
+      end
+
+      it "returns false for attributes in the list with disallowed types (HasMany)" do
+        expect(subject.inline_editable?(:items)).to be false
+      end
+    end
+
+    context "with no inline editable attributes" do
+      it "returns false for all attributes" do
+        expect(subject.inline_editable?(:description)).to be false
+        expect(subject.inline_editable?(:priority)).to be false
+      end
     end
   end
 end

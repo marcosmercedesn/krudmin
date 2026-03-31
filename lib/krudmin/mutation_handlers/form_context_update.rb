@@ -12,7 +12,7 @@ module Krudmin
       def perform
         flash[:info] = [success_message]
 
-        redirect_to edit_resource_path(model)
+        redirect_to edit_resource_path(model), status: :see_other
       end
 
       def self.call(controller, model, success_message)

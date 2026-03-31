@@ -17,8 +17,8 @@ module Krudmin
         end
       end
 
-      def successful_js_response(format)
-        format.js do
+      def successful_turbo_stream_response(format)
+        format.turbo_stream do
           instance_variable_set(:@model_id, model.id)
 
           render "edit", locals: { messages: [ActionResultMessage.new("info", success_message)] }
@@ -29,7 +29,7 @@ module Krudmin
         respond_to do |format|
           successful_html_response(format)
 
-          successful_js_response(format)
+          successful_turbo_stream_response(format)
         end
       end
 

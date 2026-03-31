@@ -14,7 +14,7 @@ PATH
       sassc-rails
       simple_form
       summernote-rails
-      turbolinks
+      turbo-rails (>= 1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -368,9 +368,9 @@ GEM
     timecop (0.9.10)
     timeout (0.4.3)
     tsort (0.2.0)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
+    turbo-rails (2.0.23)
+      actionpack (>= 7.1.0)
+      railties (>= 7.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uglifier (4.2.1)

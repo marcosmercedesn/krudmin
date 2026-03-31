@@ -11,10 +11,9 @@
 // about supported directives.
 //
 //= require jquery3
-//= require rails-ujs
 //= require popper
 //= require bootstrap
-//= require turbolinks
+//= require krudmin/vendor/turbo
 //= require cocoon
 //= require moment
 //= require krudmin/vendor/daterangepicker
@@ -29,8 +28,10 @@
 //= require krudmin/select2-adapter
 //= require krudmin/datepicker-adapter
 //= require krudmin/summernote-adapter
-//= require krudmin/turbo-forms
 //= require krudmin/core_theme/constants
+//= require krudmin/turbo-stream-actions
+//= require krudmin/remote-modal
+//= require krudmin/inline-edit
 //= require krudmin/core_theme/app
 //= require krudmin/belongs-to-one-has-one-controls
 

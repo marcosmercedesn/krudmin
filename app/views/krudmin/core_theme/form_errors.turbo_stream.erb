@@ -1,0 +1,10 @@
+<%- simple_form_for(model, url: form_submit_path) do |form| %>
+  <% @form_id = form.options.fetch(:html).fetch(:id) %>
+  <% @model_name = form.object.model_name.singular %>
+<%- end %>
+
+<% error_list = model.errors.full_messages.map { |msg| "<li class='text-left'>#{msg}</li>" }.join %>
+
+<turbo-stream action="toast" type="error" message="<ul class='text-left'><%= error_list %></ul>"></turbo-stream>
+<turbo-stream action="highlight" target="<%= @form_id %>"></turbo-stream>
+<turbo-stream action="scroll_to_top"></turbo-stream>

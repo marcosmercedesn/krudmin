@@ -1,0 +1,3 @@
+<% model.errors.full_messages.each do |msg| %>
+  <turbo-stream action="toast" type="danger" message="<%= msg %>"></turbo-stream>
+<% end %>

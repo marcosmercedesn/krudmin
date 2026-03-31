@@ -1,0 +1,3 @@
+<% messages.each do |message| %>
+  <turbo-stream action="toast" type="<%= message.type %>" message="<%= message.text %>" position="toast-top-right"></turbo-stream>
+<% end %>

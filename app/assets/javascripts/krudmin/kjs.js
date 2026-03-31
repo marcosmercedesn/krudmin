@@ -62,7 +62,7 @@ var kJs = (function() {
       if (bodyLoaded()) {
         clearInterval(intervalReference);
 
-        document.addEventListener("turbolinks:load", func);
+        document.addEventListener("turbo:load", func);
 
         loads();
         initializeBody();

@@ -57,7 +57,7 @@ function initializeTurboSelect2(container) {
     .select2({ multiple: true, width: "100%" });
 }
 
-$(document).on("turbolinks:before-cache", function () {
+$(document).on("turbo:before-cache", function () {
   $("select.select2-hidden-accessible").select2("destroy");
 });
 

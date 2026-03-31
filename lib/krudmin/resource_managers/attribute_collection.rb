@@ -5,8 +5,12 @@ module Krudmin
     class AttributeCollection
       class NoPresentationMedatataFound < StandardError; end
 
-      attr_reader :model, :attributes_metadata, :attributes, :searchable_attributes, :presentation_metadata, :listable_attributes, :displayable_attributes
-      def initialize(model, attributes_metadata, attributes, listable_attributes, searchable_attributes, displayable_attributes, presentation_metadata, lookup_attributes)
+      INLINE_EDITABLE_FIELD_TYPES = %w[
+        String Text Number Decimal Currency Boolean Date DateTime Email EnumType BelongsTo
+      ].freeze
+
+      attr_reader :model, :attributes_metadata, :attributes, :searchable_attributes, :presentation_metadata, :listable_attributes, :displayable_attributes, :inline_editable_attributes
+      def initialize(model, attributes_metadata, attributes, listable_attributes, searchable_attributes, displayable_attributes, presentation_metadata, lookup_attributes, inline_editable_attributes = [])
         @model = model
         @attributes_metadata = attributes_metadata
         @presentation_metadata = presentation_metadata
@@ -15,6 +19,14 @@ module Krudmin
         @searchable_attributes = collection_or_default(searchable_attributes)
         @_lookup_attributes = collection_or_default(lookup_attributes)
         @attributes = collection_or_default(attributes)
+        @inline_editable_attributes = inline_editable_attributes
+      end
+
+      def inline_editable?(field)
+        return false unless inline_editable_attributes.include?(field)
+
+        field_type_name = attribute_for(field).type.name.demodulize
+        INLINE_EDITABLE_FIELD_TYPES.include?(field_type_name)
       end
 
       def collection_or_default(collection)

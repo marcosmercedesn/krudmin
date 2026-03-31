@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "item-model-#{model.id}" do %>
+  <%= render_item_row(model) %>
+<% end %>
+
+<turbo-stream action="toast" type="success" message="<%= success_message %>"></turbo-stream>
+<turbo-stream action="highlight" target="item-model-<%= model.id %>"></turbo-stream>

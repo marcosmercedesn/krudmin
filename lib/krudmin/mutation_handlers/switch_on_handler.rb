@@ -60,20 +60,20 @@ module Krudmin
           format.html do
             flash[flash_type] = message
 
-            redirect_to resource_root
+            redirect_to resource_root, status: :see_other
           end
         end
 
-        def js_response(format)
-          format.js { render command.to_s }
+        def turbo_stream_response(format)
+          format.turbo_stream { render command.to_s }
         end
       end
 
       class InvalidListContext < ValidListContext
         private
 
-        def js_response(format)
-          format.js { render partial: "js_error_messages", locals: { error_messages: [message] } }
+        def turbo_stream_response(format)
+          format.turbo_stream { render partial: "error_toast", locals: { error_messages: [message] } }
         end
       end
 
@@ -81,7 +81,7 @@ module Krudmin
         def dispatch
           flash[flash_type] = [message]
 
-          redirect_to edit_resource_path(model)
+          redirect_to edit_resource_path(model), status: :see_other
         end
       end
 

@@ -62,7 +62,7 @@ describe Admin::CarsController, type: :controller do
           post :create, params: {car: invalid_attributes}
         }.to change(Car, :count).by(0)
 
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(assigns(:model)).to be_a_new(Car)
       end
     end
@@ -138,6 +138,27 @@ describe Admin::CarsController, type: :controller do
       expect do
         post :deactivate, params: {id: car.to_param}
       end.to change(Car.inactive, :count).by(1)
+    end
+  end
+
+  describe "PUT update (inline edit)" do
+    describe "with valid params" do
+      it "updates the attribute and returns turbo_stream" do
+        put :update, params: {id: car.to_param, car: { year: 2025 }, inline_edit: "true", format: :turbo_stream}
+
+        car.reload
+        expect(car.year).to eq 2025
+        expect(response.media_type).to eq "text/vnd.turbo-stream.html"
+      end
+    end
+
+    describe "with invalid params" do
+      it "returns error toast turbo_stream" do
+        put :update, params: {id: car.to_param, car: { model: "" }, inline_edit: "true", format: :turbo_stream}
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.media_type).to eq "text/vnd.turbo-stream.html"
+      end
     end
   end
 end

@@ -32,14 +32,24 @@ module Krudmin
       end
 
       def valid_context_mutator
-        controller.modal_form_context? ? ModalFormContextUpdate : FormContextUpdate
+        if controller.inline_edit_context?
+          InlineEditUpdate
+        elsif controller.modal_form_context?
+          ModalFormContextUpdate
+        else
+          FormContextUpdate
+        end
       end
 
       def invalid_path
         controller.respond_to do |format|
-          format.html { controller.render on_error_view }
-          format.js { controller.render "form_errors" }
+          format.html { controller.render on_error_view, status: :unprocessable_entity }
+          format.turbo_stream { controller.render on_error_turbo_stream_view, status: :unprocessable_entity }
         end
+      end
+
+      def on_error_turbo_stream_view
+        controller.inline_edit_context? ? "inline_edit_error" : "form_errors"
       end
     end
   end

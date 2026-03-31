@@ -6,12 +6,12 @@
       .col-lg-12
         .pull-right
           - if add_path && new_access?(associated_model)
-            = link_to(add_path, class: "btn btn-success associated-resource-creator", remote: true) do
+            = link_to(add_path, class: "btn btn-success associated-resource-creator", data: { remote_modal: true }) do
               %i.fa.fa-plus
               = new_title(associated_resource_label)
           &nbsp;
           - if edit_path && edit_access?(associated_model)
-            = link_to("#", class: "hidden btn btn-primary associated-resource-editor", remote: true, data: {edit_url: send("#{edit_path}_path", "__ID__")}) do
+            = link_to("#", class: "hidden btn btn-primary associated-resource-editor", data: {edit_url: send("#{edit_path}_path", "__ID__"), remote_modal: true}) do
               %i.fa.fa-pencil
               = edit_title(associated_resource_label)
       %br

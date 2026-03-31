@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "item-model-#{model_id}" do %>
+  <%= render_item_row(model) %>
+<% end %>
+
+<turbo-stream action="toast" type="warning" message="<%= deactivated_message %>"></turbo-stream>
+<turbo-stream action="highlight" target="item-model-<%= model_id %>"></turbo-stream>
+<turbo-stream action="init_controls"></turbo-stream>

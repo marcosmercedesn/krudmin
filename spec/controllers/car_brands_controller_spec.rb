@@ -41,7 +41,7 @@ describe CarBrandsController, type: :controller do
     describe "with valid params" do
       it "creates a new car_brand" do
         expect {
-          post :create, params: {car_brand: attributes_for(:car_brand), form_context: :modal, format: :js}
+          post :create, params: {car_brand: attributes_for(:car_brand), form_context: :modal, format: :turbo_stream}
         }.to change(CarBrand, :count).by(1)
       end
 
@@ -62,7 +62,7 @@ describe CarBrandsController, type: :controller do
           post :create, params: {car_brand: invalid_attributes}
         }.to change(CarBrand, :count).by(0)
 
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

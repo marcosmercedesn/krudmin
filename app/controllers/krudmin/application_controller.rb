@@ -19,11 +19,29 @@ module Krudmin
 
     def edit
       model.destroy if params.fetch(:failed_destroy, false)
+
+      respond_to do |format|
+        format.html
+        format.json
+        format.turbo_stream if remote_modal_request?
+      end
     end
 
-    def show; end
+    def show
+      respond_to do |format|
+        format.html
+        format.json
+        format.turbo_stream if remote_modal_request?
+      end
+    end
 
-    def new; end
+    def new
+      respond_to do |format|
+        format.html
+        format.json
+        format.turbo_stream if remote_modal_request?
+      end
+    end
 
     def create
       model.attributes = model_params
@@ -57,6 +75,14 @@ module Krudmin
 
     def modal_form_context?
       form_context == "modal"
+    end
+
+    def inline_edit_context?
+      params[:inline_edit].present?
+    end
+
+    def remote_modal_request?
+      params[:remote_modal].present?
     end
 
     private

@@ -1,0 +1,23 @@
+<% if defined?(messages) %>
+  <%# Successful update in modal context — update the row and show toast %>
+  <% messages.each do |message| %>
+    <turbo-stream action="toast" type="<%= message.type %>" message="<%= message.text %>"></turbo-stream>
+  <% end %>
+
+  <%= turbo_stream.replace "item-model-#{model.id}" do %>
+    <%= render_item_row(model) %>
+  <% end %>
+
+  <% updateable_relations = model_class.reflections.values.select { |r| r.macro == :has_many }.map { |r| r.klass.model_name.element } %>
+  <turbo-stream action="dispatch_event" event="updateBelongsToLookups" detail="<%= { model_id: model.id.to_s, model_element: model_class.model_name.element, relations: updateable_relations }.to_json %>"></turbo-stream>
+
+  <turbo-stream action="modal" target="crudFormModal" event="hide"></turbo-stream>
+  <turbo-stream action="init_controls"></turbo-stream>
+<% else %>
+  <%# Opening edit modal via non-GET request %>
+  <%= turbo_stream.update "krudmin-modal-container" do %>
+    <%= render partial: 'modal_form' %>
+  <% end %>
+
+  <turbo-stream action="modal" target="crudFormModal" event="show"></turbo-stream>
+<% end %>

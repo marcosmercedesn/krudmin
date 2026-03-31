@@ -15,6 +15,7 @@ class CarsResourceManager < Krudmin::ResourceManagers::Base
   LISTABLE_INCLUDES = [:car_brand]
   PAGINATOR_POSITION = :bottom
   REMOTE_CRUD = true
+  INLINE_EDITABLE_ATTRIBUTES = [:year, :active]
 
   ORDER_BY = [:year]
 

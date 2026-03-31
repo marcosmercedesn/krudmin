@@ -20,42 +20,26 @@ module Krudmin
 
       def valid_path
         respond_to do |format|
-          successful_html_response(format)
+          format.html do
+            flash[:error] = success_message
 
-          successful_js_response(format)
+            redirect_to resource_root, status: :see_other
+          end
+
+          format.turbo_stream { render "destroy" }
         end
-      end
-
-      def successful_html_response(format)
-        format.html do
-          flash[:error] = success_message
-
-          redirect_to resource_root
-        end
-      end
-
-      def successful_js_response(format)
-        format.js { render "destroy" }
       end
 
       def invalid_path
         respond_to do |format|
-          unsuccessful_html_response(format)
+          format.html do
+            flash[:error] = failure_message
 
-          unsuccessful_js_response(format)
+            redirect_to resource_root, status: :see_other
+          end
+
+          format.turbo_stream { render "destroy" }
         end
-      end
-
-      def unsuccessful_html_response(format)
-        format.html do
-          flash[:error] = failure_message
-
-          redirect_to resource_root
-        end
-      end
-
-      def unsuccessful_js_response(format)
-        format.js { render "destroy" }
       end
 
       def self.call(controller, model, success_message, failure_message)

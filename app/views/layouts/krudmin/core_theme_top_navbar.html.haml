@@ -9,8 +9,8 @@
 
     %title
       = content_for?(:page_title) ? yield(:page_title) : try(:crud_title)
-    = stylesheet_link_tag    'krudmin/core_theme/application', media: 'all', 'data-turbolinks-track' => 'reload'
-    = javascript_include_tag 'krudmin/core_theme/application', 'data-turbolinks-track' => 'reload'
+    = stylesheet_link_tag    'krudmin/core_theme/application', media: 'all', 'data-turbo-track' => 'reload'
+    = javascript_include_tag 'krudmin/core_theme/application', 'data-turbo-track' => 'reload'
 
     = render partial: 'layouts/krudmin/core_theme/head_content'
 
@@ -27,6 +27,7 @@
 
           = yield
       = render partial: '/layouts/krudmin/core_theme/aside_menu'
+    #krudmin-modal-container
     %footer.app-footer
       %span
         = render 'layouts/krudmin/core_theme/copyright'
