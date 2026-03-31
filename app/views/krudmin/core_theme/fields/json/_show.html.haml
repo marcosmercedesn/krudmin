@@ -1,0 +1,17 @@
+- if field.data.nil?
+  %span.text-muted -
+- elsif field.data.is_a?(Hash) && field.data.keys.length <= 10
+  %table.table.table-sm.table-bordered
+    %thead
+      %tr
+        %th Key
+        %th Value
+    %tbody
+      - field.flat_pairs.each do |key, val|
+        %tr
+          %td
+            %code= key
+          %td= val
+- else
+  %pre.bg-light.p-2{ style: "max-height: 400px; overflow: auto; font-size: 13px;" }
+    %code= field.formatted_value

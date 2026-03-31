@@ -1,0 +1,8 @@
+- type_attr = field.type_attribute
+- id_attr = field.id_attribute
+
+.row
+  .col-sm-6
+    = form.input type_attr, as: :select, collection: field.type_options_for_select, include_blank: "Select type...", label: "#{field_label} Type", input_html: { class: "form-control select2" }.merge(input_options)
+  .col-sm-6
+    = form.input id_attr, as: :number, label: "#{field_label} ID", input_html: { class: "form-control" }.merge(input_options)

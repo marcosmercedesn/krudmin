@@ -10,11 +10,11 @@ describe Krudmin::NavigationMenu::Node do
     allow(described_class).to receive(:routes).and_return(routes)
   end
 
-  subject { described_class.new("Link Label", "My Link", icon: :iconName) }
+  subject { described_class.new(label: "Link Label", link: "My Link", icon: :iconName) }
 
   describe "visibility permissions" do
     describe "single node" do
-      subject { described_class.new("Link Label", "My Link", icon: :iconName, visible_if: visibility_proc ) }
+      subject { described_class.new(label: "Link Label", link: "My Link", icon: :iconName, visible_if: visibility_proc) }
 
       context "not visible" do
         let(:visibility_proc) { -> { false } }
@@ -35,7 +35,7 @@ describe Krudmin::NavigationMenu::Node do
 
     describe "management node" do
       context "default" do
-        subject { described_class.node_for("Link Label", "link") }
+        subject { described_class.node_for(label: "Link Label", resource: "link") }
 
         it "has everything as visible" do
           expect(subject).to be_visible
@@ -43,7 +43,7 @@ describe Krudmin::NavigationMenu::Node do
         end
       end
 
-      subject { described_class.node_for("Link Label", "link", visible_if: visibility_proc, icon: :iconName, manage_if: manage_visibility_proc, add_if: add_visibility_proc) }
+      subject { described_class.node_for(label: "Link Label", resource: "link", visible_if: visibility_proc, icon: :iconName, manage_if: manage_visibility_proc, add_if: add_visibility_proc) }
 
       context "not visible" do
         let(:visibility_proc) { -> { false } }
@@ -109,12 +109,12 @@ describe Krudmin::NavigationMenu::Node do
   describe "exposed children items" do
     let(:items) {
       [
-        described_class.new(:label, :link),
-        described_class.new(:label, :link, visible_if: -> { false }),
+        described_class.new(label: :label, link: :link),
+        described_class.new(label: :label, link: :link, visible_if: -> { false }),
       ]
     }
 
-    let(:root_node) { described_class.new(:label, :link, items: items) }
+    let(:root_node) { described_class.new(label: :label, link: :link, items: items) }
 
     it 'only exposes visible items' do
       expect(root_node.to_a.size).to be 1

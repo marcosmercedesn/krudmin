@@ -20,14 +20,14 @@ describe Krudmin::NavigationMenu do
 
   describe "link" do
     it "adds a link entry to the menu" do
-      subject.link "Label", :link, module_path: :admin, icon: :gear
+      subject.link label: "Label", link: :link, module_path: :admin, icon: :gear
       expect(subject.count).to eq(1)
     end
   end
 
   describe "node" do
     it "adds a node entry to the menu" do
-      subject.node "Admin Cars", 'car', module_path: :admin, icon: :car
+      subject.node label: "Admin Cars", resource: "car", module_path: :admin, icon: :car
       expect(subject.count).to eq(1)
       expect(subject.first.map(&:label)).to eq(["Manage", "Add"])
     end

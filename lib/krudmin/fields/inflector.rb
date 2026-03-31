@@ -17,6 +17,8 @@ module Krudmin
             Krudmin::Fields::Date
           when :boolean
             Krudmin::Fields::Boolean
+          when :json, :jsonb
+            Krudmin::Fields::Json
           else
             Krudmin::Fields::String
           end

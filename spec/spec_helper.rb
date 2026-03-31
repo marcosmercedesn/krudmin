@@ -2,6 +2,7 @@ require 'simplecov'
 require 'active_support/all'
 require 'active_model'
 require "devise"
+require "ostruct"
 
 SimpleCov.start
 
@@ -27,6 +28,25 @@ RSpec.configure do |config|
 
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
+
+  # rspec-rails 8 removed the `setup`/`teardown` Minitest shims that
+  # Devise::Test::ControllerHelpers relies on. Provide them so Devise
+  # can register its before/after hooks.
+  config.include Module.new {
+    def self.included(base)
+      base.extend ClassMethods if base.respond_to?(:extend)
+    end
+
+    module ClassMethods
+      def setup(*)
+        # no-op: satisfies Devise's `setup` call in ControllerHelpers
+      end
+
+      def teardown(*)
+        # no-op
+      end
+    end
+  }, type: :controller
 
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Warden::Test::Helpers

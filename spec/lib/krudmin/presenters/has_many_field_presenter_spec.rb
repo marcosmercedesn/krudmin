@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Krudmin::Presenters::HasManyFieldPresenter do
-  let(:field) { Krudmin::Fields::HasMany.new(nil, nil, { child_partial_form: child_partial_path }) }
+  let(:field) { Krudmin::Fields::HasMany.new(:items, nil, { child_partial_form: child_partial_path }) }
   let(:child_partial_path) { :has_many_form_fields }
   subject { described_class.new(field, :form) }
 

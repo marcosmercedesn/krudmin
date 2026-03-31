@@ -1,0 +1,14 @@
+- input_html = { class: "form-control-file" }
+- input_html[:accept] = field.accept if field.accept
+- input_html[:multiple] = true if field.multiple?
+- input_html[:direct_upload] = true if field.direct_upload?
+- input_html.merge!(input_options)
+
+= form.input attribute, as: :file, input_html: input_html, label: field_label
+
+- if field.attached?
+  .mt-1.text-muted
+    %small
+      %i.fa.fa-paperclip
+      Current:
+      = field.filename

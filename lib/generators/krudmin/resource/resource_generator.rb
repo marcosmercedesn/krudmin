@@ -115,6 +115,9 @@ module Krudmin
         when "email" then ":Email"
         when "currency" then ":Currency"
         when "rich_text", "richtext" then ":RichText"
+        when "file", "image", "attachment" then ":File"
+        when "json", "jsonb" then ":Json"
+        when "polymorphic" then ":Polymorphic"
         else nil
         end
       end

@@ -40,7 +40,7 @@ describe Krudmin::Fields::DateTime do
       let(:date) { Time.new(1989, 12, 14, 4, 0).utc }
 
       it do
-        expect(subject.to_s).to eq(date.to_s(:short))
+        expect(subject.to_s).to eq(date.to_fs(:short))
       end
     end
   end

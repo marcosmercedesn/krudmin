@@ -27,9 +27,10 @@ describe Krudmin::ResourceManagers::AttributeCollection do
   let(:listable_attributes) { [] }
   let(:displayable_attributes) { [] }
   let(:searchable_attributes) { [] }
+  let(:lookup_attributes) { [] }
   let(:model) { double(primary_key: "pk_id", column_names: ["pk_id", "name", "age", "skills", "created_at", "updated_at"], columns_hash: {}, reflections: {}) }
 
-  subject{ described_class.new(model, attribute_types, editable_attributes, listable_attributes, searchable_attributes, displayable_attributes, attributes_metadata) }
+  subject{ described_class.new(model, attribute_types, editable_attributes, listable_attributes, searchable_attributes, displayable_attributes, attributes_metadata, lookup_attributes) }
 
   let(:default_columns) { [:name, :age, :skills] }
 

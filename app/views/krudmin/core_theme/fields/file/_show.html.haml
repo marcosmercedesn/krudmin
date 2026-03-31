@@ -1,0 +1,11 @@
+- if field.attached?
+  - if field.image?
+    .krudmin-file-preview
+      = image_tag(url_for(field.data), class: "img-fluid img-thumbnail", style: "max-height: 200px")
+      %br
+      %small.text-muted= field.filename
+  - else
+    %i.fa.fa-file
+    = link_to field.filename, url_for(field.data), target: "_blank"
+- else
+  %span.text-muted -

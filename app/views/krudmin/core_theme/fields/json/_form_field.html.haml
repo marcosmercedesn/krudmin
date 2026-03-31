@@ -1,0 +1,4 @@
+- json_value = field.data.nil? ? "" : JSON.pretty_generate(field.data) rescue field.data.to_s
+- textarea_options = { rows: field.rows, class: "form-control krudmin-json-field", style: "font-family: monospace; font-size: 13px;" }.merge(input_options)
+
+= form.input attribute, as: :text, input_html: textarea_options, label: field_label, value: json_value
