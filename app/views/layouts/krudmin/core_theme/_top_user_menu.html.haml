@@ -1,11 +1,11 @@
 - if _current_user
   %li.nav-item.dropdown
-    %a.nav-link.dropdown-toggle.nav-link{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
-      %span.hidden-xs-down
+    %a.nav-link.dropdown-toggle.nav-link{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", href: "#", role: "button"}
+      %span.d-none.d-sm-inline
         = _current_user.name
-      %span.hidden-sm-up
+      %span.d-sm-none
         %i.icon-people
-    .dropdown-menu.dropdown-menu-right
+    .dropdown-menu.dropdown-menu-end
       .dropdown-header.text-center
         %strong Settings
       = link_to(send(Krudmin::Config.edit_profile_path, _current_user), class: 'dropdown-item') do

@@ -12,9 +12,9 @@
   .col-lg-8
     .card{data: {card_panel: active_doc_file}}
       .card-header
-        %h1.pull-left
+        %h1.float-start
           = active_doc_file.humanize
-        .card-actions.pull-right
+        .card-actions.float-end
           %a.btn.card-collapser{href: '#'}
             %i.fa.fa-chevron-up.fa-lg
       .card-body
@@ -25,9 +25,9 @@
   .col-lg-4
     .card{data: {card_panel: :docs_links}}
       .card-header
-        %h4.pull-left
+        %h4.float-start
           Links
-        .card-actions.pull-right
+        .card-actions.float-end
           %a.btn.card-collapser{href: '#'}
             %i.fa.fa-chevron-up.fa-lg
       .card-body

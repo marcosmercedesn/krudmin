@@ -13,9 +13,9 @@
   .col-lg-12.no-padding
     .card.items-list
       .card-header
-        %h4.pull-left
+        %h4.float-start
           = t('krudmin.actions.manage_resources', label: resources_label)
-        .pull-right
+        .float-end
           - if krudmin_manager.paginator_on_top?
             = paginate items.result
       .card-body
@@ -29,6 +29,6 @@
                 %th{width: "20%"}= t('krudmin.actions.label')
           %tbody
             = render partial: "list_item", collection: items.result, as: :item
-        .pull-right
+        .float-end
           - if krudmin_manager.paginator_on_bottom?
             = paginate items.result

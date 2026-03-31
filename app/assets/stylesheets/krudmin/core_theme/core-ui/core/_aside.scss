@@ -12,7 +12,7 @@
       color: $body-color;
       border-top: 0;
       &.active {
-        color: theme-color("primary");
+        color: map-get($theme-colors, "primary");
         border-right-color: $border-color;
         border-left-color: $border-color;
       }

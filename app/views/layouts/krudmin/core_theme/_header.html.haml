@@ -1,12 +1,12 @@
 %header.app-header.navbar
-  %button.navbar-toggler.mobile-sidebar-toggler.d-lg-none.mr-auto{type: "button"}
+  %button.navbar-toggler.mobile-sidebar-toggler.d-lg-none.me-auto{type: "button"}
     %span.navbar-toggler-icon
   %a.navbar-brand{href: krudmin_root_path}
-  %button.navbar-toggler.sidebar-toggler.d-md-down-none{type: "button"}
+  %button.navbar-toggler.sidebar-toggler.d-none.d-md-block{type: "button"}
     %span.navbar-toggler-icon
-  %ul.nav.navbar-nav.d-md-down-none
+  %ul.nav.navbar-nav.d-none.d-md-block
     %li.nav-item.px-3
       %a.nav-link{href: krudmin_root_path}
         = t('krudmin.labels.dashboard')
-  %ul.nav.navbar-nav.ml-auto#main-user-menu
+  %ul.nav.navbar-nav.ms-auto#main-user-menu
     = render partial: '/layouts/krudmin/core_theme/top_user_menu'

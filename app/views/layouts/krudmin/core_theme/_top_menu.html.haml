@@ -20,15 +20,15 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.top-navbar
   .container-fluid
     %a.navbar-brand{href: krudmin_root_path}
-    %button.navbar-toggler.collapsed{"aria-controls" => "navbar-items", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbar-items", "data-toggle" => "collapse", :type => "button"}
+    %button.navbar-toggler.collapsed{"aria-controls" => "navbar-items", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbar-items", "data-bs-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     #navbar-items.navbar-collapse.collapse
-      %ul.navbar-nav.nav.mr-auto
+      %ul.navbar-nav.nav.me-auto
         %li.divider
         - navigation_menu.each do |item|
           - if item.items.any?
             %li.nav-item.dropdown{class: item.label_class}
-              = link_to(item.link, { class: "nav-link dropdown-toggle", data: {toggle: :dropdown} }.merge(item.html)) do
+              = link_to(item.link, { class: "nav-link dropdown-toggle", data: {bs_toggle: :dropdown} }.merge(item.html)) do
                 %i{class: "fa fa-#{item.icon}"}
                 = t(item.label)
               .dropdown-menu
@@ -37,10 +37,10 @@
                     %i{class: "fa fa-#{child_item.icon}"}
                     = child_item.label
           - else
-            %li.pull-right.nav-item{class: item.label_class}
+            %li.float-end.nav-item{class: item.label_class}
               = link_to(item.link, { class: "nav-link" }.merge(item.html)) do
                 %i{class: "fa fa-#{item.icon}"}
                 = t(item.label)
 
-      %ul.nav.navbar-nav.navbar-right.ml-auto#main-user-menu
+      %ul.nav.navbar-nav.navbar-right.ms-auto#main-user-menu
         = render partial: '/layouts/krudmin/core_theme/top_user_menu_toolbar'

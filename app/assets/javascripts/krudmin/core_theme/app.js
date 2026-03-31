@@ -250,10 +250,14 @@ function capitalizeFirstLetter(string) {
 
 function init(url) {
   /* ---------- Tooltip ---------- */
-  $('[rel="tooltip"],[data-rel="tooltip"]').tooltip({ placement: "bottom", delay: { show: 400, hide: 200 } });
+  document.querySelectorAll('[rel="tooltip"],[data-rel="tooltip"]').forEach(function(el) {
+    new bootstrap.Tooltip(el, { placement: "bottom", delay: { show: 400, hide: 200 } });
+  });
 
   /* ---------- Popover ---------- */
-  $('[rel="popover"],[data-rel="popover"],[data-toggle="popover"]').popover();
+  document.querySelectorAll('[rel="popover"],[data-rel="popover"],[data-bs-toggle="popover"]').forEach(function(el) {
+    new bootstrap.Popover(el);
+  });
 }
 
 function blinkHighlight(el, from, to) {

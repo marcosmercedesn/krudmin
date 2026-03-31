@@ -35,4 +35,4 @@
 //= require krudmin/core_theme/app
 //= require krudmin/belongs-to-one-has-one-controls
 
-//= require summernote/summernote-bs4.min
+//= require summernote/summernote-lite.min

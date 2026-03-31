@@ -99,12 +99,13 @@
 
 @mixin bg-variant($parent, $color) {
   #{$parent} {
-    @include border-radius($card-border-radius-inner $card-border-radius-inner $card-border-radius-inner $card-border-radius-inner);
+    @include border-radius($card-border-radius $card-border-radius $card-border-radius $card-border-radius);
     color: #fff !important;
     background-color: $color !important;
   }
   a#{$parent} {
-    @include hover-focus {
+    &:hover,
+    &:focus {
       background-color: darken($color, 10%);
     }
   }

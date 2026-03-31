@@ -2,12 +2,12 @@ clearToasts();
 
 var errorMessages = [
 <% error_messages.each do |msg| %>
-  "<li class='text-left'><%= msg %></li>",
+  "<li class='text-start'><%= msg %></li>",
 <% end %>
 ];
 
 var errorList = [
-    "<ul class='text-left'>",
+    "<ul class='text-start'>",
     errorMessages.join(""),
     "</ul>"
   ];

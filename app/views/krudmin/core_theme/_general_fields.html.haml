@@ -5,9 +5,9 @@
 %div{class: metadata.fetch(:class, 'col-lg-6 col-md-12')}
   .card{data: {card_panel: key}}
     .card-header
-      %h5.pull-left
+      %h5.float-start
         = metadata.fetch(:label)
-      .card-actions.pull-right
+      .card-actions.float-end
         %a.btn.card-collapser{href: '#'}
           %i.fa.fa-chevron-up.fa-lg
     .card-body

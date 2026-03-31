@@ -1,5 +1,7 @@
-$.fn.bstooltip = $.fn.tooltip;
-
 function initializeTooltipControls() {
-  $('[data-toggle="tooltip"]').bstooltip();
+  document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function(el) {
+    if (!bootstrap.Tooltip.getInstance(el)) {
+      new bootstrap.Tooltip(el);
+    }
+  });
 }

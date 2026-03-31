@@ -4,7 +4,7 @@
   - if add_path || edit_path
     .row
       .col-lg-12
-        .pull-right
+        .float-end
           - if add_path && new_access?(associated_model)
             = link_to(add_path, class: "btn btn-success associated-resource-creator", data: { remote_modal: true }) do
               %i.fa.fa-plus

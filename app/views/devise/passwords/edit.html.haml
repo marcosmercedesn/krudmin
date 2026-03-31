@@ -22,9 +22,9 @@
               = button_tag(type: :submit, class: "btn btn-primary") do
                 %i.fa.fa-save
                 =t("devise.passwords.change_my_password")
-            .col-6.text-right
+            .col-6.text-end
               = link_to "Log in", new_session_path(resource_name), class: 'btn btn-link px-0'
-    .card.text-white.bg-primary.py-5.d-md-down-none{:style => "width:44%"}
+    .card.text-white.bg-primary.py-5.d-none.d-md-block{:style => "width:44%"}
       .card-body.text-center
         %div
           %h2= Krudmin::Config.login_screen_intro_message

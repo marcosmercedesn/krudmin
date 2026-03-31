@@ -3,8 +3,8 @@
   <% @model_name = form.object.model_name.singular %>
 <%- end %>
 
-<% error_list = model.errors.full_messages.map { |msg| "<li class='text-left'>#{msg}</li>" }.join %>
+<% error_list = model.errors.full_messages.map { |msg| "<li class='text-start'>#{msg}</li>" }.join %>
 
-<turbo-stream action="toast" type="error" message="<ul class='text-left'><%= error_list %></ul>"></turbo-stream>
+<turbo-stream action="toast" type="error" message="<ul class='text-start'><%= error_list %></ul>"></turbo-stream>
 <turbo-stream action="highlight" target="<%= @form_id %>"></turbo-stream>
 <turbo-stream action="scroll_to_top"></turbo-stream>

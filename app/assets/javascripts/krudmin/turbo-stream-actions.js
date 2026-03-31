@@ -29,14 +29,19 @@
   Turbo.StreamActions.modal = function() {
     var targetId = this.getAttribute("target");
     var eventType = this.getAttribute("event") || "show";
-    var modal = $("#" + targetId);
+    var modalEl = document.getElementById(targetId);
+
+    if (!modalEl) return;
+
+    var modalInstance = bootstrap.Modal.getOrCreateInstance(modalEl);
 
     if (eventType === "hide") {
-      modal.modal("hide");
+      modalInstance.hide();
     } else if (eventType === "show") {
-      modal.on("shown.bs.modal", function() {
+      modalEl.addEventListener("shown.bs.modal", function() {
         initKrudminScriptsForControls();
-      }).modal("show");
+      }, { once: true });
+      modalInstance.show();
     }
   };
 
