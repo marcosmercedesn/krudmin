@@ -6,13 +6,14 @@ module Krudmin
       class NoPresentationMedatataFound < StandardError; end
 
       attr_reader :model, :attributes_metadata, :attributes, :searchable_attributes, :presentation_metadata, :listable_attributes, :displayable_attributes
-      def initialize(model, attributes_metadata, attributes, listable_attributes, searchable_attributes, displayable_attributes, presentation_metadata)
+      def initialize(model, attributes_metadata, attributes, listable_attributes, searchable_attributes, displayable_attributes, presentation_metadata, lookup_attributes)
         @model = model
         @attributes_metadata = attributes_metadata
         @presentation_metadata = presentation_metadata
         @listable_attributes = collection_or_default(listable_attributes)
         @displayable_attributes = collection_or_default(displayable_attributes)
         @searchable_attributes = collection_or_default(searchable_attributes)
+        @_lookup_attributes = collection_or_default(lookup_attributes)
         @attributes = collection_or_default(attributes)
       end
 
@@ -39,6 +40,10 @@ module Krudmin
 
       def editable_attributes
         @editable_attributes ||= attributes.is_a?(Hash) ? attributes.values.flatten : attributes
+      end
+
+      def lookup_attributes
+        @lookup_attributes ||= @_lookup_attributes.is_a?(Hash) ? @_lookup_attributes.values.flatten : @_lookup_attributes
       end
 
       def permitted_attributes

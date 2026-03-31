@@ -1,4 +1,11 @@
-<% if params[:grouped] %>
+<% if request_mode_search? %>
+  <%=
+  requested_lookup_fields.map.reduce({}) do |hash, attribute|
+    hash[attribute] = field_for(attribute, model).render(:json, self, { search_term: search_term, search_id: search_id, remote_search: true })
+    hash
+  end.to_json.html_safe
+  %>
+<% elsif params[:grouped] %>
 <%=
   grouped_attributes.map do |key, metadata|
     {

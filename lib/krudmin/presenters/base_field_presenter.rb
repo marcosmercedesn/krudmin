@@ -11,7 +11,7 @@ module Krudmin
         end
       end
 
-      delegate :attribute, :value, :to_s, to: :field
+      delegate :attribute, :attribute_alias, :value, :to_s, to: :field
 
       attr_reader :field, :page, :view_context, :options
       def initialize(field, page, view_context = nil, options = {})

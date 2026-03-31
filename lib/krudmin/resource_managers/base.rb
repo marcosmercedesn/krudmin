@@ -17,6 +17,7 @@ module Krudmin
       EDITABLE_ATTRIBUTES = []
       SEARCHABLE_ATTRIBUTES = []
       DISPLAYABLE_ATTRIBUTES = []
+      LOOKUP_ATTRIBUTES = []
       LISTABLE_ACTIONS = [:show, :edit, :destroy]
       ORDER_BY = []
       LISTABLE_INCLUDES = []
@@ -29,7 +30,7 @@ module Krudmin
       PAGINATOR_POSITION = nil
 
       constantized_methods :searchable_attributes, :resource_label, :resources_label, :model_classname, :listable_actions, :order_by, :remote_crud
-      constantized_methods :listable_includes, :resource_instance_label_attribute, :presentation_metadata, :displayable_attributes
+      constantized_methods :listable_includes, :resource_instance_label_attribute, :presentation_metadata, :displayable_attributes, :lookup_attributes
 
       def field_for(field, model = nil, root: nil)
         field_class_for(field, root).new_field(model)
@@ -92,7 +93,7 @@ module Krudmin
       end
 
       delegate :attribute_types, :permitted_attributes, :editable_attributes, :listable_attributes, to: :resource_attributes
-      delegate :grouped_attributes, :displayable_attributes, :searchable_attributes, :find_type_for, to: :resource_attributes
+      delegate :grouped_attributes, :displayable_attributes, :lookup_attributes, :searchable_attributes, :find_type_for, to: :resource_attributes
 
       def resource_attributes
         @resource_attributes ||= Krudmin::ResourceManagers::AttributeCollection.new(model_class,
@@ -101,7 +102,8 @@ module Krudmin
                                                                                    self.class::LISTABLE_ATTRIBUTES,
                                                                                    self.class::SEARCHABLE_ATTRIBUTES,
                                                                                    self.class::DISPLAYABLE_ATTRIBUTES,
-                                                                                   self.class::PRESENTATION_METADATA)
+                                                                                   self.class::PRESENTATION_METADATA,
+                                                                                   self.class::LOOKUP_ATTRIBUTES)
       end
     end
   end

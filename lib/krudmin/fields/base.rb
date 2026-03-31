@@ -14,9 +14,10 @@ module Krudmin
 
       constantized_methods :html_class, :html_format, :html_attrs
 
-      attr_reader :attribute, :model, :resource, :options, :presenter, :presenter_contexts
+      attr_reader :attribute, :model, :resource, :options, :presenter, :presenter_contexts, :real_attribute_name
       def initialize(attribute, model = nil, options = {})
         @attribute = attribute
+        @real_attribute_name = options.fetch(:real_attribute_name, attribute).to_sym
         @model = model
         @options = options.dup
         @resource = @options.delete(:resource)
@@ -24,12 +25,16 @@ module Krudmin
         @presenter_contexts = {}
       end
 
+      def attribute_alias
+        @attribute_alias ||= options.fetch(:attribute_alias, attribute).to_sym
+      end
+
       def parse(value)
-        value
+        value if value.present?
       end
 
       def data
-        @data ||= model&.send(attribute)
+        @data ||= model&.send(real_attribute_name)
       end
 
       def value

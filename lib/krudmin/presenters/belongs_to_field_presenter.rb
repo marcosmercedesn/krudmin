@@ -37,6 +37,7 @@ module Krudmin
                               associated_model: associated_model,
                               add_path: add_path,
                               edit_path: edit_path,
+                              attribute_alias: attribute_alias,
                               remote: remote?,
                               associated_resource_label: associated_resource_label,
                               associated_resource_manager_class: associated_resource_manager_class)
@@ -52,6 +53,7 @@ module Krudmin
                                 group_method: group_method,
                                 group_label_method: group_label_method,
                                 input_type: input_type,
+                                attribute_alias: attribute_alias,
                                 remote: remote?,
                                 associated_resource_manager_class: associated_resource_manager_class)
       end
