@@ -5,7 +5,8 @@ module Krudmin
       def initialize(page, view_context, action_path = "#", html_options = {}, &block)
         if remote_support? && html_options.to_h[:remote]
           html_options[:data] ||= {}
-          html_options[:data][:remote_modal] = true
+          html_options[:data][:controller] = "remote-modal"
+          html_options[:data][:action] = "click->remote-modal#open"
         end
 
         @page = page

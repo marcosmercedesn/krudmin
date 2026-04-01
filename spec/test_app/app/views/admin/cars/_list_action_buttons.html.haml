@@ -1,5 +1,5 @@
 - configure_toolbar(:list, self) do |b|
-  - b.button :new, nil, data: krudmin_manager.remote_crud ? { remote_modal: true } : {}
+  - b.button :new, nil, data: krudmin_manager.remote_crud ? { controller: "remote-modal", action: "click->remote-modal#open" } : {}
   - b.button :search
   - b.link admin_cars_path, class: 'btn btn-danger' do
     %i.fa.fa-car

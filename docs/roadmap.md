@@ -44,12 +44,13 @@ Check: MODEL_CLASSNAME exists, ATTRIBUTE_TYPES reference valid fields, associati
 
 ## Modernization (High Impact, High Effort)
 
-### 5. Complete Hotwire migration (Turbo + Stimulus)
+### 5. Remove remaining jQuery usage
 
-Turbo Streams and turbo-rails are already integrated. Cocoon has been replaced with a custom vanilla JS nested fields controller. The remaining work is:
+Turbo Streams, Stimulus controllers, and Trix are all integrated. jQuery remains only because Select2 and daterangepicker are jQuery plugins. The remaining work is:
 
-- Replace remaining jQuery event binding with **Stimulus** controllers
-- Remove `sweet-confirm.js`, `belongs-to-one-has-one-controls.js` and other custom jQuery code in favor of Stimulus
+- Replace **Select2** with a vanilla JS alternative (Tom Select, Slim Select, or Choices.js)
+- Replace **daterangepicker** with a vanilla JS date picker
+- Remove `jquery-rails` gem dependency
 
 ## Developer Experience
 

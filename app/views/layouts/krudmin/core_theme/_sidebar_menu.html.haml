@@ -1,12 +1,12 @@
 .sidebar
-  %nav.sidebar-nav
+  %nav.sidebar-nav{data: {controller: "navigation"}}
     %ul.nav
       %li.nav-title
         Menu
       - navigation_menu.each do |item|
         - if item.items.any?
           %li.nav-item.nav-dropdown{class: item.label_class}
-            = link_to(item.link, { class: "nav-link nav-dropdown-toggle" }.merge(item.html)) do
+            = link_to(item.link, { class: "nav-link nav-dropdown-toggle", data: { action: "click->navigation#toggleDropdown" } }.merge(item.html)) do
               %i{class: "fa fa-#{item.icon}"}
               = t(item.label)
             %ul.nav-dropdown-items
@@ -21,4 +21,4 @@
               %i{class: "fa fa-#{item.icon}"}
               = t(item.label)
         %li.divider
-  %button.sidebar-minimizer.brand-minimizer{type: "button"}
+  %button.sidebar-minimizer.brand-minimizer{type: "button", data: {action: "sidebar#minimize"}}

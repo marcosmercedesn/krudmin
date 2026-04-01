@@ -19,6 +19,10 @@ module Krudmin
         _input_options = input_options.dup
         input_class = _input_options.fetch(:class, "")
         _input_options[:class] = "#{input_class} #{self.class::PICKER_CONTROL_CSS_CLASS}"
+        _input_options[:data] = (_input_options[:data] || {}).merge(
+          controller: "datepicker",
+          datepicker_time_value: self.class::PICKER_CONTROL_CSS_CLASS == :datetimepicker
+        )
 
         render_partial(partial_form, formatted_date_value: value_with_input_format, input_options: _input_options)
       end

@@ -1,40 +1,16 @@
 -# =============================================================================
--# HAS MANY — NESTED FORM TABLE
+-# HAS MANY — NESTED FORM TABLE (Stimulus: nested-fields controller)
 -# =============================================================================
 -#
--# This partial renders the editable table for a HasMany association
--# (e.g., a Car's Passengers). It has three sections:
--#
--#   1. THEAD  — Column headers derived from the associated ResourceManager
--#   2. TBODY  — One row per existing associated record, rendered via
--#               _form_fields.html.haml (the "row partial")
--#   3. TFOOT  — The "Add" button + a <template> containing a blank row
--#
--# ─── HOW THE TEMPLATE WORKS ─────────────────────────────────────────────────
--#
--# The <template> tag holds the HTML for a brand-new empty row. Inside it,
--# all field names use a "NEW_RECORD" placeholder where the index would go:
--#
--#   car[passengers_attributes][NEW_RECORD][name]
--#
--# When the user clicks "Add", nested-fields.js clones this template,
--# replaces "NEW_RECORD" with a unique timestamp (e.g. 1711929600000),
--# and appends the result to the <tbody>. Rails doesn't care about the
--# index value — it only needs each nested record to have a unique key.
--#
--# ─── DATA ATTRIBUTES ────────────────────────────────────────────────────────
--#
--#   data-nested-fields="container"  → wraps the whole thing for JS to find
--#   data-nested-target="body"       → the <tbody> where rows live
--#   data-nested-target="template"   → the <template> with the blank row
--#   data-nested-action="add"        → the "Add" button
+-# Renders the editable table for a HasMany association using the
+-# nested-fields Stimulus controller for add/remove row management.
 -#
 -# =============================================================================
 
 - @field = field
 
--# Wrap everything in a container that nested-fields.js can locate
-%div{data: {nested_fields: "container"}}
+-# The nested-fields Stimulus controller wraps the entire group
+%div{data: {controller: "nested-fields"}}
   %table.table.table-hover
     %thead
       %tr
@@ -44,28 +20,16 @@
               = field.associated_resource_manager_class.model_class.human_attribute_name(attribute)
         %th
 
-    -# ── EXISTING ROWS ──────────────────────────────────────────────────────
-    -# Rails' simple_fields_for iterates over each existing associated record
-    -# and yields a form builder scoped to that record. Each record gets its
-    -# own <tr> rendered by the _form_fields partial.
-    %tbody{id: "krudmin-nested-fields-#{field.association_name}", data: {nested_target: "body"}}
+    %tbody{id: "krudmin-nested-fields-#{field.association_name}", data: {nested_fields_target: "body"}}
       = form.simple_fields_for field.attribute_for_nested_form do |builder|
         = render_partial.call(field.child_partial_form, f: builder, field: field)
 
-    -# ── TEMPLATE + ADD BUTTON ──────────────────────────────────────────────
-    -# The <template> tag is NOT rendered to the DOM — its content exists only
-    -# as a clonable fragment. We build the blank row by calling
-    -# simple_fields_for with child_index: "NEW_RECORD", which makes Rails
-    -# generate field names like:
-    -#   car[passengers_attributes][NEW_RECORD][name]
-    -#
-    -# nested-fields.js replaces "NEW_RECORD" with a unique timestamp on add.
     %tfoot
       %tr
         %td{colspan: (field.associated_resource_manager_class.editable_attributes.count + 1)}
-          %template{data: {nested_target: "template"}}
+          %template{data: {nested_fields_target: "template"}}
             = form.simple_fields_for field.attribute_for_nested_form, field.associated_class.new, child_index: "NEW_RECORD" do |builder|
               = render_partial.call(field.child_partial_form, f: builder, field: field)
-          %a.btn.btn-warning{href: "#", data: {nested_action: "add"}}
+          %a.btn.btn-warning{href: "#", data: {action: "nested-fields#add"}}
             %i.fa.fa-plus
             = t('krudmin.actions.add_new')

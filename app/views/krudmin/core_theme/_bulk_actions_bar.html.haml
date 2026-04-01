@@ -1,20 +1,20 @@
-.bulk-actions-bar.alert.alert-info.d-none{data: {bulk_actions_bar: true}}
+.bulk-actions-bar.alert.alert-info.d-none{data: {bulk_actions_target: "bar"}}
   .d-flex.align-items-center.justify-content-between
     %span.bulk-actions-count
-      %strong{data: {bulk_count: true}} 0
+      %strong{data: {bulk_actions_target: "count"}} 0
       = t('krudmin.bulk_actions.items_selected')
     .bulk-actions-buttons
       - krudmin_manager.bulk_actions.each do |action|
         - case action
         - when :destroy
-          %button.btn.btn-danger.btn-sm.ms-2{type: "button", data: {bulk_action: "destroy", bulk_url: url_for(action: :bulk_destroy), turbo_confirm: t('krudmin.bulk_actions.confirm_destroy'), confirm_icon: "warning", confirm_class: "btn-danger"}}
+          %button.btn.btn-danger.btn-sm.ms-2{type: "button", data: {action: "bulk-actions#perform", url: url_for(action: :bulk_destroy), confirm: t('krudmin.bulk_actions.confirm_destroy'), confirm_icon: "warning"}}
             %i.fa.fa-trash
             = t('krudmin.actions.delete')
         - when :activate
-          %button.btn.btn-success.btn-sm.ms-2{type: "button", data: {bulk_action: "activate", bulk_url: url_for(action: :bulk_activate), turbo_confirm: t('krudmin.bulk_actions.confirm_activate'), confirm_icon: "info", confirm_class: "btn-success"}}
+          %button.btn.btn-success.btn-sm.ms-2{type: "button", data: {action: "bulk-actions#perform", url: url_for(action: :bulk_activate), confirm: t('krudmin.bulk_actions.confirm_activate'), confirm_icon: "info"}}
             %i.fa.fa-check
             = t('krudmin.actions.activate')
         - when :deactivate
-          %button.btn.btn-warning.btn-sm.ms-2{type: "button", data: {bulk_action: "deactivate", bulk_url: url_for(action: :bulk_deactivate), turbo_confirm: t('krudmin.bulk_actions.confirm_deactivate'), confirm_icon: "warning", confirm_class: "btn-warning"}}
+          %button.btn.btn-warning.btn-sm.ms-2{type: "button", data: {action: "bulk-actions#perform", url: url_for(action: :bulk_deactivate), confirm: t('krudmin.bulk_actions.confirm_deactivate'), confirm_icon: "warning"}}
             %i.fa.fa-ban
             = t('krudmin.actions.deactivate')

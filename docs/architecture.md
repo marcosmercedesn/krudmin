@@ -356,5 +356,6 @@ ResourceManager.field_for(:name, model)
 | ransack | Search/filtering |
 | sassc-rails | SASS compilation |
 | simple_form | Form builder |
+| stimulus (vendored) | Stimulus controllers |
 | trix (vendored) | Rich text editor |
-| turbolinks | SPA-like navigation |
+| turbo-rails | Hotwire Turbo integration |

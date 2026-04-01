@@ -1,17 +1,17 @@
-.associated-resource-container
-  = form.association association_name, label: field_label, as: input_type, collection: associated_options, label_method: collection_label_field, value_method: :id, group_method: group_method, group_label_method: group_label_method, input_html: { class: 'form-control select2 belongs-to-control', include_blank: true, data: { remote: remote, field: attribute_alias } }
+.associated-resource-container{data: (add_path || edit_path) ? {controller: "belongs-to"} : {}}
+  = form.association association_name, label: field_label, as: input_type, collection: associated_options, label_method: collection_label_field, value_method: :id, group_method: group_method, group_label_method: group_label_method, input_html: { class: 'form-control select2', data: { controller: "select2", select2_remote_value: remote, select2_field_value: attribute_alias }.merge((add_path || edit_path) ? { belongs_to_target: "select", action: "change->belongs-to#updateEditUrl" } : {})}
 
   - if add_path || edit_path
     .row
       .col-lg-12
         .float-end
           - if add_path && new_access?(associated_model)
-            = link_to(add_path, class: "btn btn-success associated-resource-creator", data: { remote_modal: true }) do
+            = link_to(add_path, class: "btn btn-success associated-resource-creator", data: { controller: "remote-modal", action: "click->remote-modal#open" }) do
               %i.fa.fa-plus
               = new_title(associated_resource_label)
           &nbsp;
           - if edit_path && edit_access?(associated_model)
-            = link_to("#", class: "hidden btn btn-primary associated-resource-editor", data: {edit_url: send("#{edit_path}_path", "__ID__"), remote_modal: true}) do
+            = link_to("#", class: "hidden btn btn-primary associated-resource-editor", data: {belongs_to_target: "editLink", edit_url: send("#{edit_path}_path", "__ID__"), controller: "remote-modal", action: "click->remote-modal#open"}) do
               %i.fa.fa-pencil
               = edit_title(associated_resource_label)
       %br

@@ -325,8 +325,9 @@ When onboarding to this project, read these files in order:
 - **ransack** - Search/filtering
 - **sassc-rails** - SASS compilation
 - **simple_form** - Form builder
+- **stimulus** - Stimulus controllers (vendored, v3.2.1)
 - **trix** - Rich text editor (vendored, v2.1.15)
-- **turbolinks** - SPA-like page transitions
+- **turbo-rails** - Hotwire Turbo integration
 
 ## Common Tasks for AI Agents
 

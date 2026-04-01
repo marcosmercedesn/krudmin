@@ -38,23 +38,13 @@
     if (eventType === "hide") {
       modalInstance.hide();
     } else if (eventType === "show") {
-      modalEl.addEventListener("shown.bs.modal", function() {
-        initKrudminScriptsForControls();
-      }, { once: true });
       modalInstance.show();
-    }
-  };
-
-  // <turbo-stream action="init_controls">
-  Turbo.StreamActions.init_controls = function() {
-    if (typeof initKrudminScriptsForControls === "function") {
-      initKrudminScriptsForControls();
     }
   };
 
   // <turbo-stream action="scroll_to_top">
   Turbo.StreamActions.scroll_to_top = function() {
-    $("html, body").animate({ scrollTop: 0 }, "fast");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // <turbo-stream action="dispatch_event" event="updateBelongsToLookups" detail="{}">

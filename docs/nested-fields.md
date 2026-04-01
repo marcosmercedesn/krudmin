@@ -2,11 +2,11 @@
 
 ## Overview
 
-Krudmin uses a custom vanilla JavaScript controller (`nested-fields.js`) to manage
+Krudmin uses a **Stimulus controller** (`nested_fields_controller.js`) to manage
 add/remove behavior for HasMany nested forms. This replaced the unmaintained
 [Cocoon](https://github.com/nathanvda/cocoon) gem.
 
-The system is ~120 lines of vanilla JS with no external dependencies. It works
+The controller is part of krudmin's Stimulus-based frontend. It works
 with Rails' standard `accepts_nested_attributes_for` — no model changes needed.
 
 ## How It Works
@@ -28,20 +28,22 @@ handles the frontend (cloning/hiding DOM rows).
 The key technique is using an HTML `<template>` element:
 
 ```
-┌─────────────────────────────────────────────────┐
-│ <table>                                         │
-│   <tbody data-nested-target="body">             │
-│     <tr>  ← existing row (index 0)              │
-│     <tr>  ← existing row (index 1)              │
-│   </tbody>                                      │
-│                                                 │
-│   <template data-nested-target="template">      │
-│     <tr>  ← blank row with NEW_RECORD placeholder│
-│   </template>                                   │
-│                                                 │
-│   <button data-nested-action="add">Add</button> │
-│ </table>                                        │
-└─────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────┐
+│ <div data-controller="nested-fields">                         │
+│   <table>                                                     │
+│     <tbody data-nested-fields-target="body">                  │
+│       <tr>  ← existing row (index 0)                          │
+│       <tr>  ← existing row (index 1)                          │
+│     </tbody>                                                  │
+│                                                               │
+│     <template data-nested-fields-target="template">           │
+│       <tr>  ← blank row with NEW_RECORD placeholder           │
+│     </template>                                               │
+│                                                               │
+│     <button data-action="nested-fields#add">Add</button>      │
+│   </table>                                                    │
+│ </div>                                                        │
+└───────────────────────────────────────────────────────────────┘
 ```
 
 The `<template>` tag is special: browsers don't render its contents. It's just
@@ -54,7 +56,7 @@ When the user clicks "Add":
 1. JS reads the `<template>` innerHTML
 2. Replaces every `NEW_RECORD` string with a unique timestamp (e.g., `1711929600000`)
 3. Appends the resulting HTML to the `<tbody>`
-4. Fires `krudmin:updateControls` so Select2/datepickers/Trix reinitialize
+4. Stimulus auto-initializes other controllers (Select2, datepickers) on new elements
 
 **Why a timestamp?** Rails nested attributes need each record to have a unique
 index key. It doesn't need to be sequential — just unique. `Date.now()` gives

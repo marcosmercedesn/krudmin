@@ -3,14 +3,14 @@
 - return if valid_editable_attributes.empty?
 
 %div{class: metadata.fetch(:class, 'col-lg-6 col-md-12')}
-  .card{data: {card_panel: key}}
+  .card{data: {controller: "card-collapse", card_collapse_panel_value: key}}
     .card-header
       %h5.float-start
         = metadata.fetch(:label)
       .card-actions.float-end
-        %a.btn.card-collapser{href: '#'}
-          %i.fa.fa-chevron-up.fa-lg
-    .card-body
+        %a.btn.card-collapser{href: '#', data: {action: "click->card-collapse#toggle"}}
+          %i.fa.fa-chevron-up.fa-lg{data: {card_collapse_target: "icon"}}
+    .card-body{data: {card_collapse_target: "body"}}
       .row
         - valid_editable_attributes.each do |attribute|
           %div{class: metadata.fetch(:input_container_class, 'col-md-12')}

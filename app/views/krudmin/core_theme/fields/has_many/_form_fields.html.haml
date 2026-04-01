@@ -43,5 +43,5 @@
     -# Hidden _destroy field — Rails uses this to know whether to delete the record.
     -# The "destroy-flag" class lets nested-fields.js find and flip this to "1".
     = f.hidden_field :_destroy, class: "destroy-flag", value: false
-    %a.btn.btn-danger{href: "#", data: {nested_action: "remove"}}
+    %a.btn.btn-danger{href: "#", data: {action: "nested-fields#remove"}}
       %i.fa.fa-trash

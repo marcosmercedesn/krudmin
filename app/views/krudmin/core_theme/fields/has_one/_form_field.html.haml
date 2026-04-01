@@ -1,12 +1,12 @@
-.belongs-to-one-container{data: { form_fields: form_fields, model_id: field.model.send(attribute)&.id } }
-  .form-fields
+%div{data: { controller: "belongs-to-one", belongs_to_one_model_id_value: field.model.send(attribute)&.id, belongs_to_one_form_fields_value: form_fields }}
+  .form-fields{data: {belongs_to_one_target: "fields"}}
     - if display_fields_on_load
       = form_fields.html_safe
   - unless required
-    = link_to("#", class: "btn btn-warning add-form-fields hidden") do
+    = link_to("#", class: "btn btn-warning hidden", data: {action: "belongs-to-one#add", belongs_to_one_target: "addButton"}) do
       %i.fa.fa-plus
       = t('krudmin.actions.add_new')
 
-    = link_to("#", class: "btn btn-danger delete-form-fields hidden") do
+    = link_to("#", class: "btn btn-danger hidden", data: {action: "belongs-to-one#remove", belongs_to_one_target: "removeButton"}) do
       %i.fa.fa-trash
       = t('krudmin.actions.delete')

@@ -1,13 +1,13 @@
 %tr{id: "item-model-#{item.id}", class: "item-model-#{item.id}"}
   - if bulk_actions_enabled?
     %td.bulk-checkbox-column
-      %input.bulk-select-item{type: "checkbox", value: item.id, data: {bulk_select: "item"}}
+      %input.bulk-select-item{type: "checkbox", value: item.id, data: {bulk_actions_target: "item", action: "bulk-actions#selectItem"}}
   - listable_attributes.each_with_index do |column_label, column_index|
     - editable_inline = edit_access?(item) && krudmin_manager.inline_editable?(column_label)
     - link_cell = column_index.zero? && !editable_inline && (edit_access?(item) || show_access?(item))
-    %td{class: "#{krudmin_manager.field_for(column_label).html_class}", data: editable_inline ? inline_edit_data_for(column_label, item) : {}}
+    %td{class: "#{krudmin_manager.field_for(column_label).html_class}", data: editable_inline ? inline_edit_data_for(column_label, item).merge(controller: "inline-edit", action: "click->inline-edit#edit") : {}}
       - if link_cell
-        = link_to(field_for(column_label, item).render(:list, self), edit_access?(item) ? edit_resource_path(item.id) : resource_path(item.id), data: krudmin_manager.remote_crud ? { remote_modal: true } : {})
+        = link_to(field_for(column_label, item).render(:list, self), edit_access?(item) ? edit_resource_path(item.id) : resource_path(item.id), data: krudmin_manager.remote_crud ? { controller: "remote-modal", action: "click->remote-modal#open" } : {})
       - else
         %span.inline-display
           = field_for(column_label, item).render(:list, self)

@@ -15,23 +15,21 @@ module Krudmin
       field_type = field.class.name.demodulize.underscore
 
       data = {
-        inline_edit: true,
-        attribute: column_label,
-        model_id: item.id,
-        update_url: resource_path(item),
-        model_key: model_class.model_name.param_key,
-        field_type: field_type,
-        field_value: field.data
+        inline_edit_url_value: resource_path(item),
+        inline_edit_model_key_value: model_class.model_name.param_key,
+        inline_edit_attribute_value: column_label,
+        inline_edit_field_type_value: field_type,
+        inline_edit_field_value_value: field.data
       }
 
       if field_type == "enum_type"
-        data[:field_options] = field.associated_options.map { |label, val| { label: label, value: val } }.to_json
+        data[:inline_edit_field_options_value] = field.associated_options.map { |label, val| { label: label, value: val } }.to_json
       elsif field_type == "belongs_to"
         options = field.associated_options.map { |opt| { label: opt.send(field.collection_label_field), value: opt.id } }
-        data[:field_options] = options.to_json
+        data[:inline_edit_field_options_value] = options.to_json
       elsif field_type == "boolean"
-        data[:field_options] = [{ label: I18n.t("krudmin.labels.yes"), value: "true" }, { label: I18n.t("krudmin.labels.no"), value: "false" }].to_json
-        data[:field_value] = field.data.to_s
+        data[:inline_edit_field_options_value] = [{ label: I18n.t("krudmin.labels.yes"), value: "true" }, { label: I18n.t("krudmin.labels.no"), value: "false" }].to_json
+        data[:inline_edit_field_value_value] = field.data.to_s
       end
 
       data
