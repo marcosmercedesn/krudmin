@@ -344,8 +344,8 @@ ResourceManager.field_for(:name, model)
 
 | Gem | Purpose |
 |-----|---------|
-| bootstrap (4.x) | CSS framework |
-| cocoon | Nested forms (has_many add/remove) |
+| bootstrap (5.x) | CSS framework |
+| nested-fields.js | Custom vanilla JS for nested forms (has_many add/remove) |
 | devise | Authentication |
 | font-awesome-rails | Icons |
 | hamlit | HAML templates |

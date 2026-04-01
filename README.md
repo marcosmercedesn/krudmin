@@ -218,7 +218,7 @@ Krudmin includes 18+ field types. Types are auto-detected from ActiveRecord colu
 | `EnumType` | Select from Rails enum values |
 | `BelongsTo` | Dropdown for association (supports remote search) |
 | `BelongsToOne` | Inline nested form for belongs_to |
-| `HasMany` | Nested form collection with add/remove (via Cocoon) |
+| `HasMany` | Nested form collection with add/remove rows |
 | `HasManyIds` | Multi-select for many-to-many |
 | `HasOne` | Inline nested form for has_one |
 

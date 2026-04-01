@@ -264,7 +264,7 @@ ATTRIBUTE_TYPES = {
 | `:EnumType` | `Krudmin::Fields::EnumType` | Select from Rails enum |
 | `:BelongsTo` | `Krudmin::Fields::BelongsTo` | Select dropdown for association |
 | `:BelongsToOne` | `Krudmin::Fields::BelongsToOne` | Inline nested form for belongs_to |
-| `:HasMany` | `Krudmin::Fields::HasMany` | Nested form collection (cocoon) |
+| `:HasMany` | `Krudmin::Fields::HasMany` | Nested form collection (add/remove rows) |
 | `:HasManyIds` | `Krudmin::Fields::HasManyIds` | Multi-select for many-to-many |
 | `:HasOne` | `Krudmin::Fields::HasOne` | Inline nested form for has_one |
 
@@ -314,7 +314,7 @@ When onboarding to this project, read these files in order:
 ## Dependencies
 
 - **bootstrap** (4.x) - CSS framework
-- **cocoon** - Nested form management (has_many)
+- **nested-fields.js** - Custom vanilla JS for nested form management (has_many) — replaced Cocoon gem
 - **devise** - Authentication
 - **font-awesome-rails** - Icons
 - **hamlit** - HAML template engine

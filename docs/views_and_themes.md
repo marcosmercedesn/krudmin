@@ -183,7 +183,7 @@ The main stylesheet is at `app/assets/stylesheets/krudmin/core_theme/application
 
 The main JS is at `app/assets/javascripts/krudmin/core_theme/application.js`:
 - jQuery 3, Rails UJS, Popper, Bootstrap
-- Turbolinks, Cocoon, Moment.js
+- Turbo, Moment.js, nested-fields.js
 - Vendor: daterangepicker, SweetAlert, Select2, Toast, Cookies
 - Krudmin adapters: datepicker, select2, summernote, tooltip, turbo-forms, belongs-to-one controls
 

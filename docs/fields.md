@@ -255,7 +255,7 @@ car_owner: :BelongsToOne
 ### HasMany
 
 **Class:** `Krudmin::Fields::HasMany`
-**Renders:** Nested form collection using Cocoon (add/remove rows)
+**Renders:** Nested form collection with add/remove rows (uses custom nested-fields.js)
 
 **Requirements:**
 - Model must have `has_many` association

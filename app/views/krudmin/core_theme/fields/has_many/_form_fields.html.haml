@@ -1,7 +1,47 @@
+-# =============================================================================
+-# HAS MANY — SINGLE ROW (nested fields)
+-# =============================================================================
+-#
+-# This partial renders ONE row of a HasMany nested form table.
+-# It is used in two contexts:
+-#
+-#   1. EXISTING RECORDS — rendered by simple_fields_for in _form_field.html.haml
+-#      when iterating over the association collection. The form builder `f` is
+-#      scoped to an existing record (e.g., passengers_attributes[0]).
+-#
+-#   2. TEMPLATE ROW — rendered inside a <template> tag with child_index set to
+-#      "NEW_RECORD". When the user clicks "Add", nested-fields.js clones this
+-#      template and replaces "NEW_RECORD" with a unique timestamp.
+-#
+-# ─── STRUCTURE ──────────────────────────────────────────────────────────────
+-#
+-#   <tr class="nested-fields">
+-#     <td>... field inputs ...</td>
+-#     <td>
+-#       <input type="hidden" name="...[_destroy]" class="destroy-flag" value="false">
+-#       <button data-nested-action="remove">🗑</button>
+-#     </td>
+-#   </tr>
+-#
+-# The _destroy hidden field is how Rails knows to delete a record:
+-#   - value="false" → keep the record (default)
+-#   - value="1"     → delete the record on save
+-#
+-# When the user clicks "Remove":
+-#   - For persisted records: JS sets _destroy to "1" and hides the row
+-#   - For new records: JS removes the row from the DOM entirely
+-#
+-# The .nested-fields class is used by nested-fields.js to locate the row.
+-# =============================================================================
+
 %tr.nested-fields
+  -# Render each editable attribute as a table cell
   - @field.associated_resource_manager_class.editable_attributes.each do |attribute|
     %td{ class: @field.associated_resource_manager.field_for(attribute).html_class }
       = field_for(attribute, f.object, root: @field.association_name).render(:form, self, {form: f, input: {label: false}})
   %td
-    = link_to_remove_association f, class: 'btn btn-danger' do
+    -# Hidden _destroy field — Rails uses this to know whether to delete the record.
+    -# The "destroy-flag" class lets nested-fields.js find and flip this to "1".
+    = f.hidden_field :_destroy, class: "destroy-flag", value: false
+    %a.btn.btn-danger{href: "#", data: {nested_action: "remove"}}
       %i.fa.fa-trash

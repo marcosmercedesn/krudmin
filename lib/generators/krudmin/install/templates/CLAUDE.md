@@ -127,7 +127,7 @@ ATTRIBUTE_TYPES = {
 | `:EnumType` | Select from Rails enum |
 | `:BelongsTo` | Dropdown for association |
 | `:BelongsToOne` | Inline nested form (belongs_to) |
-| `:HasMany` | Nested form collection (cocoon) |
+| `:HasMany` | Nested form collection (add/remove rows) |
 | `:HasManyIds` | Multi-select for many-to-many |
 | `:HasOne` | Inline nested form (has_one) |
 

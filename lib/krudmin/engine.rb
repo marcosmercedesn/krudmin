@@ -9,7 +9,6 @@ require "simple_form"
 require "turbo-rails"
 require "pundit"
 require "ransack"
-require "cocoon"
 require "summernote-rails"
 require_relative "../config"
 

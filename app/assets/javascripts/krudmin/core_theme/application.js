@@ -14,7 +14,6 @@
 //= require popper
 //= require bootstrap
 //= require krudmin/vendor/turbo
-//= require cocoon
 //= require moment
 //= require krudmin/vendor/daterangepicker
 //= require krudmin/vendor/js.cookie
@@ -32,6 +31,7 @@
 //= require krudmin/turbo-stream-actions
 //= require krudmin/remote-modal
 //= require krudmin/inline-edit
+//= require krudmin/nested-fields
 //= require krudmin/bulk-actions
 //= require krudmin/core_theme/app
 //= require krudmin/belongs-to-one-has-one-controls
