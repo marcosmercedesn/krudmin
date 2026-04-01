@@ -8,6 +8,10 @@ module Krudmin
       def tooltip_title
         I18n.t("krudmin.tooltip.add_new", label: view_context.krudmin_manager.resource_label)
       end
+
+      def remote_support?
+        true
+      end
     end
   end
 end

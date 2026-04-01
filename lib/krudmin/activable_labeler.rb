@@ -6,11 +6,11 @@ module Krudmin
     end
 
     def label_for_active(value)
-      content_tag(:span, class: "badge badge-success") { value }
+      content_tag(:span, class: "badge text-bg-success") { value }
     end
 
     def label_for_inactive(value)
-      content_tag(:span, class: "badge badge-danger") { value }
+      content_tag(:span, class: "badge text-bg-danger") { value }
     end
   end
 end

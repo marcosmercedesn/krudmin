@@ -3,6 +3,11 @@ module Krudmin
     class Base
       attr_reader :page, :view_context, :action_path, :html_options, :button_body
       def initialize(page, view_context, action_path = "#", html_options = {}, &block)
+        if remote_support? && html_options.to_h[:remote]
+          html_options[:data] ||= {}
+          html_options[:data][:remote_modal] = true
+        end
+
         @page = page
         @view_context = view_context
         @action_path = action_path
@@ -48,6 +53,10 @@ module Krudmin
 
       def render_form
         render_partial(:form)
+      end
+
+      def remote_support?
+        false
       end
     end
   end

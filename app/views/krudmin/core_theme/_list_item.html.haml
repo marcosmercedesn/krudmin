@@ -14,4 +14,4 @@
   - if listable_actions.any?
     %td{width: "20%"}
       %ul.list-inline.actions-list
-        = list_action_panel(item, listable_actions, self)
+        = list_action_panel(item, listable_actions, self, remote: krudmin_manager.remote_crud)
