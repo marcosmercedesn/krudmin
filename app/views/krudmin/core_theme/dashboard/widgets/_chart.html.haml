@@ -1,0 +1,19 @@
+.card.dashboard-widget{class: widget.background_class}
+  .card-header.d-flex.justify-content-between.align-items-center
+    %div
+      %h4.mb-0= widget.label
+      - if widget.description.present?
+        %small.text-muted= widget.description
+    %span.badge.bg-light.text-dark= number_with_delimiter(widget.total)
+  .card-body
+    - if widget.empty?
+      .text-muted= t("krudmin.dashboard.empty")
+    - else
+      .dashboard-chart
+        - widget.series.each do |point|
+          .dashboard-chart-row
+            .dashboard-chart-meta
+              %span.dashboard-chart-label= point[:label]
+              %span.dashboard-chart-value= number_with_delimiter(point[:value])
+            .progress.dashboard-chart-progress
+              .progress-bar{class: "bg-#{widget.tone}", role: "progressbar", style: "width: #{point[:percentage]}%", aria: {valuenow: point[:value], valuemin: 0, valuemax: widget.total}}

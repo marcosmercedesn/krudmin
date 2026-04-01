@@ -14,6 +14,9 @@ en:
       input_format: "%m/%d/%Y"
     labels:
       dashboard: Dashboard
+      no_data: No data available
+      total_records: Total records
+      records: records
       active: Active
       inactive: Inactive
       "yes": "Yes"
@@ -103,3 +106,10 @@ en:
       activate: Activate
       deactivate: Deactivate
       manage_resources: "Manage %{label}"
+    dashboard:
+      powered_by: "Powered by %{label}"
+      empty: "Nothing to display yet"
+      total: "Total"
+      view_all: "View all"
+      latest: "Latest"
+      distribution: "Distribution"

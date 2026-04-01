@@ -29,6 +29,7 @@ module Krudmin
         %w[
           getting_started.md
           architecture.md
+          dashboard.md
           resource_managers.md
           fields.md
           configuration.md

@@ -1,0 +1,19 @@
+- content_for(:page_title) do
+  = dashboard.page_title || t("krudmin.labels.dashboard")
+
+- content_for :breadcrumb do
+  %li.breadcrumb-item.active
+    = dashboard.page_title || t("krudmin.labels.dashboard")
+
+.dashboard-page
+  - if dashboard.page_description.present?
+    .row
+      .col-12
+        .card.dashboard-intro-card
+          .card-body
+            %p.dashboard-page-description.mb-0= dashboard.page_description
+
+  .row.dashboard-grid
+    - dashboard.widgets.each do |widget|
+      .dashboard-grid-item{class: widget.grid_class, id: widget.id}
+        = render partial: widget.partial_path, locals: { widget: widget }

@@ -406,15 +406,15 @@ app-root {
 .light-krudmin-theme {
   $light-krudmin-theme-bg: #fff !important;
 
-  .card {
+  .themed-bg {
     background-color: $light-krudmin-theme-bg;
   }
 
-  .table > :not(caption) > * > * {
+  &.themed-bg.table > :not(caption) > * > * {
     background-color: $light-krudmin-theme-bg;
   }
 
-  #krudmin-modal-container {
+  &#krudmin-modal-container.themed-bg {
     .modal-content {
       background-color: $light-krudmin-theme-bg;
     }

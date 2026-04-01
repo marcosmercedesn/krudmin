@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    root to: "cars#index"
+    root to: "dashboard#show"
+
+    get :dashboard, to: "dashboard#show"
 
     resources :customs, only: [:index, :show]
 

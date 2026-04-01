@@ -17,6 +17,17 @@ class CarsResourceManager < Krudmin::ResourceManagers::Base
   REMOTE_CRUD = true
   INLINE_EDITABLE_ATTRIBUTES = [:year, :active]
   BULK_ACTIONS = [:destroy, :activate, :deactivate]
+  DASHBOARD_SCOPES = {
+    active: ->(relation, _user, _context) { relation.active },
+    inactive: ->(relation, _user, _context) { relation.inactive },
+    recent: ->(relation, _user, _context) { relation.order(created_at: :desc) },
+    automatic: ->(relation, _user, _context) { relation.where(transmission: transmissions[:automatic]) },
+    manual: ->(relation, _user, _context) { relation.where(transmission: transmissions[:manual]) }
+  }
+  DASHBOARD_COLUMNS = {
+    compact: [:model, :year, :active, :created_at],
+    showroom: [:model, :car_brand_description, :transmission, :year, :active]
+  }
 
   ORDER_BY = [:year]
 
@@ -46,4 +57,8 @@ class CarsResourceManager < Krudmin::ResourceManagers::Base
     car_insurance: { type: :HasOne, required: true },
     car_owner: :BelongsToOne
   }
+
+  def transmissions
+    model_class.transmissions
+  end
 end

@@ -1,0 +1,17 @@
+class <%= dashboard_class_name %> < Krudmin::Dashboard
+  page_title "Dashboard"
+  page_description "A ResourceManager-backed dashboard powered by Krudmin widgets."
+
+       # Example:
+       # widget :count,
+       #        resource: UsersResourceManager,
+       #        label: "Total Users",
+       #        icon: :dashboard,
+       #        path: :admin_users_path
+       #
+       # widget :table,
+       #        resource: UsersResourceManager,
+       #        label: "Recent Users",
+       #        limit: 5,
+       #        path: :admin_users_path
+end

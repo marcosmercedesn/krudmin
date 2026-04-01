@@ -30,9 +30,11 @@ module Krudmin
       INLINE_EDITABLE_ATTRIBUTES = []
       PAGINATOR_POSITION = nil
       BULK_ACTIONS = []
+      DASHBOARD_SCOPES = {}
+      DASHBOARD_COLUMNS = {}
 
       constantized_methods :searchable_attributes, :resource_label, :resources_label, :model_classname, :listable_actions, :order_by, :remote_crud
-      constantized_methods :listable_includes, :resource_instance_label_attribute, :presentation_metadata, :displayable_attributes, :lookup_attributes, :inline_editable_attributes, :bulk_actions
+      constantized_methods :listable_includes, :resource_instance_label_attribute, :presentation_metadata, :displayable_attributes, :lookup_attributes, :inline_editable_attributes, :bulk_actions, :dashboard_scopes, :dashboard_columns
 
       def field_for(field, model = nil, root: nil)
         field_class_for(field, root).new_field(model)
@@ -86,6 +88,29 @@ module Krudmin
 
       def bulk_actions?
         bulk_actions.any?
+      end
+
+      def dashboard_relation(scope_name = nil, relation:, user:, context: nil)
+        return relation if scope_name.blank?
+
+        definition = dashboard_scopes.fetch(scope_name.to_sym) do
+          raise ArgumentError, "Unknown dashboard scope `#{scope_name}` for #{self.class.name}"
+        end
+
+        if definition.is_a?(Proc)
+          instance_exec(relation, user, context, &definition)
+        else
+          public_send(definition, relation, user, context)
+        end
+      end
+
+      def dashboard_columns_for(name = nil)
+        return Array(name) if name.is_a?(Array)
+        return listable_attributes if name.blank?
+
+        dashboard_columns.fetch(name.to_sym) do
+          raise ArgumentError, "Unknown dashboard columns `#{name}` for #{self.class.name}"
+        end
       end
 
       def paginator_position

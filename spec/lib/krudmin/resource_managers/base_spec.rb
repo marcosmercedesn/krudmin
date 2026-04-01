@@ -94,6 +94,17 @@ describe Krudmin::ResourceManagers::Base do
     }
   end
 
+  class DashboardedResourceManager < described_class
+    MODEL_CLASSNAME = 'Krudmin::ItemSpecModel'
+    LISTABLE_ATTRIBUTES = [:description, :priority]
+    DASHBOARD_SCOPES = {
+      featured: ->(relation, user, context) { relation + [user, context] }
+    }
+    DASHBOARD_COLUMNS = {
+      compact: [:priority]
+    }
+  end
+
   subject { MockedResourceManager.new }
 
   it "maps types and options for base properties" do
@@ -249,6 +260,36 @@ describe Krudmin::ResourceManagers::Base do
         expect(subject.inline_editable?(:description)).to be false
         expect(subject.inline_editable?(:priority)).to be false
       end
+    end
+  end
+
+  describe "dashboard_relation" do
+    it "applies configured dashboard scopes on top of the relation" do
+      manager = DashboardedResourceManager.new
+      relation = [:base]
+
+      expect(manager.dashboard_relation(:featured, relation: relation, user: :user, context: :context)).to eq([:base, :user, :context])
+    end
+
+    it "returns the original relation when no dashboard scope is given" do
+      manager = DashboardedResourceManager.new
+      relation = [:base]
+
+      expect(manager.dashboard_relation(nil, relation: relation, user: :user, context: :context)).to eq([:base])
+    end
+  end
+
+  describe "dashboard_columns_for" do
+    it "returns configured dashboard column presets" do
+      manager = DashboardedResourceManager.new
+
+      expect(manager.dashboard_columns_for(:compact)).to eq([:priority])
+    end
+
+    it "falls back to listable attributes when no preset is provided" do
+      manager = DashboardedResourceManager.new
+
+      expect(manager.dashboard_columns_for).to eq([:description, :priority])
     end
   end
 end

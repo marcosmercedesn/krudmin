@@ -1,0 +1,15 @@
+.card.dashboard-widget.dashboard-widget-count{class: "dashboard-widget-tone-#{widget.tone} #{widget.background_class}"}
+  .card-body
+    .dashboard-widget-header
+      %div
+        %p.dashboard-widget-eyebrow= widget.hint
+        %h3.dashboard-widget-title= widget.label
+      - if widget.icon.present?
+        %span.dashboard-widget-icon
+          %i{class: "fa fa-#{widget.icon}"}
+    .dashboard-widget-stat= number_with_delimiter(widget.value)
+    - if widget.description.present?
+      %p.dashboard-widget-text.mb-0= widget.description
+    - if widget.resource_path.present?
+      .dashboard-widget-footer
+        = link_to t("krudmin.dashboard.view_all"), widget.resource_path, class: "btn btn-link px-0"
