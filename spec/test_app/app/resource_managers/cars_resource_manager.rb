@@ -16,6 +16,7 @@ class CarsResourceManager < Krudmin::ResourceManagers::Base
   PAGINATOR_POSITION = :bottom
   REMOTE_CRUD = true
   INLINE_EDITABLE_ATTRIBUTES = [:year, :active]
+  BULK_ACTIONS = [:destroy, :activate, :deactivate]
 
   ORDER_BY = [:year]
 

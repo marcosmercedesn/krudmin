@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   resources :docs
 
-  resources :car_brands
+  resources :car_brands do
+    collection do
+      post :bulk_destroy
+    end
+  end
 
   namespace :admin do
     root to: "cars#index"
@@ -14,6 +18,11 @@ Rails.application.routes.draw do
       member do
         post :activate
         post :deactivate
+      end
+      collection do
+        post :bulk_destroy
+        post :bulk_activate
+        post :bulk_deactivate
       end
     end
   end

@@ -67,6 +67,9 @@ en:
       deactivated: "%{label} was successfully deactivated"
       destroyed: "%{label} was successfully destroyed"
       cant_be_destroyed: "%{label} can't be destroyed"
+      bulk_destroyed: "%{count} %{label} were successfully deleted"
+      bulk_activated: "%{count} %{label} were successfully activated"
+      bulk_deactivated: "%{count} %{label} were successfully deactivated"
       confirm_destroy: "Are you sure about the elimination of %{label}?"
       confirm_activation: "Are you sure about the activation of %{label}?"
       confirm_deactivation: "Are you sure about the deactivation of %{label}?"
@@ -82,6 +85,11 @@ en:
       show: "View %{label}"
       cancel: "Cancel"
       search: "Search"
+    bulk_actions:
+      items_selected: "items selected"
+      confirm_destroy: "Are you sure you want to delete the selected items?"
+      confirm_activate: "Are you sure you want to activate the selected items?"
+      confirm_deactivate: "Are you sure you want to deactivate the selected items?"
     actions:
       add_new: "Add"
       manage: "Manage"

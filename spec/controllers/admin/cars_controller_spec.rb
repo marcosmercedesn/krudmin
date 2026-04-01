@@ -141,6 +141,64 @@ describe Admin::CarsController, type: :controller do
     end
   end
 
+  describe "POST bulk_destroy" do
+    let!(:car1) { create(:car, car_brand: car_brand) }
+    let!(:car2) { create(:car, car_brand: car_brand) }
+    let!(:car3) { create(:car, car_brand: car_brand) }
+
+    it "destroys the selected cars" do
+      expect do
+        post :bulk_destroy, params: { ids: [car1.id, car2.id] }
+      end.to change(Car, :count).by(-2)
+    end
+
+    it "redirects to the cars list" do
+      post :bulk_destroy, params: { ids: [car1.id] }
+
+      expect(response).to redirect_to(admin_cars_url)
+    end
+
+    it "responds with turbo_stream" do
+      post :bulk_destroy, params: { ids: [car1.id, car2.id], format: :turbo_stream }
+
+      expect(response.media_type).to eq "text/vnd.turbo-stream.html"
+    end
+  end
+
+  describe "POST bulk_activate" do
+    let!(:car1) { create(:car, active: false, car_brand: car_brand) }
+    let!(:car2) { create(:car, active: false, car_brand: car_brand) }
+
+    it "activates the selected cars" do
+      expect do
+        post :bulk_activate, params: { ids: [car1.id, car2.id] }
+      end.to change(Car.active, :count).by(2)
+    end
+
+    it "responds with turbo_stream" do
+      post :bulk_activate, params: { ids: [car1.id, car2.id], format: :turbo_stream }
+
+      expect(response.media_type).to eq "text/vnd.turbo-stream.html"
+    end
+  end
+
+  describe "POST bulk_deactivate" do
+    let!(:car1) { create(:car, active: true, car_brand: car_brand) }
+    let!(:car2) { create(:car, active: true, car_brand: car_brand) }
+
+    it "deactivates the selected cars" do
+      expect do
+        post :bulk_deactivate, params: { ids: [car1.id, car2.id] }
+      end.to change(Car.inactive, :count).by(2)
+    end
+
+    it "responds with turbo_stream" do
+      post :bulk_deactivate, params: { ids: [car1.id, car2.id], format: :turbo_stream }
+
+      expect(response.media_type).to eq "text/vnd.turbo-stream.html"
+    end
+  end
+
   describe "PUT update (inline edit)" do
     describe "with valid params" do
       it "updates the attribute and returns turbo_stream" do

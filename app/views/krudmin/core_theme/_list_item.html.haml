@@ -1,4 +1,7 @@
 %tr{id: "item-model-#{item.id}", class: "item-model-#{item.id}"}
+  - if bulk_actions_enabled?
+    %td.bulk-checkbox-column
+      %input.bulk-select-item{type: "checkbox", value: item.id, data: {bulk_select: "item"}}
   - listable_attributes.each_with_index do |column_label, column_index|
     - editable_inline = edit_access?(item) && krudmin_manager.inline_editable?(column_label)
     - link_cell = column_index.zero? && !editable_inline && (edit_access?(item) || show_access?(item))

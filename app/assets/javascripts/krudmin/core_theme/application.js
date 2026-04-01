@@ -32,6 +32,7 @@
 //= require krudmin/turbo-stream-actions
 //= require krudmin/remote-modal
 //= require krudmin/inline-edit
+//= require krudmin/bulk-actions
 //= require krudmin/core_theme/app
 //= require krudmin/belongs-to-one-has-one-controls
 

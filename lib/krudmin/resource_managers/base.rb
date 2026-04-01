@@ -29,9 +29,10 @@ module Krudmin
       REMOTE_CRUD = false
       INLINE_EDITABLE_ATTRIBUTES = []
       PAGINATOR_POSITION = nil
+      BULK_ACTIONS = []
 
       constantized_methods :searchable_attributes, :resource_label, :resources_label, :model_classname, :listable_actions, :order_by, :remote_crud
-      constantized_methods :listable_includes, :resource_instance_label_attribute, :presentation_metadata, :displayable_attributes, :lookup_attributes, :inline_editable_attributes
+      constantized_methods :listable_includes, :resource_instance_label_attribute, :presentation_metadata, :displayable_attributes, :lookup_attributes, :inline_editable_attributes, :bulk_actions
 
       def field_for(field, model = nil, root: nil)
         field_class_for(field, root).new_field(model)
@@ -81,6 +82,10 @@ module Krudmin
 
       def paginator_on_bottom?
         paginator_position == :bottom || paginator_position == :top_and_bottom
+      end
+
+      def bulk_actions?
+        bulk_actions.any?
       end
 
       def paginator_position

@@ -80,6 +80,11 @@ describe Krudmin::ResourceManagers::Base do
     INLINE_EDITABLE_ATTRIBUTES = [:description, :priority, :items]
   end
 
+  class BulkActionsMockedResourceManager < described_class
+    MODEL_CLASSNAME = 'Krudmin::ItemSpecModel'
+    BULK_ACTIONS = [:destroy, :activate, :deactivate]
+  end
+
   class PropertiesResourceManager < described_class
     MODEL_CLASSNAME = 'Krudmin::ItemSpecModel'
     EDITABLE_ATTRIBUTES = [:description, :year]
@@ -201,6 +206,23 @@ describe Krudmin::ResourceManagers::Base do
     it do
       expect(subject.field_for(:year, root: :properties)).to be_a(Krudmin::Fields::Number)
       expect(subject.field_for(:year, root: :properties).options).to eq({:decimals=>3})
+    end
+  end
+
+  describe "bulk_actions" do
+    context "with default values" do
+      it "returns an empty array" do
+        expect(described_class.new.bulk_actions).to eq([])
+        expect(described_class.new.bulk_actions?).to be false
+      end
+    end
+
+    context "with bulk actions configured" do
+      it "returns the configured bulk actions" do
+        manager = BulkActionsMockedResourceManager.new
+        expect(manager.bulk_actions).to eq([:destroy, :activate, :deactivate])
+        expect(manager.bulk_actions?).to be true
+      end
     end
   end
 

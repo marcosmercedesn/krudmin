@@ -7,4 +7,5 @@ class CarBrandsResourceManager < Krudmin::ResourceManagers::Base
   RESOURCE_LABEL = "Car Brand"
   RESOURCES_LABEL = "Car Brands"
   REMOTE_CRUD = true
+  BULK_ACTIONS = [:destroy]
 end

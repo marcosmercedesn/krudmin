@@ -1,0 +1,5 @@
+<% @bulk_ids.each do |id| %>
+  <%= turbo_stream.remove "item-model-#{id}" %>
+<% end %>
+
+<turbo-stream action="toast" type="error" message="<%= @bulk_message %>"></turbo-stream>

@@ -19,9 +19,14 @@
           - if krudmin_manager.paginator_on_top?
             = paginate items.result
       .card-body
+        - if bulk_actions_enabled?
+          = render "bulk_actions_bar"
         %table.table.table-hover
           %thead
             %tr
+              - if bulk_actions_enabled?
+                %th.bulk-checkbox-column{width: "40px"}
+                  %input.bulk-select-all{type: "checkbox", data: {bulk_select: "all"}}
               - listable_attributes.each_with_index do |column_label, column_index|
                 %th{class: "#{krudmin_manager.field_for(column_label).html_class}"}
                   = sort_link items, column_label, krudmin_manager.field_for(column_label).options.fetch(:input, {}).fetch(:label, model_class.human_attribute_name(column_label)) , o: search_form.search_criteria

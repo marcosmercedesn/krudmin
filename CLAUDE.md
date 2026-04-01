@@ -205,6 +205,7 @@ end
 | `RESOURCES_LABEL` | String | Plural label (e.g., "Cars") |
 | `PRESENTATION_METADATA` | Hash | Layout groups with labels and CSS classes |
 | `REMOTE_CRUD` | Boolean | Enable AJAX form submission (default: `false`) |
+| `BULK_ACTIONS` | Array | Bulk actions for selected rows: `:destroy`, `:activate`, `:deactivate` |
 | `PAGINATOR_POSITION` | Symbol | `:top`, `:bottom`, or `:top_and_bottom` |
 
 ## ATTRIBUTE_TYPES Options

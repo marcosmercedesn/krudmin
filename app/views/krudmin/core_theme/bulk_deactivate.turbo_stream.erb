@@ -1,0 +1,9 @@
+<% @bulk_models.each do |record| %>
+  <%= turbo_stream.replace "item-model-#{record.id}" do %>
+    <%= render_item_row(record) %>
+  <% end %>
+  <turbo-stream action="highlight" target="item-model-<%= record.id %>"></turbo-stream>
+<% end %>
+
+<turbo-stream action="toast" type="warning" message="<%= @bulk_message %>"></turbo-stream>
+<turbo-stream action="init_controls"></turbo-stream>
