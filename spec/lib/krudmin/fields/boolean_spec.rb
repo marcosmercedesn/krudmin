@@ -10,7 +10,7 @@ describe Krudmin::Fields::Boolean do
     let(:model) { double(level: true) }
 
     it "generates a decorated label with positive value inside" do
-      expect(subject.to_s.to_s).to eq("<span class=\"badge badge-success\">Yes</span>")
+      expect(subject.to_s.to_s).to eq("<span class=\"badge text-bg-success\">Yes</span>")
     end
   end
 
@@ -18,7 +18,7 @@ describe Krudmin::Fields::Boolean do
     let(:model) { double(level: false) }
 
     it "generates a decorated label negative true value inside" do
-      expect(subject.to_s.to_s).to eq("<span class=\"badge badge-danger\">No</span>")
+      expect(subject.to_s.to_s).to eq("<span class=\"badge text-bg-danger\">No</span>")
     end
   end
 end

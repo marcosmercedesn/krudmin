@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = "A Framework on top of Rails engine that provides easy ways to manage your backend data."
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib,vendor}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   s.add_dependency "bootstrap", "~> 5.3"
   s.add_dependency "font-awesome-rails"
@@ -26,6 +26,5 @@ Gem::Specification.new do |s|
   s.add_dependency "ransack"
   s.add_dependency "sassc-rails"
   s.add_dependency "simple_form"
-  s.add_dependency "summernote-rails"
   s.add_dependency "turbo-rails", ">= 1.0"
 end

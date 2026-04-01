@@ -25,7 +25,7 @@ describe "line item index page", type: :feature do
 
   it "shows the rich text field type" do
     click_edit_link_for(car)
-    expect(car_page).to have_css '[data-provider="summernote"]'
+    expect(car_page).to have_css 'trix-editor'
   end
 
   it "shows the select field for transmision" do

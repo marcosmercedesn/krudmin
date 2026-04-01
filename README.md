@@ -16,7 +16,7 @@ Krudmin generates fully-featured admin interfaces for your Rails models. Out of 
 - **Authorization** via Pundit policies
 - **Status toggling** (activate/deactivate) for soft-delete patterns
 - **Nested forms** for has_many, has_one, and belongs_to associations
-- **Rich text editing** via Summernote
+- **Rich text editing** via Trix
 - **AJAX forms** with Turbolinks for smooth, SPA-like UX
 - **Responsive UI** built on Bootstrap 4 with CoreUI theme
 - **Configurable navigation** with icon support and visibility controls
@@ -214,7 +214,7 @@ Krudmin includes 18+ field types. Types are auto-detected from ActiveRecord colu
 | `Email` | Email input |
 | `Password` | Masked password input |
 | `Hidden` | Hidden field (no display in list/show) |
-| `RichText` | Summernote WYSIWYG editor |
+| `RichText` | Trix rich text editor |
 | `EnumType` | Select from Rails enum values |
 | `BelongsTo` | Dropdown for association (supports remote search) |
 | `BelongsToOne` | Inline nested form for belongs_to |

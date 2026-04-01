@@ -260,7 +260,7 @@ ATTRIBUTE_TYPES = {
 | `:Email` | `Krudmin::Fields::Email` | Email input |
 | `:Password` | `Krudmin::Fields::Password` | Password input (masked) |
 | `:Hidden` | `Krudmin::Fields::Hidden` | Hidden field |
-| `:RichText` | `Krudmin::Fields::RichText` | Summernote WYSIWYG editor |
+| `:RichText` | `Krudmin::Fields::RichText` | Trix rich text editor |
 | `:EnumType` | `Krudmin::Fields::EnumType` | Select from Rails enum |
 | `:BelongsTo` | `Krudmin::Fields::BelongsTo` | Select dropdown for association |
 | `:BelongsToOne` | `Krudmin::Fields::BelongsToOne` | Inline nested form for belongs_to |
@@ -325,7 +325,7 @@ When onboarding to this project, read these files in order:
 - **ransack** - Search/filtering
 - **sassc-rails** - SASS compilation
 - **simple_form** - Form builder
-- **summernote-rails** - Rich text editor
+- **trix** - Rich text editor (vendored, v2.1.15)
 - **turbolinks** - SPA-like page transitions
 
 ## Common Tasks for AI Agents

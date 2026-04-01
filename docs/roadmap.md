@@ -51,10 +51,6 @@ Turbo Streams and turbo-rails are already integrated. Cocoon has been replaced w
 - Replace remaining jQuery event binding with **Stimulus** controllers
 - Remove `sweet-confirm.js`, `belongs-to-one-has-one-controls.js` and other custom jQuery code in favor of Stimulus
 
-### 6. Replace Summernote with ActionText/Trix
-
-Summernote is jQuery-dependent and heavy. Rails ships with ActionText + Trix out of the box. This would simplify the RichText field and drop the `summernote-rails` dependency.
-
 ## Developer Experience
 
 ### 7. Additional generators
@@ -94,5 +90,4 @@ The `_form.json.erb` and `index.json.erb` exist but are minimal. A proper API mo
 | 3 | CSV export (#2) | Small effort, high value |
 | 4 | Complete Hotwire migration (#5) | Foundation for everything else |
 | 5 | Dashboard system (#3) | Differentiator vs. competitors |
-| 6 | ActionText (#6) | Drop jQuery dependency piece |
-| 7 | Additional generators (#7) | Improve onboarding |
+| 6 | Additional generators (#7) | Improve onboarding |

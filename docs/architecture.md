@@ -356,5 +356,5 @@ ResourceManager.field_for(:name, model)
 | ransack | Search/filtering |
 | sassc-rails | SASS compilation |
 | simple_form | Form builder |
-| summernote-rails | Rich text editor |
+| trix (vendored) | Rich text editor |
 | turbolinks | SPA-like navigation |

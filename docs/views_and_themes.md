@@ -175,7 +175,7 @@ A simplified layout for login/logout pages without sidebar or navigation.
 The main stylesheet is at `app/assets/stylesheets/krudmin/core_theme/application.scss`:
 - Bootstrap 4
 - Font Awesome
-- Summernote (rich text editor)
+- Trix (rich text editor)
 - Vendor: daterangepicker, toast, select2
 - CoreUI theme
 
@@ -185,7 +185,7 @@ The main JS is at `app/assets/javascripts/krudmin/core_theme/application.js`:
 - jQuery 3, Rails UJS, Popper, Bootstrap
 - Turbo, Moment.js, nested-fields.js
 - Vendor: daterangepicker, SweetAlert, Select2, Toast, Cookies
-- Krudmin adapters: datepicker, select2, summernote, tooltip, turbo-forms, belongs-to-one controls
+- Krudmin adapters: datepicker, select2, trix, tooltip, turbo-forms, belongs-to-one controls
 
 ### JavaScript Events
 

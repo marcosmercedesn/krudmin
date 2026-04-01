@@ -123,7 +123,7 @@ ATTRIBUTE_TYPES = {
 | `:Email` | Email input |
 | `:Password` | Masked input |
 | `:Hidden` | Hidden field |
-| `:RichText` | Summernote WYSIWYG |
+| `:RichText` | Trix rich text editor |
 | `:EnumType` | Select from Rails enum |
 | `:BelongsTo` | Dropdown for association |
 | `:BelongsToOne` | Inline nested form (belongs_to) |

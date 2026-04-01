@@ -23,7 +23,7 @@ $.grayLightest = "#f8f9fa";
 function initKrudminScriptsForControls() {
   initializeBelongsToOneHasOneControl();
   initializeDateTimePickers();
-  initializeSummerNoteControls();
+
   initializeTooltipControls();
   initializeTurboSelect2("body");
 }

@@ -170,7 +170,7 @@ token: :Hidden
 
 **Class:** `Krudmin::Fields::RichText`
 **Inherits:** String
-**Renders:** Summernote WYSIWYG editor
+**Renders:** Trix rich text editor
 **Display:** Renders HTML (marked as html_safe)
 
 **Options:**

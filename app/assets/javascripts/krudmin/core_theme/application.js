@@ -26,7 +26,8 @@
 //= require krudmin/tooltip
 //= require krudmin/select2-adapter
 //= require krudmin/datepicker-adapter
-//= require krudmin/summernote-adapter
+//= require trix
+//= require krudmin/trix-adapter
 //= require krudmin/core_theme/constants
 //= require krudmin/turbo-stream-actions
 //= require krudmin/remote-modal
@@ -35,5 +36,3 @@
 //= require krudmin/bulk-actions
 //= require krudmin/core_theme/app
 //= require krudmin/belongs-to-one-has-one-controls
-
-//= require summernote/summernote-lite.min

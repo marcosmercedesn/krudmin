@@ -19,7 +19,7 @@
  *      index (Date.now()) so Rails treats it as a new record
  *   3. Append the new row to the <tbody>
  *   4. Dispatch a "krudmin:updateControls" event so that Select2, datepickers,
- *      Summernote, etc. reinitialize on the new fields
+ *      Trix, etc. reinitialize on the new fields
  *
  * When the user clicks "Remove", we:
  *   1. Find the hidden `_destroy` input inside that row and set it to "1"
@@ -84,7 +84,7 @@
  *
  * After adding a new row, the controller dispatches the "krudmin:updateControls"
  * custom event. This is the same event that the rest of krudmin listens for to
- * reinitialize rich controls (Select2 dropdowns, datepickers, Summernote editors,
+ * reinitialize rich controls (Select2 dropdowns, datepickers, Trix editors,
  * tooltips). See app.js → initKrudminScriptsForControls().
  *
  * =============================================================================
@@ -197,7 +197,7 @@
   // krudmin JS listens for. This triggers reinitialization of:
   //   - Select2 dropdowns
   //   - Date/time pickers
-  //   - Summernote rich text editors
+  //   - Trix rich text editors
   //   - Bootstrap tooltips
   //
   // See: app/assets/javascripts/krudmin/core_theme/app.js → updateKrudminControlsOn()

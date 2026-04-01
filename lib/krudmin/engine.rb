@@ -9,12 +9,17 @@ require "simple_form"
 require "turbo-rails"
 require "pundit"
 require "ransack"
-require "summernote-rails"
 require_relative "../config"
 
 module Krudmin
   class Engine < ::Rails::Engine
     isolate_namespace Krudmin
+
+    # Register vendored assets (Trix editor JS/CSS) so Sprockets can find them
+    initializer "krudmin.assets" do |app|
+      app.config.assets.paths << root.join("vendor", "assets", "javascripts")
+      app.config.assets.paths << root.join("vendor", "assets", "stylesheets")
+    end
 
     config.generators do |gen|
       gen.test_framework :rspec

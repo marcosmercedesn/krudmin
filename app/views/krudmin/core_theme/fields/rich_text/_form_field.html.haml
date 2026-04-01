@@ -1,1 +1,32 @@
-= form.input attribute, { as: :summernote }.merge(input_options)
+-# =============================================================================
+-# RICH TEXT — FORM FIELD (Trix Editor)
+-# =============================================================================
+-#
+-# Renders a Trix rich text editor for the given attribute.
+-#
+-# ─── HOW IT WORKS ───────────────────────────────────────────────────────────
+-#
+-# Trix is a web component: the <trix-editor> custom element. It connects to
+-# a hidden <input> via the `input` attribute (matching the input's ID).
+-# When the user types, Trix updates the hidden input's value with HTML.
+-# On form submit, Rails receives the HTML string in the normal params hash.
+-#
+-# The hidden input is rendered by SimpleForm as a regular :hidden field.
+-# We generate a unique ID for it so <trix-editor input="..."> can find it.
+-#
+-# ─── NO MODEL CHANGES NEEDED ────────────────────────────────────────────────
+-#
+-# This does NOT use ActionText's `has_rich_text`. The HTML is stored in a
+-# plain :text column, same as before. Trix is used purely as a frontend
+-# editor — the backend sees a regular string attribute.
+-#
+-# =============================================================================
+
+- input_id = "trix_#{attribute}_#{form.object.class.model_name.param_key}_#{form.object.object_id}"
+
+.mb-3
+  - unless input_options[:label] == false
+    %label.form-label{for: input_id}
+      = input_options.fetch(:label, field_label)
+  = form.hidden_field attribute, id: input_id
+  %trix-editor.trix-content.form-control{input: input_id, class: input_options[:class]}

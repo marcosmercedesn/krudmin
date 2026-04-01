@@ -54,7 +54,7 @@ When the user clicks "Add":
 1. JS reads the `<template>` innerHTML
 2. Replaces every `NEW_RECORD` string with a unique timestamp (e.g., `1711929600000`)
 3. Appends the resulting HTML to the `<tbody>`
-4. Fires `krudmin:updateControls` so Select2/datepickers/Summernote reinitialize
+4. Fires `krudmin:updateControls` so Select2/datepickers/Trix reinitialize
 
 **Why a timestamp?** Rails nested attributes need each record to have a unique
 index key. It doesn't need to be sequential — just unique. `Date.now()` gives
@@ -120,7 +120,7 @@ The rest of krudmin listens for this event to reinitialize:
 
 - Select2 dropdowns
 - Date/time pickers (daterangepicker)
-- Summernote rich text editors
+- Trix rich text editors
 - Bootstrap tooltips
 
 This is defined in `app/assets/javascripts/krudmin/core_theme/app.js`:
