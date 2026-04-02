@@ -21,7 +21,14 @@ module Krudmin
         format.turbo_stream do
           instance_variable_set(:@model_id, model.id)
 
-          render "edit", locals: { messages: [ActionResultMessage.new("info", success_message)] }
+          # If the model was just created, render the `create` turbo stream
+          # which inserts the new row into the list. For updates, keep the
+          # existing `edit` behavior that replaces the existing row.
+          if model.respond_to?(:previous_changes) && model.previous_changes.key?("id")
+            render "create", locals: { messages: [ActionResultMessage.new("info", success_message)] }
+          else
+            render "edit", locals: { messages: [ActionResultMessage.new("info", success_message)] }
+          end
         end
       end
 
