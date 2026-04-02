@@ -19,3 +19,4 @@ tmp/rspec_guard_result
 
 .DS_Store
 *.sqlite3*
+krudmin_test

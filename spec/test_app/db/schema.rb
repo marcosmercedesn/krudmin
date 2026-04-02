@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2020_01_02_202034) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_02_222541) do
   create_table "car_brands", force: :cascade do |t|
     t.string "description", null: false
     t.datetime "created_at", precision: nil, null: false
@@ -40,8 +40,10 @@ ActiveRecord::Schema[8.0].define(version: 2020_01_02_202034) do
     t.integer "transmission"
     t.date "release_date"
     t.integer "car_owner_id"
+    t.integer "status", default: 0, null: false
     t.index ["car_brand_id"], name: "index_cars_on_car_brand_id"
     t.index ["car_owner_id"], name: "index_cars_on_car_owner_id"
+    t.index ["status"], name: "index_cars_on_status"
   end
 
   create_table "passengers", force: :cascade do |t|
