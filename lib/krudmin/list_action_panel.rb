@@ -20,7 +20,27 @@ module Krudmin
     end
 
     def action_button(button_type)
-      "Krudmin::ActionButtons::#{button_type.to_s.classify}Button".constantize.new(:list, view_context, model, remote: remote)
+      manager = view_context.respond_to?(:krudmin_manager) ? view_context.krudmin_manager : nil
+
+      if manager && manager.custom_action?(button_type)
+        definition = manager.custom_action_for(button_type)
+        Krudmin::ActionButtons::CustomActionButton.new(
+          :list, view_context, model,
+          action_definition: definition,
+          html_options: { remote: remote }
+        )
+      else
+        "Krudmin::ActionButtons::#{button_type.to_s.classify}Button".constantize.new(:list, view_context, model, remote: remote)
+      end
+    rescue NameError => e
+      raise e unless manager&.custom_action?(button_type)
+      # Fallback: if constantize fails for a custom action name, that's expected
+      definition = manager.custom_action_for(button_type)
+      Krudmin::ActionButtons::CustomActionButton.new(
+        :list, view_context, model,
+        action_definition: definition,
+        html_options: { remote: remote }
+      )
     end
   end
 end

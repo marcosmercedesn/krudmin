@@ -1,0 +1,10 @@
+%li.list-inline-item
+  - data_attrs = {}
+  - data_attrs[:turbo_method] = action_method if action_method != :get
+  - data_attrs[:turbo_confirm] = action_confirm if action_confirm.present?
+  - data_attrs[:turbo] = turbo
+  = link_to(action_url, { data: data_attrs, class: "btn #{action_css_class}" }.merge(html_options)) do
+    - if action_icon.present?
+      %i{class: "fa fa-#{action_icon}"}
+    - else
+      = action_label

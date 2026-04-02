@@ -1,0 +1,13 @@
+require "rails_helper"
+
+RSpec.describe "<%= controller_class_prefix %><%= plural_resource_class %>Controller#<%= action_name %>", type: :request do
+  let(:<%= resource_name %>) { create(:<%= resource_name %>) }
+
+  describe "POST /<%= namespace_path %><%= plural_resource %>/:id/<%= action_name %>" do
+    it "performs the action and redirects" do
+      post <%= namespace_prefix %><%= action_name %>_<%= singular_resource %>_path(<%= resource_name %>)
+
+      expect(response).to redirect_to(<%= namespace_prefix %><%= singular_resource %>_path(<%= resource_name %>))
+    end
+  end
+end

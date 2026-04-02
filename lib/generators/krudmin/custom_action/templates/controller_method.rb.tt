@@ -1,0 +1,21 @@
+# Controller method stub for custom action '<%= action_name %>'
+# Add this method to your controller:
+# app/controllers/<%= namespace_path %><%= plural_resource %>_controller.rb
+
+module <%= controller_class_prefix.chomp("::") %>
+  class <%= plural_resource_class %>Controller < Krudmin::ApplicationController
+    def <%= action_name %>
+      @<%= resource_name %> = <%= resource_class %>.find(params[:id])
+      authorize @<%= resource_name %>, :<%= action_name %>?
+
+      # TODO: Add your business logic here
+      # Example: <%= resource_class %><%= human_action_name.gsub(" ", "") %>Job.perform_later(@<%= resource_name %>.id, current_user.id)
+
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(dom_id(@<%= resource_name %>), partial: "<%= namespace_path %><%= plural_resource %>/<%= resource_name %>", locals: { <%= resource_name %>: @<%= resource_name %> }) }
+        format.html { redirect_back fallback_location: <%= namespace_prefix %><%= singular_resource %>_path(@<%= resource_name %>), notice: "<%= human_action_name %> completed" }
+        format.json { head :accepted }
+      end
+    end
+  end
+end

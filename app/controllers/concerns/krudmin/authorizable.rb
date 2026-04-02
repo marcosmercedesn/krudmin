@@ -40,6 +40,12 @@ module Krudmin
             policy(record).public_send("#{action_name}?")
           end
         end
+
+        def custom_action_access?(record, action_name)
+          policy(record).public_send("#{action_name}?")
+        rescue NoMethodError
+          true
+        end
       end
     end
   end
