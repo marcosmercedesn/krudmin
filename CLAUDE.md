@@ -332,16 +332,12 @@ When onboarding to this project, read these files in order:
 ## Common Tasks for AI Agents
 
 ### Adding a new field type
-1. Create field class in `lib/krudmin/fields/`
-2. Create presenter in `lib/krudmin/presenters/`
-3. Create view partials in `app/views/krudmin/core_theme/fields/{type}/`
-4. Add `require` in `lib/krudmin.rb`
-5. Add mapping in `lib/krudmin/fields/inflector.rb` if it maps to an AR column type
+Use the generator: `rails generate krudmin:field Phone --parent=String`
+Then: add `require "krudmin/fields/phone"` in `lib/krudmin.rb` and optionally add mapping in `lib/krudmin/fields/inflector.rb`
 
 ### Adding a new action button
-1. Create button class in `lib/krudmin/action_buttons/`
-2. Create view partials in `app/views/krudmin/core_theme/action_buttons/{type}_button/`
-3. Add `require` in `lib/krudmin.rb`
+Use the generator: `rails generate krudmin:action generate_invoice`
+Then: add `require` in `lib/krudmin.rb`, add to `LISTABLE_ACTIONS`, add route and controller method
 
 ### Modifying search behavior
 - Search predicates: `lib/krudmin/search_form/search_phrases_support.rb`
@@ -365,7 +361,7 @@ The `spec/test_app/` directory contains a complete working example:
 
 ## Generators
 
-Krudmin provides two Rails generators:
+Krudmin provides six Rails generators. Full documentation: `docs/generators.md`
 
 ### Install Generator
 
@@ -392,13 +388,67 @@ rails generate krudmin:resource Product name:string price:decimal active:boolean
 Generates:
 - `app/resource_managers/products_resource_manager.rb`
 - `app/controllers/admin/products_controller.rb`
+- `spec/resource_managers/products_resource_manager_spec.rb`
+- `spec/controllers/admin/products_controller_spec.rb`
+- Routes injected into `config/routes.rb`
 
 Options:
 - `--namespace=admin` (default) — Controller namespace
 - `--policy` — Generate a Pundit policy
 - `--remote` — Enable AJAX CRUD
+- `--skip-routes` — Skip route injection
+- `--skip-specs` — Skip spec generation
 
 Generator source: `lib/generators/krudmin/resource/`
+
+### Dashboard Generator
+
+```bash
+rails generate krudmin:dashboard Dashboard --namespace=admin
+```
+
+Generates a dashboard class and controller.
+
+Generator source: `lib/generators/krudmin/dashboard/`
+
+### Field Generator
+
+```bash
+rails generate krudmin:field Phone
+rails generate krudmin:field Phone --parent=String
+```
+
+Scaffolds a custom field type: field class, presenter, view partials, and spec.
+
+Options:
+- `--parent=Base` (default) — Parent field class (e.g., String, Number)
+- `--no-specs` — Skip spec generation
+
+Generator source: `lib/generators/krudmin/field/`
+
+### Action Generator
+
+```bash
+rails generate krudmin:action generate_invoice
+```
+
+Scaffolds a custom action button: button class, view partials, and spec.
+
+Options:
+- `--no-model-action` — Inherit from Base instead of ModelActionButton
+- `--no-specs` — Skip spec generation
+
+Generator source: `lib/generators/krudmin/action/`
+
+### Theme Generator
+
+```bash
+rails generate krudmin:theme my_theme
+```
+
+Copies the entire `core_theme` directory for customization.
+
+Generator source: `lib/generators/krudmin/theme/`
 
 ## Coding Conventions
 

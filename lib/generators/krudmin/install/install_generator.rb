@@ -37,6 +37,7 @@ module Krudmin
           authorization.md
           navigation_menu.md
           views_and_themes.md
+          generators.md
         ].each do |doc|
           source_path = File.join(docs_source, doc)
           if File.exist?(source_path)

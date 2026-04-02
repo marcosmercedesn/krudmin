@@ -1,0 +1,37 @@
+require "rails_helper"
+
+RSpec.describe <%= class_name.pluralize %>ResourceManager do
+  it "inherits from Krudmin::ResourceManagers::Base" do
+    expect(described_class.superclass).to eq(Krudmin::ResourceManagers::Base)
+  end
+
+  it "defines MODEL_CLASSNAME" do
+    expect(described_class::MODEL_CLASSNAME).to eq("<%= class_name %>")
+  end
+
+  it "defines LISTABLE_ATTRIBUTES" do
+    expect(described_class::LISTABLE_ATTRIBUTES).to be_an(Array)
+    expect(described_class::LISTABLE_ATTRIBUTES).not_to be_empty
+  end
+
+  it "defines EDITABLE_ATTRIBUTES" do
+    expect(described_class::EDITABLE_ATTRIBUTES).to be_an(Array)
+    expect(described_class::EDITABLE_ATTRIBUTES).not_to be_empty
+  end
+
+  it "defines SEARCHABLE_ATTRIBUTES" do
+    expect(described_class::SEARCHABLE_ATTRIBUTES).to be_an(Array)
+  end
+
+  it "defines LISTABLE_ACTIONS" do
+    expect(described_class::LISTABLE_ACTIONS).to include(:show, :edit, :destroy)
+  end
+
+  it "defines RESOURCE_LABEL" do
+    expect(described_class::RESOURCE_LABEL).to eq("<%= class_name %>")
+  end
+
+  it "defines RESOURCES_LABEL" do
+    expect(described_class::RESOURCES_LABEL).to eq("<%= class_name.pluralize %>")
+  end
+end

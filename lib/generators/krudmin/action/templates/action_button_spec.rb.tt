@@ -1,0 +1,14 @@
+require "spec_helper"
+require "#{Dir.pwd}/lib/krudmin/action_buttons/base"
+require "#{Dir.pwd}/lib/krudmin/action_buttons/model_action_button"
+require "#{Dir.pwd}/lib/krudmin/action_buttons/<%= file_name %>_button"
+
+describe Krudmin::ActionButtons::<%= button_class_name %> do
+  it "inherits from Krudmin::ActionButtons::<%= parent_button_class %>" do
+    expect(described_class.superclass).to eq(Krudmin::ActionButtons::<%= parent_button_class %>)
+  end
+
+  it "defines tooltip_title" do
+    expect(described_class.instance_method(:tooltip_title)).to be_a(UnboundMethod)
+  end
+end

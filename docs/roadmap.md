@@ -148,17 +148,6 @@ config.tenant_scope = ->(user) { { organization_id: user.organization_id } }
 
 ## Developer Experience
 
-### 12. Additional generators
-
-The install and resource generators exist. Additional generators would help:
-
-```bash
-rails generate krudmin:dashboard          # Generate dashboard controller + view
-rails generate krudmin:field Phone         # Scaffold a custom field type
-rails generate krudmin:theme my_theme      # Copy core_theme for customization
-rails generate krudmin:action Invoice generate_invoice  # Scaffold a custom action
-```
-
 ### 13. Configurable per-resource overrides without subclassing
 
 Right now, customizing a controller action requires overriding the method. A hooks/callbacks system would be cleaner:
@@ -192,7 +181,6 @@ The `_form.json.erb` and `index.json.erb` exist but are minimal. A proper API mo
 | 9 | File attachments (#10) | Document management |
 | 10 | Remove jQuery (#9) | Modernization, smaller bundle |
 | 11 | Multi-tenancy (#11) | SaaS/enterprise requirement |
-| 12 | Additional generators (#12) | Developer onboarding |
 | 13 | Callbacks/hooks (#13) | Cleaner customization |
 | 14 | API mode (#14) | Custom frontend support |
 

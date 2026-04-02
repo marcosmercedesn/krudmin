@@ -1,0 +1,26 @@
+require "spec_helper"
+require "#{Dir.pwd}/lib/krudmin/fields/base"
+<% if parent_require -%>
+require "#{Dir.pwd}/lib/krudmin/fields/<%= parent_require %>"
+<% end -%>
+require "#{Dir.pwd}/lib/krudmin/fields/<%= file_name %>"
+
+describe Krudmin::Fields::<%= class_name %> do
+  let(:value) { "test" }
+  let(:model) { double(<%= file_name %>: value) }
+  let(:options) { {} }
+
+  subject { described_class.new(:<%= file_name %>, model, options) }
+
+  it "inherits from Krudmin::Fields::<%= parent_class_name %>" do
+    expect(described_class.superclass).to eq(Krudmin::Fields::<%= parent_class_name %>)
+  end
+
+  it "has a presenter" do
+    expect(described_class::PRESENTER).to eq(Krudmin::Presenters::<%= class_name %>FieldPresenter)
+  end
+
+  it "returns a value" do
+    expect(subject.value).to eq(value)
+  end
+end

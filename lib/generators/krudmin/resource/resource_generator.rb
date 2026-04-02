@@ -10,6 +10,8 @@ module Krudmin
       class_option :namespace, type: :string, default: "admin", desc: "Controller namespace"
       class_option :policy, type: :boolean, default: false, desc: "Generate a Pundit policy"
       class_option :remote, type: :boolean, default: false, desc: "Enable AJAX CRUD"
+      class_option :routes, type: :boolean, default: true, desc: "Inject routes into config/routes.rb"
+      class_option :specs, type: :boolean, default: true, desc: "Generate RSpec specs"
 
       def create_resource_manager
         template "resource_manager.rb.tt",
@@ -27,30 +29,78 @@ module Krudmin
         template "policy.rb.tt", "app/policies/#{file_name}_policy.rb"
       end
 
+      def create_resource_manager_spec
+        return unless options[:specs]
+
+        template "resource_manager_spec.rb.tt",
+                 "spec/resource_managers/#{plural_file_name}_resource_manager_spec.rb"
+      end
+
+      def create_controller_spec
+        return unless options[:specs]
+
+        template "controller_spec.rb.tt",
+                 "spec/controllers/#{namespace_path}#{plural_file_name}_controller_spec.rb"
+      end
+
+      def inject_routes
+        return unless options[:routes]
+
+        route_string = if namespace_name.present?
+          <<-RUBY.gsub(/^ {10}/, "")
+          namespace :#{namespace_name} do
+            resources :#{plural_file_name} do
+              member do
+                post :activate
+                post :deactivate
+              end
+            end
+          end
+          RUBY
+        else
+          <<-RUBY.gsub(/^ {10}/, "")
+          resources :#{plural_file_name} do
+            member do
+              post :activate
+              post :deactivate
+            end
+          end
+          RUBY
+        end
+
+        route route_string.strip
+      end
+
       def print_route_instructions
         say ""
         say "Resource generated!", :green
         say ""
-        say "Add to your routes:", :yellow
-        say ""
-        if namespace_name.present?
-          say "  namespace :#{namespace_name} do"
-          say "    resources :#{plural_file_name} do"
-          say "      member do"
-          say "        post :activate"
-          say "        post :deactivate"
-          say "      end"
-          say "    end"
-          say "  end"
+        if options[:routes]
+          say "Routes added to config/routes.rb", :green
+          say "Note: If you already have a namespace :#{namespace_name} block, you may need to merge the routes manually.", :yellow
+          say ""
         else
-          say "  resources :#{plural_file_name} do"
-          say "    member do"
-          say "      post :activate"
-          say "      post :deactivate"
-          say "    end"
-          say "  end"
+          say "Add to your routes:", :yellow
+          say ""
+          if namespace_name.present?
+            say "  namespace :#{namespace_name} do"
+            say "    resources :#{plural_file_name} do"
+            say "      member do"
+            say "        post :activate"
+            say "        post :deactivate"
+            say "      end"
+            say "    end"
+            say "  end"
+          else
+            say "  resources :#{plural_file_name} do"
+            say "    member do"
+            say "      post :activate"
+            say "      post :deactivate"
+            say "    end"
+            say "  end"
+          end
+          say ""
         end
-        say ""
         say "Add to your navigation menu in config/initializers/krudmin.rb:", :yellow
         say ""
         if namespace_name.present?

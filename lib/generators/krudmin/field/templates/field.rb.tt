@@ -1,0 +1,9 @@
+require_relative "../presenters/<%= file_name %>_field_presenter"
+
+module Krudmin
+  module Fields
+    class <%= class_name %> < <%= parent_class_name %>
+      PRESENTER = Krudmin::Presenters::<%= class_name %>FieldPresenter
+    end
+  end
+end

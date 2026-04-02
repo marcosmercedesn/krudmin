@@ -1,0 +1,7 @@
+require "rails_helper"
+
+RSpec.describe <%= controller_class_prefix %><%= class_name.pluralize %>Controller, type: :controller do
+  it "inherits from Krudmin::ApplicationController" do
+    expect(described_class.superclass).to eq(Krudmin::ApplicationController)
+  end
+end
