@@ -2,6 +2,22 @@
 
 Krudmin is a **Ruby on Rails Engine gem** that generates admin dashboard interfaces (CRUD, search, authorization, status toggling) for host applications with minimal configuration.
 
+Krudmin is designed to be extended into full-featured admin tooling.
+
+## Project Intentions
+
+Krudmin's purpose is to provide a modular, extensible foundation for building admin panels, dashboards, ERPs, CRMs, and other internal tools. The project follows these guiding principles:
+
+- **Extendability:** Compose, override, and extend components so host apps can adapt the engine to varied business needs.
+- **Convention over configuration:** Provide sensible defaults to minimize setup while allowing explicit configuration when necessary.
+- **Modularity:** Keep field types, presenters, mutation handlers, and UI pieces pluggable and replaceable.
+- **Theming & integration:** Ship theme-aware views and integrate easily into host applications' layouts and asset pipelines.
+- **API-first & automation:** Support HTML, JSON, and JS response flows to enable automation, API usage, and remote CRUD patterns.
+- **Testability & maintainability:** Encourage good test coverage and clear abstractions for long-term reliability.
+- **Documentation-first:** Keep authoritative usage and extension guidance in the project's `docs/` folder.
+
+Agents and contributors should consult this manifesto, the rest of this instructions file, and the `docs/` folder when extending or contributing to Krudmin.
+
 ## Commands
 
 ```bash
@@ -15,6 +31,8 @@ bundle exec guard                                          # Auto-run tests on f
 cd spec/test_app && rails s
 ```
 
+For additional guidance and developer notes, agents should consult the project's `docs/` folder: [docs](docs).
+
 ## Architecture
 
 ### The Resource Manager Pattern
@@ -27,11 +45,13 @@ Admin::ProductsController  →  ProductsResourceManager
 ```
 
 The resolution happens in `KrudminResourceManagerControllerSupport#inferred_resource_manager`:
+
 ```ruby
 "#{self.class.name.demodulize.gsub('Controller', '')}ResourceManager".constantize
 ```
 
 A minimal resource requires:
+
 1. A ResourceManager (`app/resource_managers/products_resource_manager.rb`)
 2. An empty controller inheriting `Krudmin::ApplicationController`
 3. Routes with `activate`/`deactivate` member actions
@@ -52,6 +72,7 @@ Controller (inherits Krudmin::ApplicationController)
 Field classes live in `lib/krudmin/fields/`. The inflector (`lib/krudmin/fields/inflector.rb`) auto-maps ActiveRecord column types to field classes at runtime — you only need `ATTRIBUTE_TYPES` overrides when the default is wrong or you need extra options.
 
 Auto-inference rules:
+
 - `:string` → `Fields::String`, `:text` → `Fields::Text`
 - `:integer/:bigint/:float/:decimal/:numeric` → `Fields::Number`
 - `:datetime/:time` → `Fields::DateTime`, `:date` → `Fields::Date`
@@ -156,23 +177,23 @@ Search state persists per-resource in a cookie (`krudmin_search_results`). Reset
 
 ### ResourceManager Constants Reference
 
-| Constant | Default | Purpose |
-|---|---|---|
-| `MODEL_CLASSNAME` | `nil` | AR model class name (string) |
-| `EDITABLE_ATTRIBUTES` | `[]` | Form fields (array or grouped hash) |
-| `LISTABLE_ATTRIBUTES` | `[]` | Index table columns |
-| `SEARCHABLE_ATTRIBUTES` | `[]` | Search filter fields |
-| `DISPLAYABLE_ATTRIBUTES` | `[]` | Show page fields |
-| `LISTABLE_ACTIONS` | `[:show, :edit, :destroy]` | Per-row action buttons |
-| `LISTABLE_INCLUDES` | `[]` | Eager-loaded associations |
-| `ORDER_BY` | `[]` | Default sort (e.g., `[:year]` or `[year: :desc]`) |
-| `BULK_ACTIONS` | `[]` | `:destroy`, `:activate`, `:deactivate` |
-| `INLINE_EDITABLE_ATTRIBUTES` | `[]` | Fields editable inline in the list view |
-| `REMOTE_CRUD` | `false` | AJAX form submission |
-| `PAGINATOR_POSITION` | `nil` (uses global config) | `:top`, `:bottom`, `:top_and_bottom` |
-| `PRESENTATION_METADATA` | `{}` | Section labels and CSS classes for grouped forms |
-| `DASHBOARD_SCOPES` | `{}` | Named relation scopes for dashboard widgets |
-| `DASHBOARD_COLUMNS` | `{}` | Named column sets for dashboard widgets |
+| Constant                     | Default                    | Purpose                                           |
+| ---------------------------- | -------------------------- | ------------------------------------------------- |
+| `MODEL_CLASSNAME`            | `nil`                      | AR model class name (string)                      |
+| `EDITABLE_ATTRIBUTES`        | `[]`                       | Form fields (array or grouped hash)               |
+| `LISTABLE_ATTRIBUTES`        | `[]`                       | Index table columns                               |
+| `SEARCHABLE_ATTRIBUTES`      | `[]`                       | Search filter fields                              |
+| `DISPLAYABLE_ATTRIBUTES`     | `[]`                       | Show page fields                                  |
+| `LISTABLE_ACTIONS`           | `[:show, :edit, :destroy]` | Per-row action buttons                            |
+| `LISTABLE_INCLUDES`          | `[]`                       | Eager-loaded associations                         |
+| `ORDER_BY`                   | `[]`                       | Default sort (e.g., `[:year]` or `[year: :desc]`) |
+| `BULK_ACTIONS`               | `[]`                       | `:destroy`, `:activate`, `:deactivate`            |
+| `INLINE_EDITABLE_ATTRIBUTES` | `[]`                       | Fields editable inline in the list view           |
+| `REMOTE_CRUD`                | `false`                    | AJAX form submission                              |
+| `PAGINATOR_POSITION`         | `nil` (uses global config) | `:top`, `:bottom`, `:top_and_bottom`              |
+| `PRESENTATION_METADATA`      | `{}`                       | Section labels and CSS classes for grouped forms  |
+| `DASHBOARD_SCOPES`           | `{}`                       | Named relation scopes for dashboard widgets       |
+| `DASHBOARD_COLUMNS`          | `{}`                       | Named column sets for dashboard widgets           |
 
 ### Reference Implementation
 
