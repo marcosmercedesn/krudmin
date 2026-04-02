@@ -69,22 +69,22 @@ function blinkHighlight(el, from, to) {
 // These are for elements not covered by the tooltip Stimulus controller
 // (e.g., elements with rel="tooltip" or rel="popover")
 
-document.addEventListener("turbo:load", function() {
-  document.querySelectorAll('[rel="tooltip"],[data-rel="tooltip"]').forEach(function(el) {
+document.addEventListener("turbo:load", function () {
+  document.querySelectorAll('[rel="tooltip"],[data-rel="tooltip"]').forEach(function (el) {
     if (!bootstrap.Tooltip.getInstance(el)) {
       new bootstrap.Tooltip(el, { placement: "bottom", delay: { show: 400, hide: 200 } });
     }
   });
 
-  document.querySelectorAll('[rel="popover"],[data-rel="popover"],[data-bs-toggle="popover"]').forEach(function(el) {
+  document.querySelectorAll('[rel="popover"],[data-rel="popover"],[data-bs-toggle="popover"]').forEach(function (el) {
     if (!bootstrap.Popover.getInstance(el)) {
       new bootstrap.Popover(el);
     }
   });
 
   // Disable moving to top for bare # links
-  document.querySelectorAll('a[href="#"]:not([data-top="true"])').forEach(function(el) {
-    el.addEventListener("click", function(e) { e.preventDefault(); });
+  document.querySelectorAll('a[href="#"]:not([data-top="true"])').forEach(function (el) {
+    el.addEventListener("click", function (e) { e.preventDefault(); });
   });
 });
 
@@ -93,20 +93,20 @@ document.addEventListener("turbo:load", function() {
 // when a modal form creates a new associated record. It refreshes the
 // dropdown options for BelongsTo selects.
 
-document.addEventListener("updateBelongsToLookups", function(e) {
+document.addEventListener("updateBelongsToLookups", function (e) {
   var model_element = e.detail.model_element;
   var relations = e.detail.relations;
   var _model_id = e.detail.model_id;
 
-  var _field_names = relations.map(function() {
+  var _field_names = relations.map(function () {
     return model_element + "_id";
   });
 
-  $.get(window.location, { format: "json", fields: _field_names, search_id: _model_id }).done(function(_data) {
+  $.get(window.location, { format: "json", fields: _field_names, search_id: _model_id }).done(function (_data) {
     var data = _data;
     var field_names = _field_names;
 
-    field_names.forEach(function(field_name, index) {
+    field_names.forEach(function (field_name, index) {
       var formSelector = "form[data-model-element='" + relations[index] + "']";
       var targetForm = document.querySelector(formSelector);
       if (!targetForm) return;
@@ -122,7 +122,7 @@ document.addEventListener("updateBelongsToLookups", function(e) {
 
       // Clear and rebuild options
       targetLookup.innerHTML = "";
-      items.forEach(function(item) {
+      items.forEach(function (item) {
         var option = document.createElement("option");
         option.value = item.id;
         option.text = item[label_field];
@@ -134,3 +134,13 @@ document.addEventListener("updateBelongsToLookups", function(e) {
     });
   });
 }, false);
+
+function toggleKrudminSearchPanel(event) {
+  event.preventDefault();
+
+  var searchPanel = document.querySelector(".search-panel");
+  if (searchPanel) {
+    $(searchPanel).slideToggle("fast");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
