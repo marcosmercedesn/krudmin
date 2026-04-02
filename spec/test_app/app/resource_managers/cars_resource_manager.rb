@@ -8,10 +8,10 @@ class CarsResourceManager < Krudmin::ResourceManagers::Base
     insurance: [:car_insurance],
     owner: [:car_owner]
   }
-  DISPLAYABLE_ATTRIBUTES = [:id, :model, :year, :description, :transmission, :car_brand_id, :passengers, :created_at]
-  SEARCHABLE_ATTRIBUTES = [:model, :year, :active, :car_brand_id, :transmission, :created_at]
+  DISPLAYABLE_ATTRIBUTES = [:id, :model, :year, :status, :description, :transmission, :car_brand_id, :passengers, :created_at]
+  SEARCHABLE_ATTRIBUTES = [:model, :year, :active, :status, :car_brand_id, :transmission, :created_at]
   LISTABLE_ACTIONS = [:show, :edit, :active, :destroy]
-  LISTABLE_ATTRIBUTES = [:model, :id, :car_brand_description, :year, :active, :description, :created_at]
+  LISTABLE_ATTRIBUTES = [:model, :id, :status, :car_brand_description, :year, :active, :description, :created_at]
   LISTABLE_INCLUDES = [:car_brand]
   PAGINATOR_POSITION = :bottom
   REMOTE_CRUD = true
@@ -54,6 +54,29 @@ class CarsResourceManager < Krudmin::ResourceManagers::Base
     created_at: { type: :DateTime, format: :short },
     release_date: { type: :Date, format: :short },
     transmission: { type: :EnumType, associated_options: -> { Car.transmissions } },
+    status: {
+      type: :StateMachine,
+      transitions: {
+        draft: [:submit],
+        submitted: [:approve, :reject],
+        approved: [:pay],
+        rejected: [:submit],
+        paid: []
+      },
+      transition_labels: {
+        submit: "Submit",
+        approve: "Approve",
+        reject: "Reject",
+        pay: "Mark as Paid"
+      },
+      colors: {
+        draft: :secondary,
+        submitted: :warning,
+        approved: :success,
+        paid: :info,
+        rejected: :danger
+      }
+    },
     car_insurance: { type: :HasOne, required: true },
     car_owner: :BelongsToOne
   }

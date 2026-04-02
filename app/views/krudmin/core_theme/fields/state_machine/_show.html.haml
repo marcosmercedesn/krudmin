@@ -1,0 +1,10 @@
+.d-flex.align-items-center.gap-2.flex-wrap
+  %span.badge{class: "text-bg-#{badge_class}"}
+    = current_state.to_s.humanize
+
+  - transition_events.each do |event_name|
+    - next if respond_to?(:transition_access?) && !transition_access?(field.model, event_name)
+    = link_to transition_path(field.model, event: event_name, attribute: attribute, context: :form),
+      class: "btn btn-sm btn-outline-primary btn-state-transition",
+      data: { turbo_method: :post } do
+      = transition_label_for.call(event_name)

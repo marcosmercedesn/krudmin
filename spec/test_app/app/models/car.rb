@@ -1,5 +1,6 @@
 class Car < ApplicationRecord
   include Krudmin::ActivableLabeler
+  include AASM
 
   validates :model, :year, presence: true
   validates :year, numericality: { only_integer: true }
@@ -20,6 +21,28 @@ class Car < ApplicationRecord
   belongs_to :car_brand, optional: true
 
   enum :transmission, {automatic: 0, manual: 1}
+  enum :status, {draft: 0, submitted: 1, approved: 2, rejected: 3, paid: 4}
+
+  aasm column: :status, enum: true do
+    state :draft, initial: true
+    state :submitted, :approved, :rejected, :paid
+
+    event :submit do
+      transitions from: :draft, to: :submitted
+    end
+
+    event :approve do
+      transitions from: :submitted, to: :approved
+    end
+
+    event :reject do
+      transitions from: :submitted, to: :rejected
+    end
+
+    event :pay do
+      transitions from: :approved, to: :paid
+    end
+  end
 
   delegate :description, to: :car_brand, prefix: true, allow_nil: true
 

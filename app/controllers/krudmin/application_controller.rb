@@ -62,6 +62,17 @@ module Krudmin
       Krudmin::MutationHandlers::DestroyHandler.(self, model, destroyed_message, cant_be_destroyed_message)
     end
 
+    def transition
+      event_name = params.require(:event)
+
+      Krudmin::MutationHandlers::TransitionHandler.(
+        self,
+        event_name,
+        transitioned_message(event_name),
+        cant_be_transitioned_message(event_name)
+      )
+    end
+
     def page
       params.fetch(:page, 0)
     end

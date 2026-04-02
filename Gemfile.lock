@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     krudmin (0.1.7.9.5.31)
+      aasm
       bootstrap (~> 5.3)
       font-awesome-rails
       hamlit
@@ -17,6 +18,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.5.2)
+      concurrent-ruby (~> 1.0)
     actionpack (8.0.3)
       actionview (= 8.0.3)
       activesupport (= 8.0.3)

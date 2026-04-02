@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       member do
         post :activate
         post :deactivate
+        post :transition
       end
       collection do
         post :bulk_destroy

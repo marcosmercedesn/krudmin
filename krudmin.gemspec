@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib,vendor}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   s.add_dependency "bootstrap", "~> 5.3"
+  s.add_dependency "aasm"
   s.add_dependency "font-awesome-rails"
   s.add_dependency "hamlit"
   s.add_dependency "jquery-rails"

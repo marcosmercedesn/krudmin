@@ -1,7 +1,7 @@
 module Krudmin
   module ResourceManagers
     class Routing
-      DEFINED_ACTION_METHODS = [:index, :edit, :show, :destroy, :new, :activate, :deactivate].freeze
+      DEFINED_ACTION_METHODS = [:index, :edit, :show, :destroy, :new, :activate, :deactivate, :transition].freeze
 
       DEFINED_ACTION_METHODS.each do |action_name|
         define_method("#{action_name}_route?") do
@@ -26,6 +26,10 @@ module Krudmin
 
       def deactivate_path(given_model, *params)
         routes.build(deactivate_route_path, given_model, *params)
+      end
+
+      def transition_path(given_model, *params)
+        routes.build(transition_route_path, given_model, *params)
       end
 
       def resource_path(given_model, *params)
@@ -70,6 +74,10 @@ module Krudmin
 
       def deactivate_route_path
         "deactivate_#{resource_method_path}_path"
+      end
+
+      def transition_route_path
+        "transition_#{resource_method_path}_path"
       end
 
       def resource_route_path

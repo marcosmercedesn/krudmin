@@ -1,0 +1,22 @@
+require "rails_helper"
+
+RSpec.describe <%= workflow_module_name %>, type: :model do
+  let(:dummy_class) do
+    Class.new do
+      include <%= workflow_module_name %>
+
+      attr_accessor :<%= attribute_name %>
+
+      def initialize
+        self.<%= attribute_name %> = :draft
+      end
+    end
+  end
+
+  it "defines workflow event predicate methods" do
+    instance = dummy_class.new
+
+    expect(instance.respond_to?(:may_submit?)).to be(true)
+    expect(instance.respond_to?(:submit!)).to be(true)
+  end
+end

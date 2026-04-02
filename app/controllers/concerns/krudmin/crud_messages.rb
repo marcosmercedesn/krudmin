@@ -5,6 +5,7 @@ module Krudmin
     included do
       helper_method :confirm_deactivation_message, :confirm_activation_message, :confirm_destroy_message, :crud_title
       helper_method :activated_message, :deactivated_message, :destroyed_message
+      helper_method :transitioned_message, :cant_be_transitioned_message
       helper_method :edit_title, :new_title
     end
 
@@ -54,6 +55,14 @@ module Krudmin
 
     def destroyed_message
       I18n.t("krudmin.messages.destroyed", label: model_label)
+    end
+
+    def transitioned_message(event_name)
+      I18n.t("krudmin.messages.transitioned", label: model_label, event: event_name.to_s.humanize)
+    end
+
+    def cant_be_transitioned_message(event_name)
+      I18n.t("krudmin.messages.cant_be_transitioned", label: model_label, event: event_name.to_s.humanize)
     end
 
     def cant_be_destroyed_message

@@ -1,4 +1,5 @@
 require "krudmin/engine"
+require "aasm"
 require "hamlit"
 require "krudmin/activable_labeler"
 require "krudmin/navigation_menu"
@@ -34,6 +35,7 @@ require "krudmin/fields/has_many_ids"
 require "krudmin/fields/has_one"
 require "krudmin/fields/belongs_to_one"
 require "krudmin/fields/enum_type"
+require "krudmin/fields/state_machine"
 require "krudmin/fields/currency"
 require "krudmin/fields/decimal"
 require "krudmin/fields/email"
@@ -66,6 +68,7 @@ require "krudmin/mutation_handlers/inline_edit_update"
 require "krudmin/mutation_handlers/destroy_handler"
 require "krudmin/mutation_handlers/switch_on_handler"
 require "krudmin/mutation_handlers/switch_off_handler"
+require "krudmin/mutation_handlers/transition_handler"
 
 module Krudmin
   def self.config(&block)

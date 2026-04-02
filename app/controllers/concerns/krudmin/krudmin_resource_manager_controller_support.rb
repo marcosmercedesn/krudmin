@@ -9,9 +9,9 @@ module Krudmin
       helper_method :resource_label, :resources_label, :items, :model_label, :resource_root, :listable_actions, :listable_attributes, :model_class, :model, :editable_attributes
       helper_method :krudmin_manager, :field_for, :grouped_attributes, :resource_instance_label_attribute, :searchable_attributes, :displayable_attributes, :inline_editable?
 
-      delegate :resource_root, :activate_path, :deactivate_path, :new_resource_path, :resource_path, :edit_resource_path, to: :krudmin_router
+      delegate :resource_root, :activate_path, :deactivate_path, :transition_path, :new_resource_path, :resource_path, :edit_resource_path, to: :krudmin_router
 
-      helper_method :resource_root, :activate_path, :deactivate_path, :new_resource_path, :resource_path, :edit_resource_path, :form_submit_path
+      helper_method :resource_root, :activate_path, :deactivate_path, :transition_path, :new_resource_path, :resource_path, :edit_resource_path, :form_submit_path
 
       Krudmin::ResourceManagers::Routing::DEFINED_ACTION_METHODS.each do |action_name|
         defined_method = "#{action_name}_route?".to_sym

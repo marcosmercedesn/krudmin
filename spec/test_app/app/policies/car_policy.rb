@@ -47,4 +47,24 @@ class CarPolicy
   def deactivate?
     true
   end
+
+  def transition?
+    true
+  end
+
+  def transition_submit?
+    true
+  end
+
+  def transition_approve?
+    true
+  end
+
+  def transition_reject?
+    true
+  end
+
+  def transition_pay?
+    true
+  end
 end

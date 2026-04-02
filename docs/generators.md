@@ -1,6 +1,6 @@
 # Generators
 
-Krudmin ships with five Rails generators that scaffold common patterns: project setup, admin resources, dashboards, custom field types, custom action buttons, and theme customization.
+Krudmin ships with Rails generators that scaffold common patterns: project setup, admin resources, dashboards, custom field types, custom action buttons, state machine workflows, and theme customization.
 
 ## Install Generator
 
@@ -359,9 +359,41 @@ Customize the list partial for specific styling:
 ```haml
 -# action_buttons/generate_invoice_button/_list.html.haml
 %li.list-inline-item
-  = link_to(action_path, { data: {turbo_method: :post, turbo_confirm: "Generate invoice?"}, class: "btn btn-outline-success" }.merge(html_options)) do
+  = link_to(action_path, { data: { turbo_method: :post, turbo_confirm: "Generate invoice?" }, class: "btn btn-outline-success" }.merge(html_options)) do
     %i.fa.fa-file-text
 ```
+
+## State Machine Generator
+
+Scaffolds an AASM workflow concern for a model and provides Krudmin integration guidance.
+
+```bash
+rails generate krudmin:state_machine Order
+```
+
+Creates:
+- `app/models/concerns/order_workflow.rb` — AASM workflow concern
+- `spec/models/concerns/order_workflow_spec.rb` — concern spec (unless `--no-specs`)
+
+**Options:**
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `--attribute` | `status` | Column used by AASM |
+| `--no-specs` | `false` | Skip spec generation |
+
+Examples:
+
+```bash
+rails generate krudmin:state_machine Order
+rails generate krudmin:state_machine Lead --attribute=stage
+```
+
+After generation:
+
+1. Include concern in the model.
+2. Add `post :transition` member route.
+3. Configure `ATTRIBUTE_TYPES` with `type: :StateMachine` in the ResourceManager.
 
 ## Theme Generator
 
@@ -401,4 +433,5 @@ For smaller customizations, consider overriding individual partials instead — 
 | Dashboard | `krudmin:dashboard NAME` | Dashboard class, controller |
 | Field | `krudmin:field NAME` | Field class, presenter, partials, spec |
 | Action | `krudmin:action NAME` | Button class, partials, spec |
+| State Machine | `krudmin:state_machine NAME` | AASM workflow concern, optional spec |
 | Theme | `krudmin:theme NAME` | Full theme directory copy |

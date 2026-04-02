@@ -2,10 +2,10 @@ module Krudmin
   module Authorizable
     if Krudmin::Config.pundit_enabled?
       extend ActiveSupport::Concern
-      include Pundit
+      include Pundit::Authorization
 
       included do |_|
-        before_action :authorize_model, only: [:new, :edit, :show, :update, :activate, :deactivate, :destroy]
+        before_action :authorize_model, only: [:new, :edit, :show, :update, :activate, :deactivate, :transition, :destroy]
         before_action :authorize_scope, only: [:index]
 
         prepend ModelAuthorizer
@@ -38,6 +38,18 @@ module Krudmin
         [:edit, :show, :destroy, :activate, :deactivate].each do |action_name|
           define_method("#{action_name}_access?") do |record|
             policy(record).public_send("#{action_name}?")
+          end
+        end
+
+        def transition_access?(record, event_name = nil)
+          event_policy_method = event_name.present? ? "transition_#{event_name}?" : nil
+
+          if event_policy_method && policy(record).respond_to?(event_policy_method)
+            policy(record).public_send(event_policy_method)
+          elsif policy(record).respond_to?(:transition?)
+            policy(record).public_send(:transition?)
+          else
+            true
           end
         end
 

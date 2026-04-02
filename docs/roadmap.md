@@ -22,19 +22,6 @@ Export is low effort; import is medium effort but critical for CRM/ERP onboardin
 
 ## High Impact, Medium Effort
 
-### 3. Dashboard / widgets system
-
-Right now there's `CustomController` but no structured way to build a dashboard. CRMs and ERPs live and die by dashboards — KPIs, charts, and summary counts are the first thing users see. A widget DSL would be valuable:
-
-```ruby
-class AdminDashboard < Krudmin::Dashboard
-  widget :count, model: "Product", label: "Total Products"
-  widget :count, model: "Order", scope: :today, label: "Orders Today"
-  widget :chart, model: "Order", group_by: :created_at, period: :month
-  widget :table, model: "Lead", scope: :recent, limit: 10, label: "Recent Leads"
-end
-```
-
 ### 4. ResourceManager validation at boot time
 
 Right now, if you misconfigure a ResourceManager (wrong model name, missing association, bad attribute type), you get cryptic errors at request time. Adding a validation step that runs on boot and raises clear error messages would save developers hours of debugging:
@@ -76,27 +63,6 @@ config.audit_backend = :paper_trail  # or :audited, or :custom
 # In views: a collapsible "Activity" panel on show pages
 # showing recent changes with diffs
 ```
-
-### 7. Workflow / state machine support
-
-ERPs need status progressions beyond binary active/inactive (e.g., Draft → Submitted → Approved → Paid). A field type that integrates with state machine gems:
-
-```ruby
-ATTRIBUTE_TYPES = {
-  status: {
-    type: :StateMachine,
-    transitions: {
-      draft: [:submitted],
-      submitted: [:approved, :rejected],
-      approved: [:paid],
-      rejected: [:draft]
-    },
-    colors: { draft: :secondary, submitted: :warning, approved: :success, paid: :info, rejected: :danger }
-  }
-}
-```
-
-Each valid transition renders as a button on the show/list page. Invalid transitions are hidden.
 
 ### 8. Relational navigation
 
@@ -173,11 +139,9 @@ The `_form.json.erb` and `index.json.erb` exist but are minimal. A proper API mo
 | 1 | Fix deprecations (#1) | Prevents breakage, zero risk |
 | 2 | ResourceManager validation (#4) | Biggest DX pain point |
 | 3 | CSV/Excel export & import (#2) | Small effort, high value, CRM essential |
-| 4 | Dashboard system (#3) | Differentiator, CRM/ERP essential |
 | 5 | Custom actions (#5) | Unlocks business logic beyond CRUD |
 | 6 | Audit trail (#6) | Business compliance requirement |
 | 7 | Relational navigation (#8) | Makes data browsing feel like a CRM |
-| 8 | Workflow/state machine (#7) | ERP status progressions |
 | 9 | File attachments (#10) | Document management |
 | 10 | Remove jQuery (#9) | Modernization, smaller bundle |
 | 11 | Multi-tenancy (#11) | SaaS/enterprise requirement |
