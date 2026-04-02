@@ -108,6 +108,22 @@ en:
       activate: Activate
       deactivate: Deactivate
       manage_resources: "Manage %{label}"
+    audit:
+      activity_log: "Activity Log"
+      n_fields_changed:
+        one: "1 field changed"
+        other: "%{count} fields changed"
+      field: "Field"
+      from: "From"
+      to: "To"
+      no_activity: "No activity recorded yet."
+      actions:
+        create: "Created"
+        update: "Updated"
+        destroy: "Deleted"
+        activate: "Activated"
+        deactivate: "Deactivated"
+        transition: "Transitioned"
     dashboard:
       powered_by: "Powered by %{label}"
       empty: "Nothing to display yet"

@@ -33,6 +33,7 @@ module Krudmin
       BULK_ACTIONS = []
       DASHBOARD_SCOPES = {}
       DASHBOARD_COLUMNS = {}
+      AUDIT_EXCLUDED_ATTRIBUTES = []
 
       RESERVED_ACTION_NAMES = %i[index show new edit create update destroy].freeze
       VALID_CUSTOM_ACTION_OPTIONS = %i[label icon method confirm class turbo authorize placement if route presenter_options].freeze

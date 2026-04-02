@@ -1,0 +1,22 @@
+%tr
+  %td
+    %small.text-muted
+      = entry.created_at.strftime("%Y-%m-%d %H:%M")
+  %td
+    %small= entry.user_label
+  %td
+    - action_badge_class = case entry.action.to_s
+    - when "create" then "text-bg-success"
+    - when "update" then "text-bg-primary"
+    - when "destroy" then "text-bg-danger"
+    - when "activate" then "text-bg-success"
+    - when "deactivate" then "text-bg-warning"
+    - when "transition" then "text-bg-info"
+    - else "text-bg-secondary"
+    %span.badge{class: action_badge_class}= entry.action_label
+  %td
+    - changes = entry.parsed_changes
+    - if changes.any?
+      = render "krudmin/core_theme/audit/changes_diff", changes: changes
+    - else
+      %small.text-muted —

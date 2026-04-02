@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_02_222541) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_02_234043) do
   create_table "car_brands", force: :cascade do |t|
     t.string "description", null: false
     t.datetime "created_at", precision: nil, null: false
@@ -44,6 +44,21 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_02_222541) do
     t.index ["car_brand_id"], name: "index_cars_on_car_brand_id"
     t.index ["car_owner_id"], name: "index_cars_on_car_owner_id"
     t.index ["status"], name: "index_cars_on_status"
+  end
+
+  create_table "krudmin_audit_entries", force: :cascade do |t|
+    t.string "auditable_type", null: false
+    t.integer "auditable_id", null: false
+    t.string "user_type"
+    t.integer "user_id"
+    t.string "action", null: false
+    t.text "changes_json"
+    t.text "metadata"
+    t.datetime "created_at", null: false
+    t.index ["action"], name: "index_krudmin_audit_entries_on_action"
+    t.index ["auditable_type", "auditable_id"], name: "index_krudmin_audit_on_auditable"
+    t.index ["created_at"], name: "index_krudmin_audit_entries_on_created_at"
+    t.index ["user_type", "user_id"], name: "index_krudmin_audit_on_user"
   end
 
   create_table "passengers", force: :cascade do |t|

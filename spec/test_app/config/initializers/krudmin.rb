@@ -29,6 +29,8 @@ Krudmin::config do |cfg|
   cfg.paginator_position = :top_bottom
   cfg.login_screen_intro_message = "<login_screen_intro_message> \n CONFIGURE ON KURMIN INITIALIZER"
   cfg.require_authenticated_user_method = :authenticate_krudmin_profile!
+  cfg.audit_enabled = true
+  cfg.audit_backend = :krudmin
 end
 
 config = Krudmin::config

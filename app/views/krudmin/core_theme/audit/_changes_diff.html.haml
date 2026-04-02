@@ -1,0 +1,20 @@
+%details
+  %summary
+    %small.text-muted
+      = I18n.t("krudmin.audit.n_fields_changed", count: changes.size, default: "%{count} field(s) changed")
+  %table.table.table-sm.table-bordered.mt-1.mb-0
+    %thead
+      %tr
+        %th.small= I18n.t("krudmin.audit.field", default: "Field")
+        %th.small= I18n.t("krudmin.audit.from", default: "From")
+        %th.small= I18n.t("krudmin.audit.to", default: "To")
+    %tbody
+      - changes.each do |field_name, values|
+        %tr
+          %td.small
+            %strong= field_name.to_s.humanize
+          - if values.is_a?(Array) && values.length == 2
+            %td.small.text-danger= values[0].to_s.truncate(80).presence || %i{(blank)}
+            %td.small.text-success= values[1].to_s.truncate(80).presence || %i{(blank)}
+          - else
+            %td.small{colspan: 2}= values.to_s.truncate(120)

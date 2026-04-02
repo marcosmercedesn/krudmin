@@ -1,0 +1,22 @@
+- if audit_enabled? && model.persisted?
+  - entries = audit_entries_for(model)
+  - if entries.any?
+    .card.mt-3
+      .card-header
+        %h5.mb-0
+          %button.btn.btn-link.text-decoration-none{"data-bs-toggle" => "collapse", "data-bs-target" => "#audit-activity", "aria-expanded" => "false"}
+            %i.fa.fa-history.me-2
+            = I18n.t("krudmin.audit.panel_title", default: "Activity Log")
+            %span.badge.text-bg-secondary.ms-2= entries.size
+      #audit-activity.collapse
+        .card-body.p-0
+          %table.table.table-sm.table-hover.mb-0
+            %thead
+              %tr
+                %th= I18n.t("krudmin.audit.when", default: "When")
+                %th= I18n.t("krudmin.audit.who", default: "Who")
+                %th= I18n.t("krudmin.audit.what", default: "Action")
+                %th= I18n.t("krudmin.audit.changes_header", default: "Changes")
+            %tbody
+              - entries.each do |entry|
+                = render "krudmin/core_theme/audit/activity_entry", entry: entry

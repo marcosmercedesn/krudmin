@@ -1,0 +1,19 @@
+class CreateKrudminAuditEntries < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
+  def change
+    create_table :krudmin_audit_entries do |t|
+      t.string  :auditable_type, null: false
+      t.integer :auditable_id,   null: false
+      t.string  :user_type
+      t.integer :user_id
+      t.string  :action,         null: false
+      t.text    :changes_json
+      t.text    :metadata
+      t.datetime :created_at,    null: false
+    end
+
+    add_index :krudmin_audit_entries, [:auditable_type, :auditable_id], name: "index_krudmin_audit_on_auditable"
+    add_index :krudmin_audit_entries, [:user_type, :user_id], name: "index_krudmin_audit_on_user"
+    add_index :krudmin_audit_entries, :action
+    add_index :krudmin_audit_entries, :created_at
+  end
+end

@@ -8,6 +8,7 @@ module Krudmin
     include Krudmin::Searchable
     include Krudmin::ActionButtonsSupport
     include Krudmin::BulkActions
+    include Krudmin::Auditable
     include Krudmin::HelperIncluder
 
     layout Krudmin::Config.layout

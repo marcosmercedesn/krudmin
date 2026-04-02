@@ -22,3 +22,5 @@
                   = model_class.human_attribute_name(attribute)
                 %td
                   = field_for(attribute, model).render(:show, self)
+
+= render "krudmin/core_theme/audit/activity_panel" if defined?(audit_enabled?) && audit_enabled?
