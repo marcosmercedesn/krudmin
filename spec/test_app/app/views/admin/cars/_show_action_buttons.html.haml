@@ -1,0 +1,8 @@
+- configure_toolbar(:form, self) do |b|
+  - b.button :cancel, '#', data: {bs_dismiss: :modal, type: :button}
+  - b.button :edit, model
+  - unless model.new_record?
+    - b.button :transition, model, :submit, class: "btn btn-info"
+    - b.button :transition, model, :approve, class: "btn btn-success"
+    - b.button :transition, model, :reject, class: "btn btn-danger"
+    - b.button :transition, model, :pay, class: "btn btn-primary"

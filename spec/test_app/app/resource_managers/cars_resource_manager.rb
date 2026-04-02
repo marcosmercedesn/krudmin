@@ -14,7 +14,6 @@ class CarsResourceManager < Krudmin::ResourceManagers::Base
   LISTABLE_ATTRIBUTES = [:model, :id, :status, :car_brand_description, :year, :active, :description, :created_at]
   LISTABLE_INCLUDES = [:car_brand]
   PAGINATOR_POSITION = :bottom
-  REMOTE_CRUD = true
   INLINE_EDITABLE_ATTRIBUTES = [:year, :active]
   BULK_ACTIONS = [:destroy, :activate, :deactivate]
   DASHBOARD_SCOPES = {
