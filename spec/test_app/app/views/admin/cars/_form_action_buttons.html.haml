@@ -4,3 +4,8 @@
   - b.button :show, model
   - unless model.new_record?
     - b.button :active, model
+  - unless model.new_record?
+    - b.button :transition, model, :submit, class: "btn btn-info"
+    - b.button :transition, model, :approve, class: "btn btn-success"
+    - b.button :transition, model, :reject, class: "btn btn-danger"
+    - b.button :transition, model, :pay, class: "btn btn-primary"
