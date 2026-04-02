@@ -16,9 +16,9 @@
 
     = yield(:head_content)
 
-  %body.app.header-fixed.sidebar-fixed.aside-menu-fixed.aside-menu-hidden.light-krudmin-theme.bg-white{class: body_classes, data: {controller: controller_name, action: action_name, model_id: model_id}}
+  %body.app.header-fixed.sidebar-fixed.aside-menu-fixed.aside-menu-hidden.light-krudmin-theme{class: body_classes, data: {bs_theme: :light, controller: controller_name, action: action_name, model_id: model_id}}
     #body-overlay
-    .app-body.light-krudmin-theme.bg-white
+    .app-body
       %main.main
         = render partial: 'layouts/krudmin/core_theme/top_menu_with_toolbar'
 

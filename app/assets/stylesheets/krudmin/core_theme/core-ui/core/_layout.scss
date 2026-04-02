@@ -401,22 +401,70 @@ app-root {
   }
 }
 
-// Light krudmin theme
-
-.light-krudmin-theme {
-  $light-krudmin-theme-bg: #fff !important;
-
-  .themed-bg {
-    background-color: $light-krudmin-theme-bg;
+[data-bs-theme="light"] {
+  .app-header {
+    @extend .bg-white;
   }
 
-  &.themed-bg.table > :not(caption) > * > * {
-    background-color: $light-krudmin-theme-bg;
+  .search-filter,
+  .toolbar,
+  .top-menu {
+    @extend .bg-white;
   }
 
-  &#krudmin-modal-container.themed-bg {
-    .modal-content {
-      background-color: $light-krudmin-theme-bg;
+  .card {
+    @extend .bg-white;
+
+    .table > :not(caption) > * > * {
+      @extend .bg-white;
     }
+  }
+
+  #krudmin-modal-container {
+    .modal-content {
+      @extend .bg-white;
+    }
+  }
+}
+
+[data-bs-theme="dark"] {
+  .app-header {
+    @extend .bg-dark;
+  }
+
+  .search-filter,
+  .toolbar,
+  .top-menu {
+    @extend .bg-dark;
+  }
+
+  .card {
+    @extend .bg-dark;
+
+    .table > :not(caption) > * > * {
+      @extend .bg-dark;
+    }
+  }
+
+  .breadcrumb {
+    @extend .bg-dark;
+  }
+
+  #krudmin-modal-container {
+    .modal-content {
+      @extend .bg-dark;
+    }
+  }
+
+  .app-body {
+    background-color: #343c49;
+  }
+
+  .modal-backdrop {
+    background-color: #919191;
+  }
+
+  .sidebar {
+    @extend .bg-dark;
   }
 }
