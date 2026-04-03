@@ -20,3 +20,5 @@ tmp/rspec_guard_result
 .DS_Store
 *.sqlite3*
 krudmin_test
+node_modules/
+package-lock.json
