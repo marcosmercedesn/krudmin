@@ -1,0 +1,161 @@
+require "rails_helper"
+
+describe "<%= class_name %> State Machine Transitions", type: :feature, js: true do
+  let(:<%= singular_name %>_page) { <%= class_name %>Page.new(url: admin_<%= plural_name %>_path, model: <%= singular_name %>) }
+
+  # ===== Transition Specs =====
+  # TODO: Update state names, event names, and button selectors to match your AASM configuration
+  # Example states: draft, submitted, approved, rejected, paid
+  # Example events: submit, approve, reject, pay
+
+  context "transitioning from initial state" do
+    let!(<%= singular_name %>) { create(:<%= singular_name %>, status: :draft) }
+
+    before { <%= singular_name %>_page.visit_page }
+
+    it "displays the current state" do
+      click_show_link_for(<%= singular_name %>)
+
+      expect(page).to have_content("Status")
+      expect(page).to have_content("Draft")
+    end
+
+    it "shows available transition buttons" do
+      click_show_link_for(<%= singular_name %>)
+
+      # TODO: Update button name to match your AASM event
+      expect(page).to have_button("Submit")
+    end
+
+    it "transitions to next state on event action" do
+      click_show_link_for(<%= singular_name %>)
+      click_button("Submit")
+      accept_confirmation
+
+      expect(page).to have_content("transitioned.*submitted")
+      expect(<%= singular_name %>.reload.status).to eq("submitted")
+    end
+  end
+
+  context "blocking invalid transitions" do
+    let!(<%= singular_name %>) { create(:<%= singular_name %>, status: :draft) }
+
+    before { <%= singular_name %>_page.visit_page }
+
+    it "does not show invalid transition buttons" do
+      click_show_link_for(<%= singular_name %>)
+
+      # TODO: Update button name (invalid transition from draft)
+      expect(page).not_to have_button("Approve")
+    end
+
+    it "prevents transition if attempted directly" do
+      <%= singular_name %>.reject! rescue nil
+
+      expect(<%= singular_name %>.reload.status).to eq("draft")
+    end
+  end
+
+  context "multiple state transitions" do
+    let!(<%= singular_name %>) { create(:<%= singular_name %>, status: :draft) }
+
+    before { <%= singular_name %>_page.visit_page }
+
+    it "follows valid transition chain" do
+      # draft → submitted
+      click_show_link_for(<%= singular_name %>)
+      click_button("Submit")
+      accept_confirmation
+      expect(<%= singular_name %>.reload.status).to eq("submitted")
+
+      # submitted → approved
+      visit(admin_<%= plural_name %>_path)
+      click_show_link_for(<%= singular_name %>)
+      click_button("Approve")
+      accept_confirmation
+      expect(<%= singular_name %>.reload.status).to eq("approved")
+
+      # approved → paid
+      visit(admin_<%= plural_name %>_path)
+      click_show_link_for(<%= singular_name %>)
+      click_button("Pay")
+      accept_confirmation
+      expect(<%= singular_name %>.reload.status).to eq("paid")
+    end
+  end
+
+  context "rejection transitions" do
+    let!(<%= singular_name %>) { create(:<%= singular_name %>, status: :submitted) }
+
+    before { <%= singular_name %>_page.visit_page }
+
+    it "transitions to rejected state" do
+      click_show_link_for(<%= singular_name %>)
+      click_button("Reject")
+      accept_confirmation
+
+      expect(page).to have_content("rejected")
+      expect(<%= singular_name %>.reload.status).to eq("rejected")
+    end
+
+    it "cannot transition from rejected to paid" do
+      <%= singular_name %>.reject!
+      <%= singular_name %>_page.visit_page
+      click_show_link_for(<%= singular_name %>)
+
+      # TODO: Verify that invalid transitions aren't available
+      # Rejected should probably only allow resubmission
+      expect(page).not_to have_button("Approve")
+      expect(page).not_to have_button("Pay")
+    end
+  end
+
+  context "state persistence across requests" do
+    let!(<%= singular_name %>) { create(:<%= singular_name %>, status: :draft) }
+
+    before { <%= singular_name %>_page.visit_page }
+
+    it "maintains state after page refresh" do
+      click_show_link_for(<%= singular_name %>)
+      click_button("Submit")
+      accept_confirmation
+
+      visit(admin_<%= plural_name %>_path)
+      click_show_link_for(<%= singular_name %>)
+
+      expect(page).to have_content("Submitted")
+      expect(<%= singular_name %>.reload.status).to eq("submitted")
+    end
+
+    it "updates list view to reflect new state" do
+      click_show_link_for(<%= singular_name %>)
+      click_button("Submit")
+      accept_confirmation
+      click_link("Back")
+
+      # TODO: If status is displayed in the list, verify it updates
+      # expect(page).to have_content("Submitted") within row for <%= singular_name %>
+    end
+  end
+
+  context "state machine constraints" do
+    let!(<%= singular_name %>_1) { create(:<%= singular_name %>, status: :draft) }
+    let!(<%= singular_name %>_2) { create(:<%= singular_name %>, status: :submitted) }
+
+    before { <%= singular_name %>_page.visit_page }
+
+    it "filters by state" do
+      # TODO: If search by state is enabled
+      # filter_by(:status, "Draft")
+      # expect(page).to have_content(<%= singular_name %>_1.model)
+      # expect(page).not_to have_content(<%= singular_name %>_2.model)
+    end
+
+    it "sorts by state" do
+      # TODO: If sorting by state is enabled
+      # click_link("Status")
+      # statuses = all("td.status").map(&:text)
+      # expect(statuses).to eq(statuses.sort)
+    end
+  end
+end

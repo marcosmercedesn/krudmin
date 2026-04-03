@@ -1,0 +1,27 @@
+require "rails_helper"
+
+describe "<%= class_name %> Show Page", type: :feature do
+  let!(<%= singular_name %>) { create(:<%= singular_name %>) }
+  let(:<%= singular_name %>_page) { <%= class_name %>Page.new(url: admin_<%= plural_name %>_path, model: <%= singular_name %>) }
+
+  before { <%= singular_name %>_page.visit_page }
+
+  it "displays the <%= singular_name %> details" do
+    click_show_link_for(<%= singular_name %>)
+
+    expect(page).to have_content(<%= singular_name %>.name)
+  end
+
+  it "has a link back to the index" do
+    click_show_link_for(<%= singular_name %>)
+    click_link("Back")
+
+    expect(current_path).to eq(admin_<%= plural_name %>_path)
+  end
+
+  it "has an edit button" do
+    click_show_link_for(<%= singular_name %>)
+
+    expect(page).to have_link("Edit")
+  end
+end

@@ -1,0 +1,18 @@
+FactoryBot.define do
+  factory :<%= singular_name %> do
+    # TODO: Fill in attributes based on your <%= class_name %> model
+    # Example:
+    # name { FFaker::Company.name }
+    # email { FFaker::Internet.email }
+    # active { true }
+
+    trait :inactive do
+      active { false }
+    end
+
+    # TODO: Add associations or other traits as needed
+    # trait :with_association do
+    #   association :association_name
+    # end
+  end
+end

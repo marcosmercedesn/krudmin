@@ -1,0 +1,30 @@
+require "rails_helper"
+
+describe "<%= class_name %> Search & Filtering", type: :feature do
+  let!(<%= singular_name %>_1) { create(:<%= singular_name %>, name: "Alpha") }
+  let!(<%= singular_name %>_2) { create(:<%= singular_name %>, name: "Beta") }
+  let(:<%= singular_name %>_page) { <%= class_name %>Page.new(url: admin_<%= plural_name %>_path, model: <%= singular_name %>_1) }
+
+  before { <%= singular_name %>_page.visit_page }
+
+  it "searches by name" do
+    search_for("Alpha")
+
+    expect(page).to have_content("Alpha")
+    expect(page).not_to have_content("Beta")
+  end
+
+  it "clears search results" do
+    search_for("Alpha")
+    visit("admin_<%= plural_name %>_path(reset_search: 1)")
+
+    expect(page).to have_content("Alpha")
+    expect(page).to have_content("Beta")
+  end
+
+  it "returns empty results for no matches" do
+    search_for("NonExistent")
+
+    expect(page).to have_content("No records found")
+  end
+end

@@ -27,11 +27,64 @@ bundle exec rspec spec/lib/krudmin/fields/base_spec.rb:42 # Run a single test by
 bundle exec rubocop                                        # Lint (excludes spec/, bin/, config/initializers/)
 bundle exec guard                                          # Auto-run tests on file changes
 
+# Integration testing
+bundle exec rspec spec/features/cars/                      # Run all integration specs for a resource
+bundle exec rspec spec/features/cars/crud/                 # Run CRUD specs only
+
 # Run the test app
 cd spec/test_app && rails s
+
+# Generators
+rails generate krudmin:resource Car                                  # Create a resource manager + controller
+rails generate krudmin:integration_specs Car --nested-forms          # Create full integration test suite
+rails generate krudmin:dashboard Finance                             # Create a dashboard
 ```
 
-For additional guidance and developer notes, agents should consult the project's `docs/` folder: [docs](docs).
+For additional guidance and developer notes, agents should consult the project's `docs/` folder:
+
+- [Architecture Overview](docs/architecture.md)
+- [Integration Testing Guide](docs/integration-testing-guide.md) — Best practices for writing and maintaining specs
+- [Integration Test Generator](docs/integration_test_generator.md) — Scaffold complete test suites
+- [Other Documentation](docs)
+
+## Generators
+
+Krudmin includes Rails generators to scaffold common patterns:
+
+### Resource Generator (`krudmin:resource`)
+
+Generates a ResourceManager, controller, and routes for a model:
+
+```bash
+rails generate krudmin:resource Car --policy --remote --specs
+```
+
+Options: `--policy` (Pundit), `--remote` (AJAX), `--namespace` (default: admin), `--specs`
+
+See: [docs/generators.md](docs/generators.md)
+
+### Integration Test Suite Generator (`krudmin:integration_specs`)
+
+Generates a complete integration test suite (Capybara + RSpec) with page objects, CRUD specs, state transitions, search, pagination, and more:
+
+```bash
+rails generate krudmin:integration_specs Car --nested-forms --inline-editing --state-machine --authorization
+```
+
+Options: `--nested-forms`, `--inline-editing`, `--state-machine`, `--authorization`, `--no-pagination`, `--no-search`, `--factory` (default: true), `--namespace`
+
+Generated files:
+
+- `spec/support/pages/{resource}_page.rb` — Page Object with state/authorization assertions
+- `spec/features/{resources}/crud/*.rb` — CRUD operation specs
+- `spec/features/{resources}/state_transitions/*.rb` — Activate/deactivate/bulk action specs
+- `spec/features/{resources}/state_machine_spec.rb` — AASM state transitions (--state-machine flag)
+- `spec/features/{resources}/authorization_spec.rb` — Pundit policy enforcement (--authorization flag)
+- `spec/features/{resources}/*.rb` — Search, pagination, inline editing, nested forms (as options)
+- `spec/factories/{resources}.rb` — FactoryBot factory
+- `spec/support/page_features.rb` — Reusable Capybara helpers (added/enhanced)
+
+See: [docs/integration_test_generator.md](docs/integration_test_generator.md)
 
 ## Architecture
 

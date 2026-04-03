@@ -278,6 +278,8 @@ end
 - [Authorization](/docs/authorization.md) - Pundit integration guide
 - [Navigation Menu](/docs/navigation_menu.md) - Menu configuration
 - [Views & Themes](/docs/views_and_themes.md) - UI customization
+- [Integration Testing Guide](/docs/integration-testing-guide.md) - Testing patterns and best practices for integration specs
+- [Integration Test Generator](/docs/integration_test_generator.md) - Scaffold complete test suites with the generator
 - [Contributing](/docs/contributing.md) - Development setup and contribution guide
 
 ## Contributing

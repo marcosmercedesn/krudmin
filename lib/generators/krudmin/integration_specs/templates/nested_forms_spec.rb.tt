@@ -1,0 +1,29 @@
+require "rails_helper"
+
+describe "<%= class_name %> with Nested Forms", type: :feature do
+  let(:<%= singular_name %>_page) { <%= class_name %>Page.new(url: admin_<%= plural_name %>_path, model: build_stubbed(:<%= singular_name %>)) }
+
+  before do
+    <%= singular_name %>_page.visit_page
+    click_link("Add")
+  end
+
+  it "creates record with nested associations" do
+    fill_form_for(:<%= singular_name %>, name: "Test <%= class_name %>")
+    # Fill nested form fields here (e.g., passengers, insurance)
+    submit_form
+
+    expect(page).to have_content("Test <%= class_name %> was successfully created")
+  end
+
+  it "removes nested records with destroy checkbox" do
+    <%= singular_name %> = create(:<%= singular_name %>)
+    <%= singular_name %>_page.visit_page
+    click_edit_link_for(<%= singular_name %>)
+
+    check(:delete_nested_association)
+    submit_form
+
+    expect(<%= singular_name %>.reload.nested_association).to be_nil
+  end
+end

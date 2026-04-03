@@ -1,0 +1,167 @@
+require "rails_helper"
+
+describe "<%= class_name %> Authorization (Pundit Policy)", type: :feature do
+  # ===== Policy Test Coverage =====
+  # This spec suite tests Pundit policy enforcement via the UI
+  # TODO: Update policy class name and actions to match your actual policy
+
+  let(<%= singular_name %>_page) { <%= class_name %>Page.new(url: admin_<%= plural_name %>_path, model: <%= singular_name %>) }
+
+  # ===== Admin User (Full Access) =====
+  context "as an admin user" do
+    let(:admin_user) { create(:user, role: :admin) }
+
+    before do
+      login_as(admin_user)
+      <%= singular_name %>_page.visit_page
+    end
+
+    it "has access to the index page" do
+      expect(<%= singular_name %>_page).to be_on_index_page
+    end
+
+    it "has add button visible" do
+      expect(<%= singular_name %>_page).not_to have_add_button
+    end
+
+    it "has edit link for all records" do
+      <%= singular_name %> = create(:<%= singular_name %>)
+      <%= singular_name %>_page.visit_page
+
+      expect(<%= singular_name %>_page).to have_edit_link_for(<%= singular_name %>)
+    end
+
+    it "has destroy link for all records" do
+      <%= singular_name %> = create(:<%= singular_name %>)
+      <%= singular_name %>_page.visit_page
+
+      expect(<%= singular_name %>_page).to have_destroy_link_for(<%= singular_name %>)
+    end
+
+    it "has activate/deactivate actions" do
+      <%= singular_name %> = create(:<%= singular_name %>, active: false)
+      <%= singular_name %>_page.visit_page
+
+      expect(<%= singular_name %>_page).to have_activate_link_for(<%= singular_name %>)
+    end
+  end
+
+  # ===== Manager User (Limited Access) =====
+  context "as a manager user" do
+    let(:manager_user) { create(:user, role: :manager) }
+
+    before do
+      login_as(manager_user)
+      <%= singular_name %>_page.visit_page
+    end
+
+    # TODO: Adjust these based on your policy rules
+    it "can view the <%= singular_name %> index" do
+      expect(<%= singular_name %>_page).to be_on_index_page
+    end
+
+    it "cannot add new <%= singular_name.pluralize %>" do
+      expect(<%= singular_name %>_page).to do_not_have_add_button
+    end
+
+    it "cannot edit <%= singular_name.pluralize %>" do
+      <%= singular_name %> = create(:<%= singular_name %>)
+      <%= singular_name %>_page.visit_page
+
+      expect(<%= singular_name %>_page).to do_not_have_edit_link_for(<%= singular_name %>)
+    end
+
+    it "cannot destroy <%= singular_name.pluralize %>" do
+      <%= singular_name %> = create(:<%= singular_name %>)
+      <%= singular_name %>_page.visit_page
+
+      expect(<%= singular_name %>_page).to do_not_have_destroy_link_for(<%= singular_name %>)
+    end
+  end
+
+  # ===== Regular User (Minimal Access) =====
+  context "as a regular user" do
+    let(:regular_user) { create(:user, role: :user) }
+
+    before do
+      login_as(regular_user)
+    end
+
+    it "is denied access to the index page" do
+      visit(admin_<%= plural_name %>_path)
+
+      expect(<%= singular_name %>_page).to have_access_denied_message
+    end
+
+    it "is denied access to show page" do
+      <%= singular_name %> = create(:<%= singular_name %>)
+      visit(admin_<%= plural_name %>_path(<%= singular_name %>))
+
+      expect(<%= singular_name %>_page).to have_access_denied_message
+    end
+  end
+
+  # ===== Unauthenticated User =====
+  context "as an unauthenticated user" do
+    it "is redirected to login" do
+      visit(admin_<%= plural_name %>_path)
+
+      expect(current_path).to eq(new_user_session_path)
+    end
+
+    it "cannot create a new <%= singular_name %>" do
+      visit(new_admin_<%= singular_name %>_path)
+
+      expect(current_path).to eq(new_user_session_path)
+    end
+  end
+
+  # ===== Record-Level Authorization =====
+  context "record-level authorization" do
+    let(:owner) { create(:user, role: :manager) }
+    let(:other_user) { create(:user, role: :manager) }
+    let(:<%= singular_name %>) { create(:<%= singular_name %>, creator: owner) }
+
+    # TODO: Customize based on your scoping rules
+    # Example: Users can only edit records they own
+
+    before do
+      login_as(owner)
+      <%= singular_name %>_page.visit_page
+    end
+
+    it "owner can edit their own record" do
+      click_edit_link_for(<%= singular_name %>)
+
+      expect(<%= singular_name %>_page).to be_on_edit_page
+    end
+
+    # it "owner cannot edit records created by others" do
+    #   other_<%= singular_name %> = create(:<%= singular_name %>, creator: other_user)
+    #   <%= singular_name %>_page.visit_page
+    #
+    #   expect(<%= singular_name %>_page).to do_not_have_edit_link_for(other_<%= singular_name %>)
+    # end
+  end
+
+  # ===== Policy Caching Edge Cases =====
+  context "policy enforcement consistency" do
+    let(:admin_user) { create(:user, role: :admin) }
+
+    before do
+      login_as(admin_user)
+    end
+
+    it "enforces policy after user role changes" do
+      <%= singular_name %> = create(:<%= singular_name %>)
+      visit(admin_<%= plural_name %>_path)
+
+      # Change user role mid-session
+      admin_user.update(role: :user)
+
+      # TODO: Depending on implementation, you may need to clear cache or re-login
+      # Verify access is now denied
+      # expect(<%= singular_name %>_page).to have_access_denied_message
+    end
+  end
+end

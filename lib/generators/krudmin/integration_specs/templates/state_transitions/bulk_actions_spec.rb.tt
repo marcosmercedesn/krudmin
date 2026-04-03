@@ -1,0 +1,36 @@
+require "rails_helper"
+
+describe "<%= class_name %> Bulk Actions", type: :feature, js: true do
+  let!(<%= singular_name %>_1) { create(:<%= singular_name %>, active: false) }
+  let!(<%= singular_name %>_2) { create(:<%= singular_name %>, active: false) }
+  let(:<%= singular_name %>_page) { <%= class_name %>Page.new(url: admin_<%= plural_name %>_path, model: <%= singular_name %>_1) }
+
+  before { <%= singular_name %>_page.visit_page }
+
+  it "bulk activates multiple records" do
+    select_rows(<%= singular_name %>_1, <%= singular_name %>_2)
+    apply_bulk_action(":activate")
+
+    expect(<%= singular_name %>_1.reload).to be_active
+    expect(<%= singular_name %>_2.reload).to be_active
+  end
+
+  it "bulk deactivates multiple records" do
+    <%= singular_name %>_1.update(active: true)
+    <%= singular_name %>_2.update(active: true)
+    <%= singular_name %>_page.visit_page
+
+    select_rows(<%= singular_name %>_1, <%= singular_name %>_2)
+    apply_bulk_action(":deactivate")
+
+    expect(<%= singular_name %>_1.reload).not_to be_active
+    expect(<%= singular_name %>_2.reload).not_to be_active
+  end
+
+  it "bulk destroys multiple records" do
+    select_rows(<%= singular_name %>_1, <%= singular_name %>_2)
+    apply_bulk_action(":destroy")
+
+    expect(<%= class_name %>.count).to eq(0)
+  end
+end

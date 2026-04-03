@@ -1,0 +1,33 @@
+require "rails_helper"
+
+describe "<%= class_name %> Activation", type: :feature, js: true do
+  let!(<%= singular_name %>) { create(:<%= singular_name %>, active: false) }
+  let(:<%= singular_name %>_page) { <%= class_name %>Page.new(url: admin_<%= plural_name %>_path, model: <%= singular_name %>) }
+
+  before { <%= singular_name %>_page.visit_page }
+
+  it "activates <%= singular_name %> from list actions" do
+    click_activation_link_for(<%= singular_name %>)
+    accept_confirmation
+
+    expect(<%= singular_name %>_page).to have_model_activated
+    expect(<%= singular_name %>.reload).to be_active
+  end
+
+  it "activates <%= singular_name %> from show page" do
+    click_show_link_for(<%= singular_name %>)
+    click_form_activation_link_for(<%= singular_name %>)
+    accept_confirmation
+
+    expect(page).to have_content("activated")
+  end
+
+  it "disables activate button if already active" do
+    <%= singular_name %>.update(active: true)
+    <%= singular_name %>_page.visit_page
+
+    within(row_css_for(<%= singular_name %>)) do
+      expect(page).not_to have_selector(".btn-activate-item")
+    end
+  end
+end

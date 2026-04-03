@@ -1,0 +1,22 @@
+require "rails_helper"
+
+describe "<%= class_name %> Pagination", type: :feature do
+  before do
+    create_list(:<%= singular_name %>, 30)
+    visit(admin_<%= plural_name %>_path)
+  end
+
+  it "displays pagination links" do
+    expect(page).to have_selector(".pagination")
+  end
+
+  it "navigates to the next page" do
+    click_link("2")
+
+    expect(current_url).to include("page=2")
+  end
+
+  it "limits records per page" do
+    expect(all("tr.item-model-*").count).to be <= 25
+  end
+end

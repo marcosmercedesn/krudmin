@@ -1,0 +1,171 @@
+require_relative '../page_features'
+
+class <%= class_name %>Page
+  include Capybara::DSL
+  include FactoryBot::Syntax::Methods
+  include PageFeatures
+
+  attr_reader :url, :model
+
+  def initialize(url:, model:)
+    @url = url
+    @model = model
+  end
+
+  # ===== Navigation =====
+  def visit_page(page: 1, limit: 25)
+    visit("#{url}?#{{page: page, limit: limit}.to_query}")
+  end
+
+  # ===== Index Page Helpers =====
+  def on_index_page?
+    has_content?("Manage <%= class_name.pluralize %>")
+  end
+
+  def has_model_visible?
+    has_selector?(row_css_for(model))
+  end
+
+  # ===== Show Page Helpers =====
+  def on_show_page?
+    has_content?("Edit #{model.name || model.id}") || has_content?("<%= class_name %>")
+  end
+
+  # ===== Edit Page Helpers =====
+  def on_edit_page?
+    has_content?("Edit #{model.name || model.id}")
+  end
+
+  # ===== Row Actions =====
+  def click_destroy_model_link
+    click_destroy_link_for(model)
+  end
+
+  def click_edit_model_link
+    click_edit_link_for(model)
+  end
+
+  def click_show_model_link
+    click_show_link_for(model)
+  end
+
+  def click_activate_model_link(context = nil)
+    if context == :form
+      click_link("Activate")
+    else
+      click_activation_link_for(model)
+    end
+  end
+
+  def click_deactivate_model_link(context = nil)
+    if context == :form
+      click_link("Deactivate")
+    else
+      click_deactivation_link_for(model)
+    end
+  end
+
+  # ===== Form Actions =====
+  def click_save_button
+    first('.btn-primary').click
+  end
+
+  def click_add_button
+    within('.toolbar-buttons') do
+      click_link("Add")
+    end
+  end
+
+  # ===== Message Assertions =====
+  def has_created_message_visible?
+    has_content?("was successfully created")
+  end
+
+  def has_modified_message_visible?
+    has_content?("was successfully modified")
+  end
+
+  def has_destroyed_message_visible?
+    has_content?("was successfully destroyed")
+  end
+
+  def has_model_activated?
+    has_content?("was successfully activated")
+  end
+
+  def has_model_deactivated?
+    has_content?("was successfully deactivated")
+  end
+
+  def has_model_unable_to_be_destroyed?
+    has_content?("can't be destroyed")
+  end
+
+  def has_model_unable_to_be_activated?
+    has_content?("couldn't be activated")
+  end
+
+  def has_model_unable_to_be_deactivated?
+    has_content?("couldn't be deactivated")
+  end
+
+  # ===== State Machine Assertions =====
+  def on_state?(state_name)
+    has_content?("Status") && has_content?(state_name.to_s.titleize)
+  end
+
+  def has_state_button?(event_name)
+    has_button?(event_name.to_s.titleize)
+  end
+
+  def does_not_have_state_button?(event_name)
+    !has_button?(event_name.to_s.titleize)
+  end
+
+  # ===== Authorization Assertions =====
+  def does_not_have_add_button?
+    !has_link?("Add")
+  end
+
+  def does_not_have_edit_link_for?(model)
+    within(row_css_for(model)) do
+      !has_selector?(".btn-edit-item")
+    end
+  end
+
+  def does_not_have_destroy_link_for?(model)
+    within(row_css_for(model)) do
+      !has_selector?(".btn-destroy-item")
+    end
+  end
+
+  def does_not_have_activate_link_for?(model)
+    within(row_css_for(model)) do
+      !has_selector?(".btn-activate-item")
+    end
+  end
+
+  def does_not_have_deactivate_link_for?(model)
+    within(row_css_for(model)) do
+      !has_selector?(".btn-deactivate-item")
+    end
+  end
+
+  def has_forbidden_message?
+    has_content?("not authorized") || has_content?("You are not authorized")
+  end
+
+  def has_access_denied_message?
+    has_content?("Access Denied") || has_content?("Unauthorized")
+  end
+
+  # ===== TODO: Add resource-specific helpers below =====
+  # Examples:
+  # def has_status_badge?(status)
+  #   has_content?("Status: #{status}")
+  # end
+  #
+  # def has_total_price?(price)
+  #   has_content?("Total: $#{price}")
+  # end
+end

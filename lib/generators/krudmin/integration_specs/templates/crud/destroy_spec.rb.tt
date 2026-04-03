@@ -1,0 +1,30 @@
+require "rails_helper"
+
+describe "<%= class_name %> Destruction", type: :feature, js: true do
+  let!(<%= singular_name %>) { create(:<%= singular_name %>) }
+  let(:<%= singular_name %>_page) { <%= class_name %>Page.new(url: admin_<%= plural_name %>_path, model: <%= singular_name %>) }
+
+  before { <%= singular_name %>_page.visit_page }
+
+  it "destroys the <%= singular_name %> and shows success message" do
+    click_destroy_link_for(<%= singular_name %>)
+    accept_confirmation
+
+    expect(page).to have_content("was successfully destroyed")
+  end
+
+  it "removes the <%= singular_name %> from the list" do
+    <%= singular_name %>_id = <%= singular_name %>.id
+    click_destroy_link_for(<%= singular_name %>)
+    accept_confirmation
+
+    expect(<%= class_name %>.exists?(<%= singular_name %>_id)).to be(false)
+  end
+
+  it "redirects to the index page" do
+    click_destroy_link_for(<%= singular_name %>)
+    accept_confirmation
+
+    expect(current_path).to eq(admin_<%= plural_name %>_path)
+  end
+end

@@ -1,0 +1,37 @@
+require "rails_helper"
+
+describe "<%= class_name %> Update", type: :feature do
+  let!(<%= singular_name %>) { create(:<%= singular_name %>, name: "Original Name") }
+  let(:<%= singular_name %>_page) { <%= class_name %>Page.new(url: admin_<%= plural_name %>_path, model: <%= singular_name %>) }
+
+  before do
+    <%= singular_name %>_page.visit_page
+    click_edit_link_for(<%= singular_name %>)
+  end
+
+  context "with valid data" do
+    it "updates the <%= singular_name %> and shows success message" do
+      fill_in(:<%= singular_name %>_name, with: "Updated Name")
+      submit_form
+
+      expect(page).to have_content("Updated Name was successfully modified")
+      expect(<%= singular_name %>.reload.name).to eq("Updated Name")
+    end
+  end
+
+  context "with invalid data" do
+    it "shows validation errors" do
+      fill_in(:<%= singular_name %>_name, with: "")
+      submit_form
+
+      expect(page).to have_content("can't be blank")
+    end
+
+    it "retains existing data" do
+      fill_in(:<%= singular_name %>_name, with: "Invalid")
+      submit_form
+
+      expect(<%= singular_name %>.reload.name).to eq("Original Name")
+    end
+  end
+end

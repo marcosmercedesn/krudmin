@@ -1,0 +1,49 @@
+require "rails_helper"
+
+describe "<%= class_name %> Creation", type: :feature do
+  let(:<%= singular_name %>_page) { <%= class_name %>Page.new(url: admin_<%= plural_name %>_path, model: build_stubbed(:<%= singular_name %>)) }
+
+  before do
+    <%= singular_name %>_page.visit_page
+    click_link("Add")
+  end
+
+  context "with valid data" do
+    it "creates a new <%= singular_name %> and shows success message" do
+      fill_form_for(:<%= singular_name %>, name: "Test <%= class_name %>")
+      submit_form
+
+      expect(page).to have_content("Test <%= class_name %> was successfully created")
+    end
+
+    it "redirects to the show page" do
+      fill_form_for(:<%= singular_name %>, name: "Test <%= class_name %>")
+      submit_form
+
+      expect(current_path).to match(%r{/admin/<%= plural_name %>/\d+})
+    end
+
+    it "displays the new record in the list" do
+      fill_form_for(:<%= singular_name %>, name: "Test <%= class_name %>")
+      submit_form
+      click_link("Back")
+
+      expect(page).to have_content("Test <%= class_name %>")
+    end
+  end
+
+  context "with invalid data" do
+    it "shows validation errors" do
+      submit_form
+
+      expect(page).to have_content("can't be blank")
+    end
+
+    it "preserves form data on validation failure" do
+      fill_in(:<%= singular_name %>_name, with: "Partial Data")
+      submit_form
+
+      expect(find_field(:<%= singular_name %>_name).value).to eq("Partial Data")
+    end
+  end
+end

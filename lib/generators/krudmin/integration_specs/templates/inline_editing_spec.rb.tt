@@ -1,0 +1,30 @@
+require "rails_helper"
+
+describe "<%= class_name %> Inline Editing", type: :feature, js: true do
+  let!(<%= singular_name %>) { create(:<%= singular_name %>, name: "Original") }
+  let(:<%= singular_name %>_page) { <%= class_name %>Page.new(url: admin_<%= plural_name %>_path, model: <%= singular_name %>) }
+
+  before { <%= singular_name %>_page.visit_page }
+
+  it "edits field inline in the list view" do
+    inline_edit_field(<%= singular_name %>, 'name', 'Updated')
+
+    expect(<%= singular_name %>.reload.name).to eq('Updated')
+    expect(page).to have_content('Updated')
+  end
+
+  it "shows validation errors inline" do
+    inline_edit_field(<%= singular_name %>, 'name', '')
+
+    expect(page).to have_content("can't be blank")
+  end
+
+  it "reverts on escape key" do
+    within(row_css_for(<%= singular_name %>)) do
+      find("[data-field='name']").click
+      find(".inline-edit-input").send_keys(:escape)
+    end
+
+    expect(<%= singular_name %>.reload.name).to eq("Original")
+  end
+end
