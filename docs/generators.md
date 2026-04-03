@@ -23,6 +23,13 @@ Creates:
 | `--no-docs` | `true` | Skip documentation files |
 | `--no-claude` | `true` | Skip CLAUDE.md |
 | `--no-initializer` | `true` | Skip initializer |
+| `--docs-only` | `false` | Only update docs/krudmin in the host project |
+
+Refresh docs in an existing host app without touching initializer or CLAUDE.md:
+
+```bash
+rails generate krudmin:install --docs-only
+```
 
 ## Resource Generator
 

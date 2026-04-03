@@ -70,6 +70,12 @@ This creates:
 
 Skip docs or CLAUDE.md with flags: `--no-docs`, `--no-claude`, `--no-initializer`.
 
+Update only docs in an existing host project:
+
+```bash
+rails generate krudmin:install --docs-only
+```
+
 ### Option B: Manual Setup
 
 #### 1. Configure Krudmin
