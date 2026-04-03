@@ -4,13 +4,15 @@ PATH
     krudmin (0.1.7.9.5.31)
       aasm
       bootstrap (~> 5.3)
+      dartsass-rails
       hamlit
       jquery-rails
       kaminari
       momentjs-rails
+      propshaft
       pundit
       ransack
-      sassc-rails
+      sass-embedded
       simple_form
       turbo-rails (>= 1.0)
 
@@ -92,6 +94,9 @@ GEM
     concurrent-ruby (1.3.6)
     connection_pool (3.0.2)
     crass (1.0.6)
+    dartsass-rails (0.5.1)
+      railties (>= 6.0.0)
+      sass-embedded (~> 1.63)
     database_cleaner (2.1.0)
       database_cleaner-active_record (>= 2, < 3)
     database_cleaner-active_record (2.2.2)
@@ -121,6 +126,9 @@ GEM
     ffi (1.17.4-arm64-darwin)
     formatador (1.2.3)
       reline
+    google-protobuf (4.34.1-arm64-darwin)
+      bigdecimal
+      rake (~> 13.3)
     guard (2.20.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -211,6 +219,10 @@ GEM
       prettyprint
     prettyprint (0.2.0)
     prism (1.9.0)
+    propshaft (1.3.1)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
     pry (0.16.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -296,14 +308,8 @@ GEM
       rspec-mocks (>= 3.13.0, < 5.0.0)
       rspec-support (>= 3.13.0, < 5.0.0)
     rspec-support (3.13.7)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
+    sass-embedded (1.98.0-arm64-darwin)
+      google-protobuf (~> 4.31)
     securerandom (0.4.1)
     shellany (0.0.1)
     simple_form (5.4.1)
@@ -315,14 +321,6 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.2)
     simplecov_json_formatter (0.1.4)
-    sprockets (4.2.2)
-      concurrent-ruby (~> 1.0)
-      logger
-      rack (>= 2.2.4, < 4)
-    sprockets-rails (3.5.2)
-      actionpack (>= 6.1)
-      activesupport (>= 6.1)
-      sprockets (>= 3.0.0)
     sqlite3 (2.9.2-arm64-darwin)
     stringio (3.2.0)
     temple (0.10.4)

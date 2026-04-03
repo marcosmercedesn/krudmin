@@ -18,13 +18,15 @@ Gem::Specification.new do |s|
 
   s.add_dependency "bootstrap", "~> 5.3"
   s.add_dependency "aasm"
+  s.add_dependency "dartsass-rails"
   s.add_dependency "hamlit"
   s.add_dependency "jquery-rails"
   s.add_dependency "kaminari"
   s.add_dependency "momentjs-rails"
+  s.add_dependency "propshaft"
   s.add_dependency "pundit"
   s.add_dependency "ransack"
-  s.add_dependency "sassc-rails"
+  s.add_dependency "sass-embedded"
   s.add_dependency "simple_form"
   s.add_dependency "turbo-rails", ">= 1.0"
 end

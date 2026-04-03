@@ -351,9 +351,11 @@ ResourceManager.field_for(:name, model)
 | jquery-rails | jQuery |
 | kaminari | Pagination |
 | momentjs-rails | Date/time formatting in JS |
+| propshaft | Asset delivery |
 | pundit | Authorization (optional) |
 | ransack | Search/filtering |
-| sassc-rails | SASS compilation |
+| dartsass-rails | Sass integration required by the Bootstrap gem |
+| sass-embedded | SASS compilation for Krudmin build output |
 | simple_form | Form builder |
 | stimulus (vendored) | Stimulus controllers |
 | trix (vendored) | Rich text editor |

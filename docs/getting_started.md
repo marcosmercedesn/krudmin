@@ -24,21 +24,17 @@ Run:
 bundle install
 ```
 
-### 2. Add Asset Dependencies
+### 2. Build Krudmin Assets
 
-Krudmin uses Bootstrap 4, jQuery, and several JavaScript libraries. Ensure your application's asset pipeline includes them.
+Krudmin now targets Propshaft instead of Sprockets. The engine builds its JS and CSS bundles into `tmp/krudmin-assets`, and your layouts continue to reference the logical assets `krudmin/core_theme/application.js` and `krudmin/core_theme/application.css`.
 
-In your `app/assets/javascripts/application.js`:
+Build the assets once after installation and whenever you change Krudmin asset sources locally:
 
-```javascript
-//= require krudmin/core_theme/application
+```bash
+bundle exec rake krudmin:assets:build
 ```
 
-In your `app/assets/stylesheets/application.scss`:
-
-```scss
-@import "krudmin/core_theme/application";
-```
+The engine also rebuilds them automatically on boot in development and test.
 
 ### 3. Configure SimpleForm for Bootstrap
 

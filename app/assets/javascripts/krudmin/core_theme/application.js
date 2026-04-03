@@ -23,6 +23,7 @@
 //= require krudmin/vendor/sweetalert
 //= require trix
 //= require stimulus
+//= require krudmin/core_theme/constants
 //= require krudmin/stimulus-loader
 //= require krudmin/controllers/tooltip_controller
 //= require krudmin/controllers/select2_controller
@@ -39,6 +40,5 @@
 //= require krudmin/controllers/search_panel_controller
 //= require krudmin/trix-adapter
 //= require krudmin/sweet-confirm
-//= require krudmin/core_theme/constants
 //= require krudmin/turbo-stream-actions
 //= require krudmin/core_theme/app

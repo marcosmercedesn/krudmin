@@ -172,8 +172,9 @@ A simplified layout for login/logout pages without sidebar or navigation.
 
 ### Stylesheets
 
-The main stylesheet is at `app/assets/stylesheets/krudmin/core_theme/application.scss`:
-- Bootstrap 4
+The source stylesheet entrypoint is at `app/assets/stylesheets/krudmin/core_theme/application.scss`.
+Krudmin compiles it to the logical asset `krudmin/core_theme/application.css` for Propshaft:
+- Bootstrap 5
 - Font Awesome
 - Trix (rich text editor)
 - Vendor: daterangepicker, toast, select2
@@ -181,7 +182,8 @@ The main stylesheet is at `app/assets/stylesheets/krudmin/core_theme/application
 
 ### JavaScript
 
-The main JS is at `app/assets/javascripts/krudmin/core_theme/application.js`:
+The source JavaScript load order lives in `app/assets/javascripts/krudmin/core_theme/application.js`.
+Krudmin bundles those sources into the logical asset `krudmin/core_theme/application.js` for Propshaft:
 - jQuery 3, Popper, Bootstrap
 - Turbo, Stimulus, Moment.js
 - Vendor: daterangepicker, SweetAlert, Select2, Toast, Cookies, Trix

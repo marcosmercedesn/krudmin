@@ -17,8 +17,8 @@ Krudmin generates fully-featured admin interfaces for your Rails models. Out of 
 - **Status toggling** (activate/deactivate) for soft-delete patterns
 - **Nested forms** for has_many, has_one, and belongs_to associations
 - **Rich text editing** via Trix
-- **AJAX forms** with Turbolinks for smooth, SPA-like UX
-- **Responsive UI** built on Bootstrap 4 with CoreUI theme
+- **AJAX forms** with Turbo for smooth, SPA-like UX
+- **Responsive UI** built on Bootstrap 5 with CoreUI theme
 - **Configurable navigation** with icon support and visibility controls
 
 ### Philosophy
@@ -26,7 +26,7 @@ Krudmin generates fully-featured admin interfaces for your Rails models. Out of 
 - **No custom DSL** — uses standard Ruby classes, Rails conventions, and familiar gems
 - **Convention over configuration** — controller names map to resource managers automatically
 - **Decoupled and maintainable** — concerns, presenters, and service objects keep code organized
-- **Enhanced UX** — Turbolinks, SweetAlert confirmations, Select2 dropdowns, date pickers
+- **Enhanced UX** — Turbo, SweetAlert confirmations, Select2 dropdowns, date pickers
 
 ### Similar Projects
 
@@ -52,6 +52,7 @@ Then run:
 
 ```bash
 bundle install
+bundle exec rake krudmin:assets:build
 ```
 
 ## Quick Start
