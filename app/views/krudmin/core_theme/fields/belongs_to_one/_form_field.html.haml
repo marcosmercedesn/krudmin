@@ -4,9 +4,9 @@
       = form_fields.html_safe
   - unless required
     = link_to("#", class: "btn btn-warning hidden", data: {action: "belongs-to-one#add", belongs_to_one_target: "addButton"}) do
-      %i.fa.fa-plus
+      %i.bi.bi-plus
       = t('krudmin.actions.add_new')
 
     = link_to("#", class: "btn btn-danger hidden", data: {action: "belongs-to-one#remove", belongs_to_one_target: "removeButton"}) do
-      %i.fa.fa-trash
+      %i.bi.bi-trash
       = t('krudmin.actions.delete')

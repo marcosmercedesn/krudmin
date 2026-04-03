@@ -15,13 +15,13 @@
             .col-sm-12
               %br
               = button_tag(type: :submit, class: "btn btn-primary") do
-                %i.fa.fa-search
+                %i.bi.bi-search
                 = t('krudmin.actions.search')
               &nbsp;
               = link_to("#", class: "btn btn-danger", data: {action: "search-panel#toggle"}) do
-                %i.fa.fa-close
+                %i.bi.bi-x
                 = t('krudmin.actions.cancel')
               &nbsp;
               = link_to(resource_root(reset_search: 1), class: "btn btn-light") do
-                %i.fa.fa-close
+                %i.bi.bi-x
                 = t('krudmin.actions.reset')

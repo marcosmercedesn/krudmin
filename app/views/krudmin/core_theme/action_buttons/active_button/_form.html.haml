@@ -1,8 +1,8 @@
 - if model.active? && deactivate_access?(model)
   = link_to(deactivate_path(model, context: :form), { data: {turbo_method: :post, turbo_confirm: confirm_deactivation_message(model), confirm_class: :warning, confirm_icon: :warning}, class: "btn btn-warning btn-disable btn-deactivate-item" }.merge(html_options)) do
-    %i.fa.fa-times
+    %i.bi.bi-x-lg
     = t('krudmin.actions.deactivate')
 - elsif !model.active? && activate_access?(model)
   = link_to(activate_path(model, context: :form), { data: {turbo_method: :post, turbo_confirm: confirm_activation_message(model), confirm_class: :success, confirm_icon: :info}, class: "btn btn-success btn-enable btn-activate-item" }.merge(html_options)) do
-    %i.fa.fa-check
+    %i.bi.bi-check-lg
     = t('krudmin.actions.activate')

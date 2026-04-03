@@ -1,4 +1,4 @@
 - if destroy_access?(model)
   .list-inline-item
     = link_to(resource_path(model), { data: {turbo_method: :delete, turbo_confirm: confirm_destroy_message(model), confirm_class: :danger, confirm_icon: :error}, class: "btn btn-outline-danger delete-btn btn-destroy-item" }.merge(html_options)) do
-      %i.fa.fa-trash
+      %i.bi.bi-trash

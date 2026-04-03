@@ -6,7 +6,7 @@
         %h3.dashboard-widget-title= widget.label
       - if widget.icon.present?
         %span.dashboard-widget-icon
-          %i{class: "fa fa-#{widget.icon}"}
+          %i{class: "bi bi-#{widget.icon}"}
     .dashboard-widget-stat= number_with_delimiter(widget.value)
     - if widget.description.present?
       %p.dashboard-widget-text.mb-0= widget.description

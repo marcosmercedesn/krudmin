@@ -5,7 +5,7 @@
       .card-header
         %h5.mb-0
           %button.btn.btn-link.text-decoration-none{"data-bs-toggle" => "collapse", "data-bs-target" => "#audit-activity", "aria-expanded" => "false"}
-            %i.fa.fa-history.me-2
+            %i.bi.bi-clock-history.me-2
             = I18n.t("krudmin.audit.panel_title", default: "Activity Log")
             %span.badge.text-bg-secondary.ms-2= entries.size
       #audit-activity.collapse

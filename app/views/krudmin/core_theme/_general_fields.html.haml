@@ -9,7 +9,7 @@
         = metadata.fetch(:label)
       .card-actions.float-end
         %a.btn.card-collapser{href: '#', data: {action: "click->card-collapse#toggle"}}
-          %i.fa.fa-chevron-up.fa-lg{data: {card_collapse_target: "icon"}}
+          %i.bi.bi-chevron-up.fa-lg{data: {card_collapse_target: "icon"}}
     .card-body{data: {card_collapse_target: "body"}}
       .row
         - valid_editable_attributes.each do |attribute|

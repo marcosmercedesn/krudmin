@@ -2,8 +2,8 @@
   - b.button :new, nil, data: krudmin_manager.remote_crud ? { controller: "remote-modal", action: "click->remote-modal#open" } : {}
   - b.button :search
   - b.link admin_cars_path, class: 'btn btn-danger' do
-    %i.fa.fa-car
+    %i.bi.bi-car-front
   - b.link 'https://google.com', class: 'btn btn-primary', target: :_blank, data: { turbo_confirm: "Do you really wanna go there?", confirm_icon: :success, title: :Google, confirm_class: :success } do
-    %i.fa.fa-google
-    %i.fa.fa-plus
+    %i.bi.bi-google
+    %i.bi.bi-plus
     Google

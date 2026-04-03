@@ -31,5 +31,5 @@
             = form.simple_fields_for field.attribute_for_nested_form, field.associated_class.new, child_index: "NEW_RECORD" do |builder|
               = render_partial.call(field.child_partial_form, f: builder, field: field)
           %a.btn.btn-warning{href: "#", data: {action: "nested-fields#add"}}
-            %i.fa.fa-plus
+            %i.bi.bi-plus
             = t('krudmin.actions.add_new')

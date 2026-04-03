@@ -1,7 +1,7 @@
 %li.list-inline-item
   - if model.active? && deactivate_access?(model)
     = link_to(deactivate_path(model), { data: {turbo_method: :post, turbo_confirm: confirm_deactivation_message(model), confirm_class: :warning, confirm_icon: :warning}, class: "btn btn-outline-warning btn-disable btn-deactivate-item" }.merge(html_options)) do
-      %i.fa.fa-times
+      %i.bi.bi-x-lg
   - elsif !model.active? && activate_access?(model)
     = link_to(activate_path(model), { data: {turbo_method: :post, turbo_confirm: confirm_activation_message(model), confirm_class: :success, confirm_icon: :info}, class: "btn btn-outline-success btn-enable btn-activate-item" }.merge(html_options)) do
-      %i.fa.fa-check
+      %i.bi.bi-check-lg

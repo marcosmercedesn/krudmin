@@ -3,7 +3,7 @@ class AdminDashboard < Krudmin::Dashboard
   page_description "A default Krudmin dashboard showing how ResourceManager-backed widgets inherit authorization and scoping from the same resources used by CRUD screens."
 
   toolbar do |b|
-              b.link admin_cars_path, label: "Browse Cars", icon: :car
+              b.link admin_cars_path, label: "Browse Cars", icon: "car-front"
               b.link car_brands_path, label: "Browse Brands", icon: :list
               b.link docs_path, label: "Docs", icon: :copy
   end
@@ -11,7 +11,7 @@ class AdminDashboard < Krudmin::Dashboard
   widget :count,
          resource: CarsResourceManager,
          label: "Total Cars",
-         icon: :car,
+         icon: "car-front",
          tone: :primary,
          background: :slate,
          description: "All authorized cars in the system.",
@@ -20,7 +20,7 @@ class AdminDashboard < Krudmin::Dashboard
   widget :count,
          resource: CarsResourceManager,
          label: "Active Cars",
-         icon: :check_circle,
+         icon: "check-circle",
          tone: :success,
          background: :mint,
          scope: :active,
@@ -31,7 +31,7 @@ class AdminDashboard < Krudmin::Dashboard
   widget :count,
          resource: CarsResourceManager,
          label: "Inactive Cars",
-         icon: :pause_circle,
+         icon: "slash-circle",
          tone: :warning,
          background: :sand,
          scope: :inactive,

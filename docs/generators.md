@@ -367,7 +367,7 @@ Customize the list partial for specific styling:
 -# action_buttons/generate_invoice_button/_list.html.haml
 %li.list-inline-item
   = link_to(action_path, { data: { turbo_method: :post, turbo_confirm: "Generate invoice?" }, class: "btn btn-outline-success" }.merge(html_options)) do
-    %i.fa.fa-file-text
+    %i.bi.bi-file-text
 ```
 
 ## State Machine Generator

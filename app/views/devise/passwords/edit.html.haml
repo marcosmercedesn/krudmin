@@ -11,16 +11,16 @@
           %p.text-muted= "#{@minimum_password_length} #{t('devise.passwords.minimum_password_length')}"
           .input-group.mb-3
             %span.input-group-addon
-              %i.fa.fa-lock
+              %i.bi.bi-lock
             = f.password_field :password, autofocus: true, class: 'form-control', autocomplete: "off"
           .input-group.mb-4
             %span.input-group-addon
-              %i.fa.fa-lock
+              %i.bi.bi-lock
             = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
           .row
             .col-6
               = button_tag(type: :submit, class: "btn btn-primary") do
-                %i.fa.fa-save
+                %i.bi.bi-floppy
                 =t("devise.passwords.change_my_password")
             .col-6.text-end
               = link_to "Log in", new_session_path(resource_name), class: 'btn btn-link px-0'

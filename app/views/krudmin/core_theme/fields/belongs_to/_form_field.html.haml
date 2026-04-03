@@ -7,12 +7,12 @@
         .float-end
           - if add_path && new_access?(associated_model)
             = link_to(add_path, class: "btn btn-success associated-resource-creator", data: { controller: "remote-modal", action: "click->remote-modal#open" }) do
-              %i.fa.fa-plus
+              %i.bi.bi-plus
               = new_title(associated_resource_label)
           &nbsp;
           - if edit_path && edit_access?(associated_model)
             = link_to("#", class: "hidden btn btn-primary associated-resource-editor", data: {belongs_to_target: "editLink", edit_url: send("#{edit_path}_path", "__ID__"), controller: "remote-modal", action: "click->remote-modal#open"}) do
-              %i.fa.fa-pencil
+              %i.bi.bi-pencil
               = edit_title(associated_resource_label)
       %br
       %br

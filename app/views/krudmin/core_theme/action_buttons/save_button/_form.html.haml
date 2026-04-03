@@ -1,9 +1,8 @@
 - default_content = capture do
-  %i.fa.fa-save
+  %i.bi.bi-floppy
   = t('krudmin.actions.save')
 
 - button_content = yield().presence || default_content
 
 = button_tag({ type: :submit, class: "btn btn-primary", form: form_id }.merge(html_options)) do
   = button_content
-

@@ -6,11 +6,11 @@
           %h1 Login
           .input-group.mb-3
             %span.input-group-addon
-              %i.fa.fa-user
+              %i.bi.bi-person
             = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Username or Email'
           .input-group.mb-4
             %span.input-group-addon
-              %i.fa.fa-lock
+              %i.bi.bi-lock
             = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Password"
           .row
             .col-6

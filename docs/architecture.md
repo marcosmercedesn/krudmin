@@ -347,7 +347,6 @@ ResourceManager.field_for(:name, model)
 | bootstrap (5.x) | CSS framework |
 | nested-fields.js | Custom vanilla JS for nested forms (has_many add/remove) |
 | devise | Authentication |
-| font-awesome-rails | Icons |
 | hamlit | HAML templates |
 | jquery-rails | jQuery |
 | kaminari | Pagination |

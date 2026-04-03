@@ -5,6 +5,6 @@
   - data_attrs[:turbo] = turbo
   = link_to(action_url, { data: data_attrs, class: "btn #{action_css_class}" }.merge(html_options)) do
     - if action_icon.present?
-      %i{class: "fa fa-#{action_icon}"}
+      %i{class: "bi bi-#{action_icon}"}
     - else
       = action_label

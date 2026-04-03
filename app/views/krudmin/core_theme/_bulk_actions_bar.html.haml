@@ -8,13 +8,13 @@
         - case action
         - when :destroy
           %button.btn.btn-danger.btn-sm.ms-2{type: "button", data: {action: "bulk-actions#perform", url: url_for(action: :bulk_destroy), confirm: t('krudmin.bulk_actions.confirm_destroy'), confirm_icon: "warning"}}
-            %i.fa.fa-trash
+            %i.bi.bi-trash
             = t('krudmin.actions.delete')
         - when :activate
           %button.btn.btn-success.btn-sm.ms-2{type: "button", data: {action: "bulk-actions#perform", url: url_for(action: :bulk_activate), confirm: t('krudmin.bulk_actions.confirm_activate'), confirm_icon: "info"}}
-            %i.fa.fa-check
+            %i.bi.bi-check-lg
             = t('krudmin.actions.activate')
         - when :deactivate
           %button.btn.btn-warning.btn-sm.ms-2{type: "button", data: {action: "bulk-actions#perform", url: url_for(action: :bulk_deactivate), confirm: t('krudmin.bulk_actions.confirm_deactivate'), confirm_icon: "warning"}}
-            %i.fa.fa-ban
+            %i.bi.bi-ban
             = t('krudmin.actions.deactivate')
