@@ -35,6 +35,9 @@ module Krudmin
       DASHBOARD_COLUMNS = {}
       AUDIT_EXCLUDED_ATTRIBUTES = []
 
+      CREATE_REDIRECT_ACTION = :edit
+      UPDATE_REDIRECT_ACTION = :edit
+
       RESERVED_ACTION_NAMES = %i[index show new edit create update destroy].freeze
       VALID_CUSTOM_ACTION_OPTIONS = %i[label icon method confirm class turbo authorize placement if route presenter_options].freeze
       VALID_PLACEMENTS = %i[list toolbar both].freeze
@@ -42,6 +45,7 @@ module Krudmin
 
       constantized_methods :searchable_attributes, :resource_label, :resources_label, :model_classname, :listable_actions, :order_by, :remote_crud
       constantized_methods :listable_includes, :resource_instance_label_attribute, :presentation_metadata, :displayable_attributes, :lookup_attributes, :inline_editable_attributes, :bulk_actions, :dashboard_scopes, :dashboard_columns
+      constantized_methods :create_redirect_action, :update_redirect_action
 
       # --- Custom Actions DSL ---
 
