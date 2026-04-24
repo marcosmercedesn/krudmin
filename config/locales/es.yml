@@ -1,0 +1,133 @@
+es:
+  devise:
+    passwords:
+      forgot_your_password: ¿Olvidaste tu contraseña?
+      recover_my_password: Recuperar mi contraseña
+      change_password: Cambiar contraseña
+      change_my_password: Cambiar mi contraseña
+      minimum_password_length: caracteres como mínimo
+  hello: "Hola mundo"
+  krudmin:
+    datetime:
+      input_format: "%d/%m/%Y %I:%M %p"
+    date:
+      input_format: "%d/%m/%Y"
+    labels:
+      dashboard: Tablero
+      no_data: No hay datos disponibles
+      total_records: Total de registros
+      records: registros
+      active: Activo
+      inactive: Inactivo
+      "yes": "Sí"
+      "no": "No"
+      edit_profile: "Editar perfil"
+      logout: "Cerrar sesión"
+    search:
+      contains: "Contiene"
+      equals: "Igual a"
+      not_equal_to: "No igual a"
+      matches: "Coincide con"
+      doesnt_match: "No coincide con"
+      less_than: "Menor que"
+      less_than_or_equal_to: "Menor o igual que"
+      greater_than: "Mayor que"
+      greater_than_or_equal_to: "Mayor o igual que"
+      doesnt_contain: "No contiene"
+      starts_with: "Comienza con"
+      doesnt_start_with: "No comienza con"
+      ends_with: "Termina con"
+      doesnt_end_with: "No termina con"
+      "yes": "Sí"
+      "no": "No"
+      "null": "Nulo"
+      join_phrases:
+        contains: "Contiene"
+        equals: "Igual a"
+        not_equal_to: "No igual a"
+        matches: "Coincide con"
+        doesnt_match: "No coincide con"
+        less_than: "Es menor que"
+        less_than_or_equal_to: "Es menor o igual que"
+        greater_than: "Es mayor que"
+        greater_than_or_equal_to: "Es mayor o igual que"
+        doesnt_contain: "No contiene"
+        starts_with: "Comienza con"
+        doesnt_start_with: "No comienza con"
+        ends_with: "Termina con"
+        doesnt_end_with: "No termina con"
+        "yes": "Sí"
+        "no": "No"
+        "null": "Nulo"
+    messages:
+      modified: "%{label} fue modificado exitosamente"
+      created: "%{label} fue creado exitosamente"
+      cant_be_created: "%{label} no pudo ser creado"
+      cant_be_modified: "%{label} no pudo ser modificado"
+      cant_be_activated: "%{label} no pudo ser activado"
+      cant_be_deactivated: "%{label} no pudo ser desactivado"
+      activated: "%{label} fue activado exitosamente"
+      deactivated: "%{label} fue desactivado exitosamente"
+      transitioned: "%{label} fue transicionado exitosamente vía %{event}"
+      destroyed: "%{label} fue eliminado exitosamente"
+      cant_be_transitioned: "%{label} no pudo ser transicionado vía %{event}"
+      cant_be_destroyed: "%{label} no pudo ser eliminado"
+      bulk_destroyed: "%{count} %{label} fueron eliminados exitosamente"
+      bulk_activated: "%{count} %{label} fueron activados exitosamente"
+      bulk_deactivated: "%{count} %{label} fueron desactivados exitosamente"
+      confirm_destroy: "¿Estás seguro de eliminar %{label}?"
+      confirm_activation: "¿Estás seguro de activar %{label}?"
+      confirm_deactivation: "¿Estás seguro de desactivar %{label}?"
+      edit_record: "Editar %{label}"
+      new_record: "Nuevo %{label}"
+    tooltip:
+      destroy: "Eliminar %{label}"
+      activate: "Activar %{label}"
+      deactivate: "Desactivar %{label}"
+      save: "Guardar cambios"
+      add_new: "Agregar %{label}"
+      edit: "Editar %{label}"
+      show: "Ver %{label}"
+      cancel: "Cancelar"
+      search: "Buscar"
+    bulk_actions:
+      items_selected: "elementos seleccionados"
+      confirm_destroy: "¿Estás seguro de eliminar los elementos seleccionados?"
+      confirm_activate: "¿Estás seguro de activar los elementos seleccionados?"
+      confirm_deactivate: "¿Estás seguro de desactivar los elementos seleccionados?"
+    actions:
+      add_new: "Agregar"
+      manage: "Administrar"
+      label: "Acciones"
+      save: "Guardar"
+      cancel: "Cancelar"
+      delete: "Eliminar"
+      show: "Ver"
+      search: "Buscar"
+      reset: "Restablecer"
+      activate: "Activar"
+      deactivate: "Desactivar"
+      manage_resources: "Administrar %{label}"
+    audit:
+      activity_log: "Registro de actividad"
+      n_fields_changed:
+        one: "1 campo modificado"
+        other: "%{count} campos modificados"
+      field: "Campo"
+      from: "De"
+      to: "A"
+      no_activity: "No hay actividad registrada aún."
+      actions:
+        create: "Creado"
+        update: "Actualizado"
+        destroy: "Eliminado"
+        activate: "Activado"
+        deactivate: "Desactivado"
+        transition: "Transicionado via %{event}"
+    dashboard:
+      powered_by: "Desarrollado por %{label}"
+      empty: "Nada que mostrar aún."
+      total: "Total"
+      view_all: "Ver todo"
+      latest: "Últimos"
+      distribution: "Distribución"
