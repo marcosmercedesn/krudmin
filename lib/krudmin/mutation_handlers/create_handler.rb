@@ -28,7 +28,7 @@ module Krudmin
       end
 
       def valid_path
-        valid_context_mutator.(controller, model, success_message, redirect_action_method: redirect_action_method)
+        valid_context_mutator.(controller, model, success_message, redirect_action_method: redirect_action_method, new_record: new_record)
       end
 
       def redirect_action_method
