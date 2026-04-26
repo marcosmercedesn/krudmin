@@ -1,10 +1,12 @@
-<% if new_record %>
-  <%= turbo_stream.prepend "krudmin-#{model_class.model_name.element}-items-list" do %>
-    <%= render_item_row(model) %>
-  <% end %>
-<% else %>
-  <%= turbo_stream.replace "item-model-#{model.id}" do %>
-    <%= render_item_row(model) %>
+<% if defined?(new_record) %>
+  <% if new_record %>
+    <%= turbo_stream.prepend "krudmin-#{model_class.model_name.element}-items-list" do %>
+      <%= render_item_row(model) %>
+    <% end %>
+  <% else %>
+    <%= turbo_stream.replace "item-model-#{model.id}" do %>
+      <%= render_item_row(model) %>
+    <% end %>
   <% end %>
 <% end %>
 
