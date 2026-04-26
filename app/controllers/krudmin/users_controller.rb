@@ -11,7 +11,7 @@ module Krudmin
 
     def model_params
       @model_params ||= begin
-        _params = params.require(:user).permit(permitted_attributes)
+        _params = params.require(:user).permit(permitted_attributes - readonly_attributes)
 
         if _params[:password].blank?
           _params.delete(:password)
