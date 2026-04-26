@@ -9,8 +9,8 @@ module Krudmin
         String Text Number Decimal Currency Boolean Date DateTime Email EnumType BelongsTo
       ].freeze
 
-      attr_reader :model, :attributes_metadata, :attributes, :searchable_attributes, :presentation_metadata, :listable_attributes, :displayable_attributes, :inline_editable_attributes
-      def initialize(model, attributes_metadata, attributes, listable_attributes, searchable_attributes, displayable_attributes, presentation_metadata, lookup_attributes, inline_editable_attributes = [])
+      attr_reader :model, :attributes_metadata, :attributes, :searchable_attributes, :presentation_metadata, :listable_attributes, :displayable_attributes, :inline_editable_attributes, :readonly_attributes
+      def initialize(model, attributes_metadata, attributes, listable_attributes, searchable_attributes, displayable_attributes, presentation_metadata, lookup_attributes, inline_editable_attributes = [], readonly_attributes = [])
         @model = model
         @attributes_metadata = attributes_metadata
         @presentation_metadata = presentation_metadata
@@ -20,6 +20,7 @@ module Krudmin
         @_lookup_attributes = collection_or_default(lookup_attributes)
         @attributes = collection_or_default(attributes)
         @inline_editable_attributes = inline_editable_attributes
+        @readonly_attributes = readonly_attributes
       end
 
       def inline_editable?(field)
@@ -59,7 +60,7 @@ module Krudmin
       end
 
       def permitted_attributes
-        @permitted_attributes ||= editable_attributes.map do |attribute|
+        @permitted_attributes ||= (editable_attributes - readonly_attributes).map do |attribute|
           attribute_for(attribute).permitted_attribute
         end
       end

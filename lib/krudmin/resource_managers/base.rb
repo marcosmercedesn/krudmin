@@ -16,6 +16,7 @@ module Krudmin
       MODEL_CLASSNAME = nil
       LISTABLE_ATTRIBUTES = []
       EDITABLE_ATTRIBUTES = []
+      READONLY_ATTRIBUTES = []
       SEARCHABLE_ATTRIBUTES = []
       DISPLAYABLE_ATTRIBUTES = []
       LOOKUP_ATTRIBUTES = []
@@ -281,7 +282,7 @@ module Krudmin
         scope.includes(listable_includes).order(order_by)
       end
 
-      delegate :attribute_types, :permitted_attributes, :editable_attributes, :listable_attributes, to: :resource_attributes
+      delegate :attribute_types, :permitted_attributes, :editable_attributes, :readonly_attributes, :listable_attributes, to: :resource_attributes
       delegate :grouped_attributes, :displayable_attributes, :lookup_attributes, :searchable_attributes, :find_type_for, :inline_editable?, to: :resource_attributes
 
       def resource_attributes
@@ -293,7 +294,8 @@ module Krudmin
                                                                                    self.class::DISPLAYABLE_ATTRIBUTES,
                                                                                    self.class::PRESENTATION_METADATA,
                                                                                    self.class::LOOKUP_ATTRIBUTES,
-                                                                                   self.class::INLINE_EDITABLE_ATTRIBUTES)
+                                                                                   self.class::INLINE_EDITABLE_ATTRIBUTES,
+                                                                                   self.class::READONLY_ATTRIBUTES)
       end
     end
   end

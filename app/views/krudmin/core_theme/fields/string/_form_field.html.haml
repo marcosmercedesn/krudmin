@@ -1,1 +1,4 @@
-= form.input(attribute, { as: :string }.merge(input_options))
+- if readonly_attributes.include?(attribute)
+  = form.input(attribute, { as: :string, input_html: input_options.merge(readonly: true) }.merge(input_options))
+- else
+  = form.input(attribute, { as: :string }.merge(input_options))
