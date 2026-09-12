@@ -7,7 +7,7 @@ module Krudmin
       PRESENTER = Krudmin::Presenters::CurrencyFieldPresenter
 
       def value
-        super.round(decimals)
+        super&.round(decimals)
       end
 
       def prefix

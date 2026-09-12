@@ -13,7 +13,6 @@ module Krudmin
       def valid?
         model.destroy
       rescue => e
-        require 'pry'; ::Kernel.binding.pry
 
         fail e
       ensure
