@@ -11,6 +11,8 @@ RSpec.describe Krudmin::Generators::InstallGenerator do
       expect(file_exists?("config/initializers/krudmin.rb")).to be true
       expect(file_exists?("CLAUDE.md")).to be true
       expect(file_exists?("docs/krudmin/getting_started.md")).to be true
+      expect(file_exists?("docs/krudmin/custom_actions.md")).to be true
+      expect(file_exists?("docs/krudmin/audit_trail.md")).to be true
       expect(file_exists?("app/resource_managers")).to be true
     end
   end
@@ -20,6 +22,8 @@ RSpec.describe Krudmin::Generators::InstallGenerator do
 
     it "copies docs only" do
       expect(file_exists?("docs/krudmin/getting_started.md")).to be true
+      expect(file_exists?("docs/krudmin/custom_actions.md")).to be true
+      expect(file_exists?("docs/krudmin/audit_trail.md")).to be true
       expect(file_exists?("config/initializers/krudmin.rb")).to be false
       expect(file_exists?("CLAUDE.md")).to be false
       expect(file_exists?("app/resource_managers")).to be false

@@ -16,6 +16,12 @@ Key changes
 - Tests: unit, presenter, request, and feature specs added; guidance included to avoid test load-order leaks (prefer requiring only necessary files in unit tests and restore global config after mutation).
 
 Upgrade / Migration notes for host apps
+- After upgrading the engine, refresh host-app Krudmin docs so developers and AI coding tools read current behavior:
+
+```bash
+rails generate krudmin:install --docs-only
+```
+
 - Add a member route for each new custom action. Example (admin namespace):
 
 ```ruby

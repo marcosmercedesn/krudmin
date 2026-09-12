@@ -16,13 +16,15 @@ Creates:
 - `docs/krudmin/` — Documentation
 - `app/resource_managers/` — Empty directory
 
+Installed docs include core behavior and extension guides such as getting started, architecture, fields, configuration, generators, custom actions, nested fields, workflow state machine, audit trail, and integration testing.
+
 **Options:**
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `--no-docs` | `true` | Skip documentation files |
-| `--no-claude` | `true` | Skip CLAUDE.md |
-| `--no-initializer` | `true` | Skip initializer |
+| `--docs` / `--no-docs` | `--docs` | Copy or skip `docs/krudmin/*` |
+| `--claude` / `--no-claude` | `--claude` | Generate or skip `CLAUDE.md` |
+| `--initializer` / `--no-initializer` | `--initializer` | Generate or skip `config/initializers/krudmin.rb` |
 | `--docs-only` | `false` | Only update docs/krudmin in the host project |
 
 Refresh docs in an existing host app without touching initializer or CLAUDE.md:
@@ -30,6 +32,8 @@ Refresh docs in an existing host app without touching initializer or CLAUDE.md:
 ```bash
 rails generate krudmin:install --docs-only
 ```
+
+Use `--docs-only` whenever the engine is upgraded so AI coding assistants and developers in the host app read the current behavior.
 
 ## Resource Generator
 

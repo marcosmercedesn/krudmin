@@ -45,6 +45,13 @@ module Krudmin
           navigation_menu.md
           views_and_themes.md
           generators.md
+          custom_actions.md
+          nested-fields.md
+          workflow_state_machine.md
+          audit_trail.md
+          integration-testing-guide.md
+          integration_test_generator.md
+          kanban_board.md
         ].each do |doc|
           source_path = File.join(docs_source, doc)
           if File.exist?(source_path)
@@ -69,6 +76,7 @@ module Krudmin
         say ""
         if docs_only?
           say "Updated docs in docs/krudmin/", :cyan
+          say "Use these files as the source of truth for AI coding assistants.", :cyan
           say ""
           return
         end
@@ -83,6 +91,7 @@ module Krudmin
         end
         if options[:docs]
           say "Documentation copied to docs/krudmin/", :cyan
+          say "Refresh later with: rails generate krudmin:install --docs-only", :cyan
         end
       end
     end

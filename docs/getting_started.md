@@ -10,6 +10,25 @@ This guide walks you through setting up Krudmin in an existing Rails application
 
 ## Installation
 
+### 0. Run the installer generator (recommended)
+
+```bash
+rails generate krudmin:install
+```
+
+This creates:
+
+- `config/initializers/krudmin.rb`
+- `CLAUDE.md`
+- `docs/krudmin/*`
+- `app/resource_managers/`
+
+To refresh only the installed docs after upgrading the engine:
+
+```bash
+rails generate krudmin:install --docs-only
+```
+
 ### 1. Add the Gem
 
 Add Krudmin to your `Gemfile`:
@@ -46,7 +65,7 @@ rails generate simple_form:install --bootstrap
 
 ### 4. Create the Initializer
 
-Create `config/initializers/krudmin.rb`:
+If you did not run `rails generate krudmin:install`, create `config/initializers/krudmin.rb` manually:
 
 ```ruby
 Krudmin::Config.with do |config|

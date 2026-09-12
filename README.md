@@ -69,6 +69,8 @@ This creates:
 - `docs/krudmin/` — Full documentation
 - `app/resource_managers/` — Directory for your resource managers
 
+The generated `docs/krudmin/` folder is intended to be the host app's local source of truth for both humans and AI coding tools.
+
 Skip docs or CLAUDE.md with flags: `--no-docs`, `--no-claude`, `--no-initializer`.
 
 Update only docs in an existing host project:
@@ -76,6 +78,8 @@ Update only docs in an existing host project:
 ```bash
 rails generate krudmin:install --docs-only
 ```
+
+Use `--docs-only` after upgrading Krudmin to keep host-app documentation aligned with engine behavior.
 
 ### Option B: Manual Setup
 
